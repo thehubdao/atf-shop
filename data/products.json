@@ -1,0 +1,23 @@
+[
+    {
+        "id": "1",
+        "title": "CASQUETTE TRUCKER LOSC RED WHITE",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        "price": 2400,
+        "image": "/images/nft.png"
+    },
+    {
+        "id": "2",
+        "title": "CASQUETTE TRUCKER LOSC RED WHITE",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        "price": 2400,
+        "image": "/images/nft.png"
+    },
+    {
+        "id": "3",
+        "title": "CASQUETTE TRUCKER LOSC RED WHITE",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        "price": 2400,
+        "image": "/images/nft.png"
+    }
+]
