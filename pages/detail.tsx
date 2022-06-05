@@ -10,9 +10,9 @@ import { BsDash, BsFileMinus, BsPlus } from 'react-icons/bs'
 
 const ShopItemDetail = () => {
     const router = useRouter()
+    const { id } = router.query
     const dispatch = useAppDispatch()
     const { basketItems } = useAppSelector(state => state.basket)
-    const { id } = router.query
     const product = products.filter(product => product.id === id)[0]
     const [inBasketCount, setInBasketCount] = useState(0)
 
@@ -28,7 +28,10 @@ const ShopItemDetail = () => {
         return (() => setInBasketCount(0))
     }, [basketItems])
 
-
+    if (!id) {
+        return (<></>)
+    }
+    
     return (
         <div className='w-screen min-h-screen animate__animated animate__fadeIn bg-gray-50 flex flex-col items-center'>
             <IoMdClose onClick={() => history.back()} className="absolute top-3 right-3 text-5xl cursor-pointer bg-gray-200 p-2 rounded-full" />
