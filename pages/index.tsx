@@ -23,15 +23,15 @@ const Home: NextPage = () => {
         }
     }
 
-    useEffect(()=>{
-        setTimeout(()=>{
-            if (slide > 2) {
-                setSlide(0)
-            } else {
-                setSlide(slide=>slide+=1)
-            }
-        }, 5000)
-    }, [slide])
+    // useEffect(()=>{
+    //     setTimeout(()=>{
+    //         if (slide > 2) {
+    //             setSlide(0)
+    //         } else {
+    //             setSlide(slide=>slide+=1)
+    //         }
+    //     }, 5000)
+    // }, [slide])
 
     return (
         <>
@@ -87,11 +87,16 @@ const Home: NextPage = () => {
                     <BsFilterRight onClick={() => setOpenFilter(!openFilter)} className='text-3xl cursor-pointer' />
                 </div>
 
-                <div className='w-screen -ml-5 mb-5 h-32 relative'>
+                {/* <div className='w-screen -ml-5 mb-5 h-32 relative'>
                     <img src="/images/banner-1.jpg" className={`absolute inset-0 w-full animate__animated ${slide === 2 && "hidden"} ${slide === 0 && "animate__slideInRight"} ${slide === 1 && "animate__slideOutLeft"}`}/>
                     <img src="/images/banner-2.jpg" className={`absolute inset-0 w-full animate__animated ${slide === 0 && "hidden"}  ${slide === 1 && "animate__slideInRight"} ${slide === 2 && "animate__slideOutLeft"}`}/>
                     <img src="/images/banner-3.jpg" className={`absolute inset-0 w-full animate__animated ${slide === 1 && "hidden"} ${slide === 2 && "animate__slideInRight"} ${slide === 0 && "animate__slideOutLeft"}`}/>
+                </div> */}
+
+                <div className='w-screen -ml-5 mb-5 h-auto '>
+                    <img src="/images/banner-2.jpg" className={`w-full`}/>
                 </div>
+
 
                 <p className='font-bold text-3xl mb-5'>Shop</p>
 
