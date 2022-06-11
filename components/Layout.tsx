@@ -12,7 +12,7 @@ const Layout = ({ children }: any) => {
 
     return (
         <>
-            <div className="flex flex-col w-screen">
+            <div className="flex flex-col w-screen relative">
                 <Toolbar />
                 <div className="w-full h-full relative">
                     {children}

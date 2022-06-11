@@ -78,7 +78,7 @@ module.exports = {
         'visibility': 'visibility'
       },
       boxShadow: {
-        round: '0 0px 30px -15px rgba(0, 0, 0, 0.25)',
+        round: '0 -10px 50px 0px rgba(0, 0, 0, 0.25)',
         color: '0 0px 20px 0px rgba(250, 250, 250, 0.5)',
         color_blue: '0 0px 20px 0px rgba(96, 165, 250, 0.7)',
         color_pink: '0 0px 20px 0px rgba(236, 72, 153, 0.7)',

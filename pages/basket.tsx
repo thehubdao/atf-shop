@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react';
-import { BsTrash } from 'react-icons/bs';
+import { BsDash, BsPlus, BsTrash } from 'react-icons/bs';
 import { Toolbar } from '../components';
 
 import ShopCard from '../components/ShopCard';
@@ -9,7 +9,7 @@ import ShopItemDetail from '../components/ShopItemDetail';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import products from "../data/products.json"
 import { ProductData, basketItem } from '../lib/types';
-import { removeItem } from '../state/basket';
+import { decrease, increase, removeItem } from '../state/basket';
 import { IoMdClose } from 'react-icons/io';
 import { getLocal } from '../lib/local';
 
@@ -50,10 +50,14 @@ const Home: NextPage = () => {
 
                 <div className='flex flex-col space-y-10 w-full'>
                     {basketList.map(item => (
-                        <div key={item.id} className='flex items-center space-x-7'>
-                            <BsTrash onClick={() => dispatch(removeItem(item.id))} className='text-4xl cursor-pointer' />
-                            <p className='font-medium text-sm'>{item.title}</p>
-                            <p className='bg-gray-100 py-2 px-3 rounded-lg font-medium'>{item.count}</p>
+                        <div key={item.id} className='flex items-center space-x-5'>
+                            <BsTrash onClick={() => dispatch(removeItem(item.id))} className='text-3xl cursor-pointer' />
+                            <p className='font-medium text-xs w-full'>{item.title}</p>
+                            <div className='flex items-center space-x-2'>
+                                <BsDash onClick={() => (dispatch(decrease(item.id)))} className='text-2xl rounded-full bg-gray-200 p-1 cursor-pointer' />
+                                <p className='text-lg font-jost'>{item.count}</p>
+                                <BsPlus onClick={() => dispatch(increase(item.id))} className='text-2xl rounded-full bg-gray-300 p-1 cursor-pointer' />
+                            </div>
                             <p className='font-medium'>{item.price * (item.count || 1)}</p>
                         </div>
                     ))}

@@ -1,15 +1,18 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Toolbar } from '../components';
 
 import ShopCard from '../components/ShopCard';
 import { BsFilterRight } from "react-icons/bs"
 
+import products from "../data/products.json"
+
 
 const Home: NextPage = () => {
     const [openFilter, setOpenFilter] = useState(false)
     const [filter, setFilter] = useState<string[]>([])
+    const [slide, setSlide] = useState(0)
 
     const updateFilter = (name: string) => {
         const index = filter.findIndex(item => item === name);
@@ -20,6 +23,16 @@ const Home: NextPage = () => {
         }
     }
 
+    useEffect(()=>{
+        setTimeout(()=>{
+            if (slide > 2) {
+                setSlide(0)
+            } else {
+                setSlide(slide=>slide+=1)
+            }
+        }, 5000)
+    }, [slide])
+
     return (
         <>
             <Head>
@@ -28,7 +41,7 @@ const Home: NextPage = () => {
 
             {openFilter &&
                 <>
-                    <div onClick={() => setOpenFilter(false)} className='w-screen h-screen absolute inset-0 bg-black/20 z-20' />
+                    <div onClick={() => setOpenFilter(false)} className='w-screen h-screen absolute inset-0 z-20' />
                     <div className='fixed flex flex-col justify-between bottom-0 left-0 p-5 w-screen min-h-[80vh] bg-white z-20 animate__animated animate__fadeInUpBig animate__faster shadow-round rounded-t-2xl'>
 
                         <div className='flex flex-col space-y-2 font-jost'>
@@ -72,17 +85,20 @@ const Home: NextPage = () => {
                 <div className='flex space-x-5 items-center mb-5 font-jost -mt-5'>
                     <input placeholder='Search' className='bg-gray-100 rounded-full p-3 outline-none grow' />
                     <BsFilterRight onClick={() => setOpenFilter(!openFilter)} className='text-3xl cursor-pointer' />
+                </div>
 
+                <div className='w-screen -ml-5 mb-5 h-32 relative'>
+                    <img src="/images/banner-1.jpg" className={`absolute inset-0 w-full animate__animated ${slide === 2 && "hidden"} ${slide === 0 && "animate__slideInRight"} ${slide === 1 && "animate__slideOutLeft"}`}/>
+                    <img src="/images/banner-2.jpg" className={`absolute inset-0 w-full animate__animated ${slide === 0 && "hidden"}  ${slide === 1 && "animate__slideInRight"} ${slide === 2 && "animate__slideOutLeft"}`}/>
+                    <img src="/images/banner-3.jpg" className={`absolute inset-0 w-full animate__animated ${slide === 1 && "hidden"} ${slide === 2 && "animate__slideInRight"} ${slide === 0 && "animate__slideOutLeft"}`}/>
                 </div>
 
                 <p className='font-bold text-3xl mb-5'>Shop</p>
 
-
                 <div className="grid grid-cols-2 gap-5 place-items-center">
-                    <ShopCard id="1" price={2400} title="CASQUETTE TRUCKER LOSC RED WHITE" image="/images/nft.png" />
-                    <ShopCard id="2" price={2400} title="CASQUETTE TRUCKER LOSC RED WHITE" image="/images/nft.png" />
-                    <ShopCard id="3" price={2400} title="CASQUETTE TRUCKER LOSC RED WHITE" image="/images/nft.png" />
-
+                    {products.map(product => (
+                        <ShopCard key={product.id} id={product.id} price={product.price} title={product.title} image={product.image} />
+                    ))}
                 </div>
 
             </main>

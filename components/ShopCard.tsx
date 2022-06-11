@@ -18,11 +18,11 @@ const ShopCard = ({ id, price, title, image }: ShopCardProps) => {
 
                 <img src={image} className='h-24 w-auto' />
 
-                <div className='font-jost absolute bottom-12 z-10 bg-[#020202] rounded-xl text-[#FDE100] px-2 py-1 text-xs'>
+                <div className='font-jost absolute bottom-16 z-10 bg-[#020202] rounded-xl text-[#FDE100] px-2 py-1 text-xs'>
                     Include Metaverse
                 </div>
 
-                <div className='absolute bg-indigo-800 w-[120%] h-16 -rotate-6 -bottom-2 px-5 py-2 flex items-center justify-center'>
+                <div className='absolute bg-indigo-800 w-[120%] h-20 -rotate-6 -bottom-2 px-5 py-5 flex items-center justify-center'>
                     <p className='text-white text-center rotate-6 font-jost font-medium text-xs'>{title}</p>
                 </div>
 

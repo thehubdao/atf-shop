@@ -31,14 +31,14 @@ const ShopItemDetail = () => {
     if (!id) {
         return (<></>)
     }
-    
+
     return (
         <div className='w-screen min-h-screen animate__animated animate__fadeIn bg-gray-50 flex flex-col items-center'>
             <IoMdClose onClick={() => history.back()} className="absolute top-3 right-3 text-5xl cursor-pointer bg-gray-200 p-2 rounded-full" />
 
-            <p className='font-bold text-3xl max-w-[70%] p-5 self-start'>{product.title}</p>
+            <p className='font-bold text-3xl max-w-[80%] p-5 self-start'>{product.title}</p>
 
-            <img src={product.image} className='h-auto w-1/2 mb-10' />
+            <img src={product.image} className='h-auto w-1/2 mb-10 mt-5' />
 
             <div className='fixed bottom-5 z-10 shadow-2xl rounded-full flex items-center justify-between w-[95%] p-2 bg-gray-50'>
                 <p className='font-bold text-3xl p-3 ml-10'>{product.price}</p>

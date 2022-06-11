@@ -1,23 +1,23 @@
 [
     {
         "id": "1",
-        "title": "CASQUETTE TRUCKER LOSC RED WHITE",
-        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        "title": "Casquette baseball FRANCE RUGBY 2021/2022 bleu pour homme",
+        "description": "Casquette baseball FRANCE RUGBY 2021/2022 bleue pour homme. Découvrez la gamme Supporter de la collection FRANCE RUGBY spécialement conçue pour les fans de l'équipe de France de Rugby avec cette casquette baseball bleue pour homme.",
         "price": 2400,
-        "image": "/images/nft.png"
+        "image": "/images/cap.png"
     },
     {
         "id": "2",
-        "title": "CASQUETTE TRUCKER LOSC RED WHITE",
-        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 2400,
-        "image": "/images/nft.png"
+        "title": "Polo LE COQ SPORTIF FFR Replica 2021/2022 bleu pour homme",
+        "description": "Polo LE COQ SPORTIF FFR Replica 2021/2022 bleu pour homme. Découvrez le polo replica de la FFR pour homme dans son coloris bleu pour la saison 2021/2022.",
+        "price": 3200,
+        "image": "/images/polo.png"
     },
     {
         "id": "3",
-        "title": "CASQUETTE TRUCKER LOSC RED WHITE",
-        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 2400,
-        "image": "/images/nft.png"
+        "title": "Sweat à capuche LE COQ SPORTIF FFR présentation bleu pour homme",
+        "description": "Sweat à capuche LE COQ SPORTIF FFR présentation bleu pour homme. Découvrez le sweat à capuche de présentation de la FFR pour homme dans son coloris bleu pour la saison 2021/2022.",
+        "price": 9800,
+        "image": "/images/sweat.png"
     }
 ]
