@@ -11,7 +11,7 @@ import Filter from '../components/Filter';
 import Link from 'next/link';
 
 
-const Apparel: NextPage = () => {
+const Apparel: NextPage = (data) => {
     const [openFilter, setOpenFilter] = useState(false)
 
     return (
@@ -51,6 +51,14 @@ const Apparel: NextPage = () => {
         </>
     )
 }
+
+export async function getServerSideProps() {
+    const res = await fetch(`https://atf-test.backendboyz.repl.co/api/products`)
+    const data = await res.json()
+  
+    return { props: { data } }
+  }
+  
 
 
 export default Apparel
