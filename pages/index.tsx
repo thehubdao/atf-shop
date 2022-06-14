@@ -45,6 +45,10 @@ const Home: NextPage = () => {
                     <BsFilterRight onClick={() => setOpenFilter(!openFilter)} className='text-3xl cursor-pointer' />
                 </div>
 
+                <div className='w-screen -ml-5 mb-5 h-auto '>
+                    <img src="/images/banner-home.jpg" className={`w-full`} />
+                </div>
+
                 <p className='font-bold text-3xl'>Shop</p>
 
                 <div className='flex justify-between items-end pb-3 mt-10'>

@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 interface FilterProps {
-    close: ()=>void
+    close: () => void
 }
 
-const Filter = ({close}: FilterProps) => {
+const Filter = ({ close }: FilterProps) => {
     const [filter, setFilter] = useState<string[]>([])
 
     const updateFilter = (name: string) => {
