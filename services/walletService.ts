@@ -37,10 +37,10 @@ export const login = async () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                signature: await wallet.client.requestSignPayload({
+                signature: (await wallet.client.requestSignPayload({
                     signingType: SigningType.RAW,
                     payload: 'Nonce: ' + nonce,
-                }),
+                })).signature,
                 address: address,
             }),
         }).then((json) => json.json())
