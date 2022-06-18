@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import basketReducer from "./basket"
-import accountReducer from "./account"
+import persistedReducer from "./wallet"
 
 const store =  configureStore({
   reducer: {
     basket: basketReducer,
-    account: accountReducer
+    account: persistedReducer,
   }
 })
 

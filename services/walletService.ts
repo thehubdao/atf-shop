@@ -1,48 +1,23 @@
-import { TezosToolkit } from '@taquito/taquito'
-
-import { BeaconWallet } from '@taquito/beacon-wallet'
-
 import { SigningType } from '@airgap/beacon-sdk'
-
-const Tezos = new TezosToolkit('https://mainnet-tezos.giganode.io')
-
-const wallet = new BeaconWallet({ name: 'Beacon + Taquito' })
-
-Tezos.setWalletProvider(wallet)
-
-export const connectToWallet = async () => {
-    return await wallet.client.requestPermissions()
+import axios from 'axios'
+const {char2Bytes } = require('@taquito/utils')
+export const getNonce = async (address: any) => {
+    console.log(address)
+    return (await axios.post('/api/loginGetNonce', { address })).data
 }
 
-export const getNonce = async (address: any) =>
-    await fetch('http://localhost:8080/api/loginGetNonce', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ address }),
-    }).then((json) => json.json())
-
-export const login = async () => {
-        
-    let address = await connectToWallet()
+export const login = async (address: any, wallet: any) => {
     let nonce = await getNonce(address)
-    console.log(nonce)
-    console.log(
-        await fetch('http://localhost:8080/api/loginWallet', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                signature: (await wallet.client.requestSignPayload({
-                    signingType: SigningType.RAW,
-                    payload: 'Nonce: ' + nonce,
-                })).signature,
-                address: address,
-            }),
-        }).then((json) => json.json())
-    )
+   
+    const bytes = char2Bytes(nonce + '')
+    const payloadBytes = '05' + '0100' + char2Bytes(bytes.length+"") + bytes
+    console.log((await axios.post('api/loginWallet', {
+        signature: (
+            await wallet.client.requestSignPayload({
+                signingType: SigningType.MICHELINE,
+                payload: payloadBytes,
+            })
+        ).signature,
+        address: address,
+    })).data)
 }

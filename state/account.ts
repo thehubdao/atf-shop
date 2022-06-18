@@ -17,6 +17,7 @@ export const accountSlice = createSlice({
         state.connected = true
         state.address = payload.address
         state.chainId = payload.chainId
+        
     },
     disconnect: state => initialState,
     setChain: (state, {payload}) => {
