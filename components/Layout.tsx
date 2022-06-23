@@ -7,7 +7,7 @@ import Toolbar from "./general/Toolbar";
 
 const Layout = ({ children }: any) => {
     const [openModal, setOpenModal] = useState(false)
-    const { chainId } = useAppSelector(state => state.account)
+    // const { chainId } = useAppSelector(state => state.account)
 
 
     return (
