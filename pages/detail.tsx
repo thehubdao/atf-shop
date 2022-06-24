@@ -21,9 +21,9 @@ const ShopItemDetail = () => {
     const [inBasketCount, setInBasketCount] = useState(0)
     const [loading, setLoading] = useState(false)
 
-    // const product = products.filter(product => product.id === id)[0]
-    const { data, error } = useSWR(`https://atf-test.backendboyz.repl.co/api/product/${id}`, fetcher)
-    const product = data
+    const product = products.filter(product => product.id === id)[0]
+    // const { data, error } = useSWR(`https://atf-test.backendboyz.repl.co/api/product/${id}`, fetcher)
+    // const product = data
 
     const addToBasket = () => {
         dispatch(addItem({ id: id, count: 1 }))
@@ -38,8 +38,8 @@ const ShopItemDetail = () => {
     }, [basketItems])
 
     
-    if (error || !id) return <Error />
-    if (!data) return <Loader />
+    // if (error || !id) return <Error />
+    if (!product) return <Loader />
 
     return (
         <div className='w-screen min-h-screen animate__animated animate__fadeIn bg-gray-50 flex flex-col items-center'>
