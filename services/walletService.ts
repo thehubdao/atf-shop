@@ -16,7 +16,9 @@ const notifyMobile = (result: loginResult) => {
         aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(result)
     }
     //Android case
+    console.log(aWindow.androidWeb3,"Left out")
     if (aWindow.androidWeb3) {
+        console.log(aWindow.androidWeb3,"Joined")
         aWindow.androidWeb3.onLoginResult(JSON.stringify(result))
     }
     console.log(result)
