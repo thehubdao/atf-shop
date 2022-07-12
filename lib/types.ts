@@ -14,7 +14,10 @@ export interface ProductData {
   title: string,
   description: string,
   price: number;
+  priceATF?: number;
+  priceAT?: number;
   image: string;
+  category: string;
   count?: number;
 }
 

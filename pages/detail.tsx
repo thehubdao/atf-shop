@@ -20,6 +20,7 @@ const ShopItemDetail = () => {
     const { basketItems } = useAppSelector(state => state.basket)
     const [inBasketCount, setInBasketCount] = useState(0)
     const [loading, setLoading] = useState(false)
+    const [basketPopUp, setBasketPopUp] = useState(false)
 
     const product = products.filter(product => product.id === id)[0]
     // const { data, error } = useSWR(`https://atf-test.backendboyz.repl.co/api/product/${id}`, fetcher)
@@ -27,6 +28,8 @@ const ShopItemDetail = () => {
 
     const addToBasket = () => {
         dispatch(addItem({ id: id, count: 1 }))
+        setBasketPopUp(true)
+        setTimeout(()=>{setBasketPopUp(false)}, 2000)
     }
 
     useEffect(() => {
@@ -43,6 +46,11 @@ const ShopItemDetail = () => {
 
     return (
         <div className='w-screen min-h-screen animate__animated animate__fadeIn bg-gray-50 flex flex-col items-center'>
+
+            {basketPopUp && (
+                <p className='font-jost text-xs p-2 absolute -top-4 right-2 bg-white border border-black rounded shadow-2xl z-30 max-w-[95vw]'>Item has been added to the basket</p>
+            )}
+
             <IoMdClose onClick={() => history.back()} className="absolute top-3 right-3 text-5xl cursor-pointer bg-gray-200 p-2 rounded-full" />
 
             <p className='font-bold text-3xl max-w-[80%] p-5 self-start'>{product.title}</p>

@@ -36,6 +36,8 @@
         "title": "NFTs #1",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
         "price": 1000,
+        "priceATF": 100,
+        "priceAT": 10,
         "image": "/images/nft-1.png",
         "category": "nfts"
     },
@@ -44,6 +46,7 @@
         "title": "NFTs #2",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
         "price": 1000,
+        "priceAT": 10,
         "image": "/images/nft-2.png",
         "category": "nfts"
     },
@@ -52,6 +55,7 @@
         "title": "NFTs #3",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
         "price": 1000,
+        "priceATF": 100,
         "image": "/images/nft-3.png",
         "category": "nfts"
     },

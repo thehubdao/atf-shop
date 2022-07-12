@@ -60,7 +60,7 @@ const Home: NextPage = () => {
 
                 <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
                     {products.filter(product => product.category === "apparel").map(product => (
-                        <ShopCard key={product.id} id={product.id} price={product.price} title={product.title} image={product.image} classes="min-w-[12rem]" />
+                        <ShopCard key={product.id} product={product} classes="min-w-[12rem]" />
                     ))}
                 </div>
 
@@ -73,7 +73,7 @@ const Home: NextPage = () => {
 
                 <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
                     {products.filter(product => product.category === "nfts").map(product => (
-                        <ShopCard key={product.id} id={product.id} price={product.price} title={product.title} image={product.image} classes="min-w-[12rem]" />
+                        <ShopCard key={product.id} product={product} classes="min-w-[12rem]" />
                     ))}
                 </div>
 
@@ -86,7 +86,7 @@ const Home: NextPage = () => {
 
                 <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
                     {products.filter(product => product.category === "events").map(product => (
-                        <ShopCard key={product.id} id={product.id} price={product.price} title={product.title} image={product.image} classes="min-w-[12rem]" />
+                        <ShopCard key={product.id} product={product}  classes="min-w-[12rem]" />
                     ))}
                 </div>
 
@@ -99,7 +99,7 @@ const Home: NextPage = () => {
 
                 <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
                     {products.filter(product => product.category === "metaverse-events").map(product => (
-                        <ShopCard key={product.id} id={product.id} price={product.price} title={product.title} image={product.image} classes="min-w-[12rem]" />
+                        <ShopCard key={product.id} product={product}  classes="min-w-[12rem]" />
                     ))}
                 </div>
 
