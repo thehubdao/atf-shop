@@ -15,7 +15,7 @@ export interface ProductData {
   description: string,
   price: number;
   priceATF?: number;
-  priceAT?: number;
+  priceAP?: number;
   image: string;
   category: string;
   count?: number;

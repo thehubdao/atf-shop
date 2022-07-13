@@ -3,7 +3,7 @@
         "id": "1",
         "title": "Casquette baseball FRANCE RUGBY 2021/2022 bleu pour homme",
         "description": "Casquette baseball FRANCE RUGBY 2021/2022 bleue pour homme. Découvrez la gamme Supporter de la collection FRANCE RUGBY spécialement conçue pour les fans de l'équipe de France de Rugby avec cette casquette baseball bleue pour homme.",
-        "price": 2400,
+        "priceAP": 2400,
         "image": "/images/cap.png",
         "category": "apparel"
     },
@@ -11,7 +11,7 @@
         "id": "2",
         "title": "Polo LE COQ SPORTIF FFR Replica 2021/2022 bleu pour homme",
         "description": "Polo LE COQ SPORTIF FFR Replica 2021/2022 bleu pour homme. Découvrez le polo replica de la FFR pour homme dans son coloris bleu pour la saison 2021/2022.",
-        "price": 3200,
+        "priceAP": 3200,
         "image": "/images/polo.png",
         "category": "apparel"
     },
@@ -19,7 +19,7 @@
         "id": "3",
         "title": "Sweat à capuche LE COQ SPORTIF FFR présentation bleu pour homme",
         "description": "Sweat à capuche LE COQ SPORTIF FFR présentation bleu pour homme. Découvrez le sweat à capuche de présentation de la FFR pour homme dans son coloris bleu pour la saison 2021/2022.",
-        "price": 9800,
+        "priceAP": 9800,
         "image": "/images/sweat.png",
         "category": "apparel"
     },
@@ -27,7 +27,7 @@
         "id": "4",
         "title": "Mini ballon réplica Gilbert édition spéciale GRAND CHELEM 2022",
         "description": "Célébrez le sacre historique des Bleus dans le Tournoi des Six Nations avec le mini ballon Gilbert exclusif GRAND CHELEM 2022!",
-        "price": 9800,
+        "priceAP": 9800,
         "image": "/images/ball.png",
         "category": "apparel"
     },
@@ -35,9 +35,8 @@
         "id": "5",
         "title": "NFTs #1",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "priceATF": 100,
-        "priceAT": 10,
         "image": "/images/nft-1.png",
         "category": "nfts"
     },
@@ -45,8 +44,7 @@
         "id": "6",
         "title": "NFTs #2",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
-        "priceAT": 10,
+        "priceAP": 1000,
         "image": "/images/nft-2.png",
         "category": "nfts"
     },
@@ -54,7 +52,7 @@
         "id": "7",
         "title": "NFTs #3",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "priceATF": 100,
         "image": "/images/nft-3.png",
         "category": "nfts"
@@ -63,7 +61,7 @@
         "id": "8",
         "title": "NFTs #4",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "image": "/images/nft-4.png",
         "category": "nfts"
     },
@@ -71,7 +69,7 @@
         "id": "9",
         "title": "Events #1",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "image": "/images/event-1.jpg",
         "category": "events"
     },
@@ -79,7 +77,7 @@
         "id": "10",
         "title": "Events #2",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "image": "/images/event-2.jpg",
         "category": "events"
     },
@@ -87,7 +85,7 @@
         "id": "11",
         "title": "Events #3",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "image": "/images/event-3.jpg",
         "category": "events"
     },
@@ -95,7 +93,7 @@
         "id": "12",
         "title": "Events #4",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "image": "/images/event-4.jpg",
         "category": "events"
     },
@@ -103,7 +101,7 @@
         "id": "13",
         "title": "Metaverse Event #1",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "image": "/images/metaverse_event-1.jpg",
         "category": "metaverse-events"
     },
@@ -111,7 +109,7 @@
         "id": "14",
         "title": "Metaverse Event #2",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "image": "/images/metaverse_event-2.png",
         "category": "metaverse-events"
     },
@@ -119,7 +117,7 @@
         "id": "15",
         "title": "Metaverse Event #3",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "image": "/images/metaverse_event-3.png",
         "category": "metaverse-events"
     },
@@ -127,7 +125,7 @@
         "id": "16",
         "title": "Metaverse Event #4",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-        "price": 1000,
+        "priceAP": 1000,
         "image": "/images/metaverse_event-4.jpg",
         "category": "metaverse-events"
     }

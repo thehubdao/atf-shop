@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link';
 import { useState } from 'react';
+import { IoMdClose } from 'react-icons/io';
 
 
 const Exchange: NextPage = () => {
@@ -15,6 +16,9 @@ const Exchange: NextPage = () => {
             </Head>
 
             <div className="flex flex-col pt-20 p-5 items-center justify-center space-y-10">
+
+                <IoMdClose onClick={() => history.back()} className="absolute top-3 right-3 text-5xl cursor-pointer bg-gray-200 p-2 rounded-full" />
+
                 <p className='font-jost text-2xl'>Top Up Action Points</p>
 
                 <div className='flex space-x-5'>
@@ -31,13 +35,13 @@ const Exchange: NextPage = () => {
 
                     <div className='flex items-center space-x-3'>
                         <input type="number" className='bg-gray-100 font-jost p-2 rounded-xl w-20' />
-                        <p>AT</p>
+                        <p>AP</p>
                     </div>
                 </div>
 
 
 
-                <p className='font-jost'>1ATF = XAT</p>
+                <p className='font-jost'>1ATF = XAP</p>
 
                 <div className='rounded-full font-jost border border-black p-4 cursor-pointer w-44 text-center font-medium self-center'>
                     Review

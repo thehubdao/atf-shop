@@ -11,19 +11,16 @@ const ShopCard = ({ product, classes }: ShopCardProps) => {
     return (
         <Link href={`/detail?id=${product.id}`}>
             <a className={`${classes} cursor-pointer relative rounded-xl bg-gray-100 items-center justify-start pt-8 flex flex-col w-40 h-56 overflow-hidden`}>
-                <div className='absolute top-2 right-2 rounded-xl flex space-x-3 items-center justify-center min-w-max px-2 bg-white'>
-                    <p className='font-bold'>{product.price}</p>
-                </div>
 
-                {product.priceAT && (
-                    <div className='absolute top-2 left-2 rounded flex space-x-3 items-center justify-center min-w-max px-2 bg-white'>
-                        <p className='font-jost text-sm'>{product.priceAT} AT</p>
+                {product.priceAP && (
+                    <div className='absolute top-2 right-2 rounded-xl flex space-x-3 items-center justify-center min-w-max px-2 bg-white'>
+                        <p className='font-bold text-sm'>{product.priceAP} AP</p>
                     </div>
                 )}
 
                 {product.priceATF && (
-                    <div className={`absolute ${product.priceAT ? "top-8" : "top-2"} left-2 rounded flex space-x-3 items-center justify-center min-w-max px-2 bg-white`}>
-                        <p className='font-jost text-sm'>{product.priceATF} ATF</p>
+                    <div className={`absolute ${product.priceAP ? "top-8" : "top-2"} top-2 right-2 rounded-xl flex space-x-3 items-center justify-center min-w-max px-2 bg-white`}>
+                        <p className='font-bold text-sm'>{product.priceATF} ATF</p>
                     </div>
                 )}
 

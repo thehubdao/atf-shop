@@ -2,7 +2,7 @@ import { useState } from "react"
 import Link from 'next/link'
 import { HiMenuAlt4 } from "react-icons/hi"
 import { MdClose } from "react-icons/md"
-import { BsCart, BsCart2, BsPerson } from "react-icons/bs"
+import { BsCart, BsCart2, BsPerson, BsPlus } from "react-icons/bs"
 import { useAppSelector } from "../../state/hooks"
 
 
@@ -19,10 +19,17 @@ const Toolbar = ({ dark }: any) => {
                 </Link>
 
                 <div className="flex flex-col justify-start items-stretch space-y-1">
-                    <p className='font-jost text-sm border border-black px-1 rounded'>1000 ATF</p>
-                    <Link href="/exchange">
-                        <a><p className='font-jost text-sm border border-black px-1 rounded'>500 AT</p></a>
-                    </Link>
+                    <div className="flex items-center space-x-2">
+                        <p className='text-sm px-2 py-0.5 bg-gray-200 rounded-full'>1000 ATF</p>
+                        <BsPlus className="rounded-full border border-black text-xl" />
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                        <p className='text-sm px-2 py-0.5 bg-gray-200 rounded-full'>500 AP</p>
+                        <Link href="/exchange">
+                            <a><BsPlus className="rounded-full border border-black text-xl" /></a>
+                        </Link>
+                    </div>
 
                 </div>
 
