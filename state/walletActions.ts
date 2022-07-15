@@ -5,32 +5,22 @@ import { login } from '../services/walletService'
 
 export const connectWallet = ({ wallet, Tezos }:any) => {
   return async (dispatch:any) => {
-    try {
+    
       var payload = {user:{}}
       Tezos.setWalletProvider(wallet)
       let activeAccount = await wallet.client.getActiveAccount()
       if (!activeAccount) {
-        await wallet.requestPermissions({
-          network: {
-            type: NetworkType.ITHACANET,
-            rpcUrl: 'https://ithacanet.smartpy.io',
-          },
-        })
+        await wallet.requestPermissions()
         activeAccount = await wallet.client.getActiveAccount()
       }
       const userAddress = await wallet.getPKH()
       await login(activeAccount.publicKey,wallet)
       payload.user = {
-        userAddress: userAddress,
+        address: userAddress,
       }
       dispatch(_walletConfig(payload.user))
-    } catch (error) {
-      console.log(error)
-      dispatch({
-        type: actions.CONNECT_WALLET_ERROR,
-      })
-    }
-  }
+    } 
+  
 }
 
 export const _walletConfig = (user:any) => {
