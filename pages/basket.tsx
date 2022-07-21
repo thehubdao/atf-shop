@@ -26,12 +26,20 @@ const Basket: NextPage = () => {
         return (() => { setBasketList([]) })
     }, [basketItems])
 
-    const calcTotal = () => {
-        let total: number = 0;
+    const calcTotalAP = () => {
+        let totalAP: number = 0;
         basketList.map(item => {
-            total += item.price * (item.count || 1)
+            totalAP += item.priceAP ? item.priceAP * (item.count || 1) : 0
         })
-        return total
+        return totalAP
+    }
+
+    const calcTotalATF = () => {
+        let totalATF: number = 0;
+        basketList.map(item => {
+            totalATF += item.priceATF ? item.priceATF * (item.count || 1) : 0
+        })
+        return totalATF
     }
 
 
@@ -58,7 +66,11 @@ const Basket: NextPage = () => {
                                 <p className='text-lg font-jost'>{item.count}</p>
                                 <BsPlus onClick={() => dispatch(increase(item.id))} className='text-2xl rounded-full bg-gray-300 p-1 cursor-pointer' />
                             </div>
-                            <p className='font-medium'>{item.price * (item.count || 1)}</p>
+                            <div className='flex flex-col min-w-max'>
+                                {item.priceAP && <p className='font-medium'>{item.priceAP * (item.count || 1)} AP</p>}
+                                {item.priceATF && <p className='font-medium'>{item.priceATF * (item.count || 1)} ATF</p>}
+                            </div>
+
                         </div>
                     ))}
                 </div>
@@ -67,7 +79,11 @@ const Basket: NextPage = () => {
 
                 <div className='flex items-center justify-between mt-5'>
                     <p className='font-light'>Grand Total</p>
-                    <p className='font-bold'>{calcTotal()}</p>
+                    <div className='flex flex-col min-w-max'>
+                        <p className='font-bold'>{calcTotalAP()} AP</p>
+                        <p className='font-bold'>{calcTotalATF()} ATF</p>
+                    </div>
+
                 </div>
 
                 <div className='rounded-full mt-10 bg-[#020202] text-[#FDE100] p-4 w-44 cursor-pointer text-center font-medium self-center'>
