@@ -19,7 +19,7 @@ const Wert = ({walletAddress}:{walletAddress:string}) => {
     const signedData = signSmartContractData(
         {
             address: user,
-            commodity: 'XTZ',
+            commodity: 'EURL',
             commodity_amount: 0,
             pk_id: 'key1',
             sc_address:
@@ -38,7 +38,7 @@ const Wert = ({walletAddress}:{walletAddress:string}) => {
                     process.env.WERT_PARTNER_ID!,
                 origin: process.env.WERT_ORIGIN!,
                 theme: 'white',
-                commodities: 'XTZ:Tezos',
+                commodities: 'EURL',
                 address: `${walletAddress}`,
                 listeners: {
                     error: (name: any, message: any) =>

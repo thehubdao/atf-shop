@@ -15,6 +15,7 @@ const Toolbar = ({ dark }: any) => {
     const { basketItems } = useAppSelector((state) => state.basket)
     const user = useAppSelector((state) => state.account.walletConfig.user)
     console.log(user)
+    
     return (
         <div className="w-full flex items-center justify-between py-3 px-5">
             <Link href="/">

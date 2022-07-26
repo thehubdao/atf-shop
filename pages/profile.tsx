@@ -19,7 +19,7 @@ import {
     _walletConfig,
 } from '../state/walletActions'
 
-const Profile: NextPage = () => {
+const Profile = ({ setNextPage }: any) => {
     const dispatch = useAppDispatch()
     const [openDetail, setOpenDetail] = useState(false)
     const user = useAppSelector((state) => state.account.walletConfig.user)
@@ -32,6 +32,7 @@ const Profile: NextPage = () => {
     const handleConnectWallet = async () => {
         console.log('Connect')
         await dispatch(connectWallet({ Tezos, wallet }))
+        setNextPage(true)
     }
 
     const handleDisconnectWallet = async () => {
@@ -68,20 +69,6 @@ const Profile: NextPage = () => {
             <Head>
                 <title>ATF Shop</title>
             </Head>
-            {/* <WertModule
-                className="h-[500px]"
-                options={{
-                    partner_id:  process.env.WERT_PARTNER_ID || "01G5RYFYE1H31HHCY3KX54QXPX",
-                    origin: process.env.WERT_ORIGIN || "https://sandbox.wert.io",
-                    theme: 'white',
-                    commodities: 'XTZ:Tezos',
-                    container_id: 'wert',
-                    address: `${user.address}` ,
-                    listeners: {
-                        error: (name:any,message:any) => console.log(name,message),
-                      },
-                }}
-            /> */}
             <div className="flex flex-col pt-20 items-center justify-center space-y-5 font-jost">
                 <div
                     onClick={handleConnectWallet}
