@@ -24,7 +24,7 @@ const Profile = ({ setNextPage }: any) => {
     const [openDetail, setOpenDetail] = useState(false)
     const user = useAppSelector((state) => state.account.walletConfig.user)
     const [Tezos, setTezos] = useState(
-        new TezosToolkit('https://ithacanet.smartpy.io')
+        new TezosToolkit('https://ghostnet.smartpy.io')
     )
     const [wallet, setWallet] = useState<any>(null)
     console.log(process.env.WERT_PRIVATE_KEY, 'PK')
@@ -32,7 +32,7 @@ const Profile = ({ setNextPage }: any) => {
     const handleConnectWallet = async () => {
         console.log('Connect')
         await dispatch(connectWallet({ Tezos, wallet }))
-        setNextPage(true)
+        //setNextPage(true)
     }
 
     const handleDisconnectWallet = async () => {

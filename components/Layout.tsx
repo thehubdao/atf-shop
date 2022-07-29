@@ -1,6 +1,8 @@
 import WertModule from '@wert-io/module-react-component'
+import { signSmartContractData } from '@wert-io/widget-sc-signer'
 import 'animate.css'
 import { useState } from 'react'
+import { v4 } from 'uuid'
 import Profile from '../pages/profile'
 
 import { useAppSelector } from '../state/hooks'
@@ -8,15 +10,37 @@ import Toolbar from './general/Toolbar'
 import Wert from './Wert'
 
 const Layout = ({ children }: any) => {
-    const [nextPage, setNextPage] = useState(false)
+    const [nextPage, setNextPage] = useState(true)
     // const { chainId } = useAppSelector(state => state.account)
-
-    if(!nextPage) return (<Profile setNextPage = {setNextPage} />)
+/*     let micheline_sc_params_string = JSON.stringify({
+        entrypoint: "buy",
+        value: {
+          prim: "Pair",
+          args: [
+            { string: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb' },
+            { int: 5  },
+          ],
+        },
+      });
+    const signedData = signSmartContractData(
+        {
+            address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
+            commodity: 'XTZ',
+            commodity_amount: 5 / 1000000,
+            pk_id: 'key1',
+            sc_address: 'KT1E7yfz6NRvrZkHeuJvYKB9tZuqpTd3MyCe',
+            sc_id: v4(),
+            sc_input_data: micheline_sc_params_string,
+        },
+        process.env.WERT_PRIVATE_KEY!
+    )
+    if (!nextPage) return <Profile setNextPage={setNextPage} />
     return (
         <div className="h-screen">
             <WertModule
                 className="w-full h-full"
                 options={{
+                    ...signedData,
                     partner_id: process.env.WERT_PARTNER_ID!,
                     origin: process.env.WERT_ORIGIN!,
                     theme: 'white',
@@ -29,8 +53,8 @@ const Layout = ({ children }: any) => {
                 }}
             />
         </div>
-    )
-    /*  return (
+    ) */
+     return (
         <>
             <div className="flex flex-col w-screen relative">
                 <Toolbar />
@@ -40,7 +64,7 @@ const Layout = ({ children }: any) => {
             </div>
 
         </>
-    ) */
+    )
 }
 
 export default Layout
