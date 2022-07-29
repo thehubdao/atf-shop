@@ -12,21 +12,24 @@ import Wert from './Wert'
 const Layout = ({ children }: any) => {
     const [nextPage, setNextPage] = useState(true)
     // const { chainId } = useAppSelector(state => state.account)
-/*     let micheline_sc_params_string = JSON.stringify({
-        entrypoint: "buy",
+    let micheline_sc_params_string = JSON.stringify({
+        entrypoint: 'buy',
         value: {
-          prim: "Pair",
-          args: [
-            { string: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb' },
-            { int: 5  },
-          ],
+            prim: 'Pair',
+            args: [
+                { string: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb' },
+                { int: 2000000 / 1000000 },
+            ],
         },
-      });
-    const signedData = signSmartContractData(
+    })
+        .split('')
+        .map((c: any) => c.charCodeAt(0).toString(16).padStart(2, '0'))
+        .join('')
+/*     const signedData = signSmartContractData(
         {
             address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
             commodity: 'XTZ',
-            commodity_amount: 5 / 1000000,
+            commodity_amount: 2000000 / 1000000,
             pk_id: 'key1',
             sc_address: 'KT1E7yfz6NRvrZkHeuJvYKB9tZuqpTd3MyCe',
             sc_id: v4(),
@@ -54,7 +57,7 @@ const Layout = ({ children }: any) => {
             />
         </div>
     ) */
-     return (
+         return (
         <>
             <div className="flex flex-col w-screen relative">
                 <Toolbar />
@@ -63,7 +66,7 @@ const Layout = ({ children }: any) => {
                 </div>
             </div>
 
-        </>
+        </> 
     )
 }
 

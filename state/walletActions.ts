@@ -105,8 +105,8 @@ export const connectWallet = ({ wallet, Tezos }: any) => {
                             token_origin:
                                 'KT1AixfDL1nuWD2fHfQ1DEtvwzhd7Rtj97WP',
                             token_price: 10,
-                            start_time: new Date(1659058945*1000).toISOString(),
-                            end_time: new Date(1659145320*1000).toISOString(),
+                            start_time: parseInt('1659058945'),//new Date(1659058945*1000).toISOString(), 
+                            end_time: parseInt('1659145320'),//new Date(1659145320*1000).toISOString(),
                             token_symbol: 'ATF',
                             accepted_tokens: [],
                             is_multi_token: false,
