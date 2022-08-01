@@ -93,20 +93,20 @@ export const connectWallet = ({ wallet, Tezos }: any) => {
             .then((contract: any) => {
                 let { methodsObject } = contract
                 console.log(
-                    new Date().toISOString(),
-                    new Date(Date.now() + 86400 * 1000).toISOString()
+                    new Date(1659135449*1000).toISOString(),
+                    new Date(1659221820*1000).toISOString()
                 )
                 console.log(
                     methodsObject
                         .addToMarketplace({
                             recipient: { general: '' },
                             swap_type: { regular: '' },
-                            token_id: 8,
+                            token_id: 20,
                             token_origin:
-                                'KT1AixfDL1nuWD2fHfQ1DEtvwzhd7Rtj97WP',
+                                'KT1KRvqRLoDQCFLmLS3kkEunkBoirLVZ79VJ',
                             token_price: 10,
-                            start_time: parseInt('1659058945'),//new Date(1659058945*1000).toISOString(), 
-                            end_time: parseInt('1659145320'),//new Date(1659145320*1000).toISOString(),
+                            start_time: new Date(1659135449*1000).toISOString(), //new Date(1659058945*1000).toISOString(),
+                            end_time: new Date(1659221820*1000).toISOString(), //new Date(1659145320*1000).toISOString(),
                             token_symbol: 'ATF',
                             accepted_tokens: [],
                             is_multi_token: false,
