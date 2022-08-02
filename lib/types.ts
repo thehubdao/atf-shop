@@ -13,8 +13,11 @@ export interface ProductData {
   id: string,
   title: string,
   description: string,
-  price: number;
+  price?: number;
+  priceATF?: number;
+  priceAP?: number;
   image: string;
+  category: string;
   count?: number;
 }
 

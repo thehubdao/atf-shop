@@ -39,6 +39,10 @@ module.exports = {
                 source: '/api/loginWallet',
                 destination: 'https://atf-test.backendboyz.repl.co/api/loginWallet',
             },
+            {
+                source: '/api/validate-token',
+                destination: 'https://atf-test.backendboyz.repl.co/api/validate-token',
+            }
         ]
     },
 }

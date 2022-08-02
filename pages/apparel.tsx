@@ -43,7 +43,7 @@ const Apparel: NextPage = (data) => {
 
                 <div className="grid grid-cols-2 place-items-center gap-5">
                     {products.filter(product => product.category === "apparel").map(product => (
-                        <ShopCard key={product.id} id={product.id} price={product.price} title={product.title} image={product.image} />
+                        <ShopCard key={product.id} product={product} />
                     ))}
                 </div>
 
