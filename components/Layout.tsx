@@ -37,7 +37,7 @@ const Layout = ({ children }: any) => {
         },
         process.env.WERT_PRIVATE_KEY!
     )
-    if (!nextPage) return <Profile setNextPage={setNextPage} />
+    //if (!nextPage) return <Profile setNextPage={setNextPage} />
     return (
         <div className="h-screen">
             <WertModule
