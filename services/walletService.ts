@@ -1,4 +1,6 @@
 import { SigningType } from '@airgap/beacon-sdk'
+import { BeaconWallet } from '@taquito/beacon-wallet'
+import { TezosToolkit } from '@taquito/taquito'
 import axios from 'axios'
 const { char2Bytes } = require('@taquito/utils')
 
@@ -8,6 +10,11 @@ interface loginResult {
     token: string
     refreshToken: string
 }
+export const Tezos = new TezosToolkit('https://ghostnet.smartpy.io')
+
+export const wallet_instance = new BeaconWallet({
+    name: 'ATF Beacon',
+})
 
 const notifyMobile = (result: loginResult) => {
     const aWindow: any = window as any
@@ -16,16 +23,14 @@ const notifyMobile = (result: loginResult) => {
         aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(result)
     }
     //Android case
-    console.log(aWindow.androidWeb3,"Left out")
+    console.log(aWindow.androidWeb3, 'Left out')
     if (aWindow.androidWeb3) {
-        console.log(aWindow.androidWeb3,"Joined")
+        console.log(aWindow.androidWeb3, 'Joined')
         aWindow.androidWeb3.onLoginResult(JSON.stringify(result))
     }
-    console.log(result)
 }
 
 export const getNonce = async (address: any) => {
-    console.log(address)
     return (await axios.post('/api/loginGetNonce', { address })).data
 }
 
@@ -34,7 +39,7 @@ export const login = async (address: any, wallet: any) => {
     const bytes = char2Bytes(nonce + '')
     const payloadBytes = '05' + '0100' + char2Bytes(bytes.length + '') + bytes
     const callData = (
-        await axios.post('api/loginWallet', {
+        await axios.post('/api/loginWallet', {
             signature: (
                 await wallet.client.requestSignPayload({
                     signingType: SigningType.MICHELINE,
@@ -46,7 +51,16 @@ export const login = async (address: any, wallet: any) => {
     ).data
     try {
         notifyMobile(callData)
+        return callData
     } catch (err) {
         console.log(err)
     }
+}
+
+export const checkJWT = async (jwt: any) => {
+   return axios.get('/api/validate-token', {
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+        },
+    })
 }

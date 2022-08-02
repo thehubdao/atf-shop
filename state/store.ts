@@ -1,13 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
-import basketReducer from "./basket"
-import persistedReducer from "./wallet"
+import basketReducer from './basket'
+import persistedReducer from './wallet'
 
-const store =  configureStore({
-  reducer: {
-    basket: basketReducer,
-    account: persistedReducer,
-  }
+const store = configureStore({
+    reducer: {
+        basket: basketReducer,
+        account: persistedReducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({ serializableCheck: false }),
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

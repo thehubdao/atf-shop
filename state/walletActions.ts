@@ -1,56 +1,58 @@
 import { NetworkType } from '@airgap/beacon-sdk'
 import { TezosToolkit } from '@taquito/taquito'
 import * as actions from './actionType'
-import { login } from '../services/walletService'
+import { login, wallet_instance, Tezos } from '../services/walletService'
 
-export const connectWallet = ({ wallet, Tezos }:any) => {
-  return async (dispatch:any) => {
-    try {
-      var payload = {user:{}}
-      Tezos.setWalletProvider(wallet)
-      let activeAccount = await wallet.client.getActiveAccount()
-      if (!activeAccount) {
-        await wallet.requestPermissions({
-          network: {
-            type: NetworkType.ITHACANET,
-            rpcUrl: 'https://ithacanet.smartpy.io',
-          },
+export const connectWallet = () => {
+    return async (dispatch: any) => {
+        try {
+            let user = {}
+            Tezos.setWalletProvider(wallet_instance)
+            let activeAccount = await wallet_instance.client.getActiveAccount()
+            if (!activeAccount) {
+                await wallet_instance.requestPermissions({
+                    network: {
+                        type: NetworkType.CUSTOM,
+                        rpcUrl: 'https://ghostnet.smartpy.io',
+                    },
+                })
+                activeAccount = await wallet_instance.client.getActiveAccount()
+            }
+            const userAddress = await wallet_instance.getPKH()
+            let { token, refreshToken } = await login(
+                activeAccount?.publicKey,
+                wallet_instance
+            )
+            user = {
+                userAddress: userAddress,
+                wallet_instance: wallet_instance,
+                token,
+                refreshToken,
+            }
+            dispatch(_walletConfig(user))
+        } catch (error) {
+            console.log(error)
+            dispatch({
+                type: actions.CONNECT_WALLET_ERROR,
+            })
+        }
+    }
+}
+
+export const _walletConfig = (user: any) => {
+    return {
+        type: actions.CONNECT_WALLET,
+        user,
+    }
+}
+
+export const disconnectWallet = () => {
+    return async (dispatch: any) => {
+        dispatch({
+            type: actions.DISCONNECT_WALLET,
         })
-        activeAccount = await wallet.client.getActiveAccount()
-      }
-      const userAddress = await wallet.getPKH()
-      await login(activeAccount.publicKey,wallet)
-      payload.user = {
-        userAddress: userAddress,
-      }
-      dispatch(_walletConfig(payload.user))
-    } catch (error) {
-      console.log(error)
-      dispatch({
-        type: actions.CONNECT_WALLET_ERROR,
-      })
+        if (wallet_instance) {
+            await wallet_instance.client.clearActiveAccount()
+        }
     }
-  }
 }
-
-export const _walletConfig = (user:any) => {
-  return {
-    type: actions.CONNECT_WALLET,
-    user,
-  }
-}
-
-export const disconnectWallet = ({ wallet, setTezos }:any) => {
-  return async (dispatch:any) => {
-    setTezos(new TezosToolkit('https://ithacanet.smartpy.io'))
-    dispatch({
-      type: actions.DISCONNECT_WALLET,
-    })
-    if (wallet) {
-      await wallet.client.removeAllAccounts()
-      await wallet.client.removeAllPeers()
-      await wallet.client.destroy()
-    }
-  }
-}
-
