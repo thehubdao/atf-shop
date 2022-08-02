@@ -7,12 +7,16 @@ import { checkJWT } from '../../services/walletService'
 const isWeb3 = async (user: any) => {
     const aWindow: any = window as any
     //IOS case
-    if (aWindow.webkit?.messageHandlers?.web3LoginHandler) {
+    let ios = aWindow.webkit?.messageHandlers?.web3LoginHandler
+    if (ios && ios?.wallet_instance) {
+        if ((await checkJWT(ios?.JWT))?.data?.user_id) return true
         return true
     }
     //Android case
-    if (aWindow.androidWeb3 && aWindow.androidWeb3?.wallet_instance) {
-        if ((await checkJWT(aWindow.androidWeb3?.JWT)).data.user_id) return true
+    let android = aWindow.androidWeb3
+    if (android && android?.wallet_instance) {
+        if ((await checkJWT(aWindow.androidWeb3?.JWT))?.data?.user_id)
+            return true
     }
     if (user.wallet_instance) return true
 
