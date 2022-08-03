@@ -14,32 +14,44 @@ import {
     _walletConfig,
 } from '../state/walletActions'
 
-const Wert = ({walletAddress}:{walletAddress:string}) => {
+const Wert = ({ walletAddress }: { walletAddress: string }) => {
     const user = useAppSelector((state) => state.account.walletConfig.user)
-    const signedData = signSmartContractData(
+    let micheline_sc_params_string = JSON.stringify({
+        entrypoint: 'buy',
+        value: {
+            prim: 'Pair',
+            args: [
+                { string: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb' },
+                { int: '1000000' },
+            ],
+        },
+    })
+        .split('')
+        .map((c: any) => c.charCodeAt(0).toString(16).padStart(2, '0'))
+        .join('')
+   const signedData = signSmartContractData(
         {
-            address: user,
-            commodity: 'EURL',
-            commodity_amount: 0,
+            address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
+            commodity: 'XTZ',
+            commodity_amount: 1,
             pk_id: 'key1',
-            sc_address:
-                process.env.TOKEN_CONTRACT_ADDRESS!,
+            sc_address: 'KT1E7yfz6NRvrZkHeuJvYKB9tZuqpTd3MyCe',
             sc_id: v4(),
-            sc_input_data: '',
+            sc_input_data: micheline_sc_params_string,
         },
         process.env.WERT_PRIVATE_KEY!
     )
 
     return (
-        <WertModule className ="w-full h-full"
+        <WertModule
+            className="w-full h-full"
             options={{
                 ...signedData,
-                partner_id:
-                    process.env.WERT_PARTNER_ID!,
+                partner_id: process.env.WERT_PARTNER_ID!,
                 origin: process.env.WERT_ORIGIN!,
                 theme: 'white',
-                commodities: 'EURL',
-                address: `${walletAddress}`,
+                commodities: 'XTZ',
+                address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
                 listeners: {
                     error: (name: any, message: any) =>
                         console.log(name, message),

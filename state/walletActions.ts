@@ -38,7 +38,7 @@ export const connectWallet = () => {
             })
             .catch((error: any) => console.log(`Error: ${error}`)) */
             //Mint NFT
-            Tezos.wallet
+            /* Tezos.wallet
                 .at('KT1KRvqRLoDQCFLmLS3kkEunkBoirLVZ79VJ')
                 .then(async (contract: any) => {
                     let { methods } = contract
@@ -67,11 +67,11 @@ export const connectWallet = () => {
                     },
                 ])
                 .send() */
-                    Tezos.wallet
+                /*     Tezos.wallet
                         .at('KT1LqLtQsGy96SQwRERhYP4XuukF9L2tEpNT')
                         .then(async (contract: any) => {
                             let { methods } = contract
-                            /*                         await methods
+                                                    await methods
                         .approve('KT1AixfDL1nuWD2fHfQ1DEtvwzhd7Rtj97WP', 0)
                         .send()
                     await methods
@@ -79,10 +79,10 @@ export const connectWallet = () => {
                             'KT1AixfDL1nuWD2fHfQ1DEtvwzhd7Rtj97WP',
                             100
                         )
-                        .send() */
+                        .send() 
 
                             //Call marketplace contract
-                            /*                             Tezos.wallet
+                                                       Tezos.wallet
                         .at('KT1AixfDL1nuWD2fHfQ1DEtvwzhd7Rtj97WP')
                         .then((contract: any) => {
                             let { methods } = contract
@@ -91,10 +91,10 @@ export const connectWallet = () => {
     
     
                                 
-                        })  */
+                        })  
                         })
-                })
-            Tezos.wallet
+                }) */
+/*             Tezos.wallet
                 .at('KT1AixfDL1nuWD2fHfQ1DEtvwzhd7Rtj97WP')
                 .then((contract: any) => {
                     let { methodsObject } = contract
@@ -123,7 +123,7 @@ export const connectWallet = () => {
                             })
                             .send()
                     )
-                })
+                }) */
         } catch (error) {
             console.log(error)
             dispatch({
