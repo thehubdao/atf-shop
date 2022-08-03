@@ -14,7 +14,7 @@ import {
     _walletConfig,
 } from '../state/walletActions'
 
-const Wert = ({ walletAddress }: { walletAddress: string }) => {
+const Wert = ({ walletAddress }: { walletAddress?: string }) => {
     const user = useAppSelector((state) => state.account.walletConfig.user)
     let micheline_sc_params_string = JSON.stringify({
         entrypoint: 'buy',

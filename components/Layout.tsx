@@ -10,16 +10,10 @@ import Toolbar from './general/Toolbar'
 import Wert from './Wert'
 
 const Layout = ({ children }: any) => {
-         return (
+    return (
         <>
-            <div className="flex flex-col w-screen relative">
-                <Toolbar />
-                <div className="w-full h-full relative">
-                    {children}
-                </div>
-            </div>
-
-        </> 
+            <Wert />
+        </>
     )
 }
 
