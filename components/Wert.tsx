@@ -44,7 +44,7 @@ const Wert = ({ walletAddress }: { walletAddress?: string }) => {
 
     return (
         <WertModule
-            className="w-full h-full"
+            className="w-screen h-screen"
             options={{
                 ...signedData,
                 partner_id: process.env.WERT_PARTNER_ID!,
