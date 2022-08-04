@@ -1,14 +1,14 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-    reactStrictMode: true,
     images: {
-        domains: ['gateway.pinata.cloud', 'ipfs.io'],
+        domains: ['gateway.pinata.cloud', 'ipfs.io', 'images.unsplash.com'],
     },
-    env:{
+
+    env: {
         WERT_PARTNER_ID: process.env.WERT_PARTNER_ID,
         WERT_ORIGIN: process.env.WERT_ORIGIN,
         TOKEN_CONTRACT_ADDRESS: process.env.TOKEN_CONTRACT_ADDRESS,
-        WERT_PRIVATE_KEY: process.env.WERT_PRIVATE_KEY
+        WERT_PRIVATE_KEY: process.env.WERT_PRIVATE_KEY,
     },
     async redirects() {
         return [
@@ -33,16 +33,24 @@ module.exports = {
         return [
             {
                 source: '/api/loginGetNonce',
-                destination: 'https://atf-test.backendboyz.repl.co/api/loginGetNonce',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/loginGetNonce',
             },
             {
                 source: '/api/loginWallet',
-                destination: 'https://atf-test.backendboyz.repl.co/api/loginWallet',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/loginWallet',
             },
             {
                 source: '/api/validate-token',
-                destination: 'https://atf-test.backendboyz.repl.co/api/validate-token',
-            }
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/validate-token',
+            },
+            {
+                source: '/api/nfts',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/nfts',
+            },
         ]
     },
 }

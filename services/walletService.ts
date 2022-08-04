@@ -34,8 +34,8 @@ export const getNonce = async (address: any) => {
     return (await axios.post('/api/loginGetNonce', { address })).data
 }
 
-export const login = async (address: any, wallet: any) => {
-    const nonce = await getNonce(address)
+export const login = async (address: any, publicKey:any, wallet: any) => {
+    const nonce = await getNonce((await wallet.client.getActiveAccount()).address)
     console.log(nonce,"Nonce")
     const bytes = char2Bytes(nonce + '')
     const payloadBytes = '05' + '0100' + char2Bytes(bytes.length + '') + bytes
@@ -47,7 +47,8 @@ export const login = async (address: any, wallet: any) => {
                     payload: payloadBytes,
                 })
             ).signature,
-            address: address,
+            address,
+            publicKey
         })
     ).data
     try {

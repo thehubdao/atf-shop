@@ -10,6 +10,8 @@ export interface basketItem {
 }
 
 export interface ProductData {
+  Detail: any;
+  id_product: any;
   id: string,
   title: string,
   description: string,
