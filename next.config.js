@@ -62,7 +62,7 @@ module.exports = {
                     'https://atf-test.backendboyz.repl.co/api/apparels',
             },
             {
-                source: '/api/eventos',
+                source: '/api/events',
                 destination:
                     'https://atf-test.backendboyz.repl.co/api/events',
             },

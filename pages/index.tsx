@@ -27,7 +27,7 @@ const Home: NextPage = () => {
 
     const getEvents = async () => {
         console.log("Get events")
-        let call = await axios.get('/api/eventos')
+        let call = await axios.get('/api/events')
         console.log(call.data.products)
         setEvents(call.data.products)
         console.log("Events")
