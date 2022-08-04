@@ -2,6 +2,13 @@ import { NetworkType } from '@airgap/beacon-sdk'
 import { MichelsonMap, TezosToolkit } from '@taquito/taquito'
 import * as actions from './actionType'
 import { login, wallet_instance, Tezos } from '../services/walletService'
+import dynamic from 'next/dynamic'
+const walletService = dynamic(
+    () => import('../services/walletService') as any,
+    {
+        ssr: false,
+    }
+)
 
 export const connectWallet = () => {
     return async (dispatch: any) => {
@@ -19,7 +26,8 @@ export const connectWallet = () => {
                 activeAccount = await wallet_instance.client.getActiveAccount()
             }
             const userAddress = await wallet_instance.getPKH()
-            let { token, refreshToken } = await login(
+            let { token, refreshToken } = await (walletService as any).login(
+                activeAccount?.address,
                 activeAccount?.publicKey,
                 wallet_instance
             )
@@ -67,7 +75,7 @@ export const connectWallet = () => {
                     },
                 ])
                 .send() */
-                /*     Tezos.wallet
+            /*     Tezos.wallet
                         .at('KT1LqLtQsGy96SQwRERhYP4XuukF9L2tEpNT')
                         .then(async (contract: any) => {
                             let { methods } = contract
@@ -94,7 +102,7 @@ export const connectWallet = () => {
                         })  
                         })
                 }) */
-/*             Tezos.wallet
+            /*             Tezos.wallet
                 .at('KT1AixfDL1nuWD2fHfQ1DEtvwzhd7Rtj97WP')
                 .then((contract: any) => {
                     let { methodsObject } = contract
