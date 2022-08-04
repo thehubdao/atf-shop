@@ -41,7 +41,7 @@ const ShopCard = ({ product, classes }: ShopCardProps) => {
 
 
                 <div className='absolute bg-indigo-800 w-[120%] h-20 -rotate-6 -bottom-2 px-5 py-5 flex items-center justify-center'>
-                    <p className='text-white text-center rotate-6 font-jost font-medium text-xs'>{product.title}</p>
+                    <p className='text-white text-center rotate-6 font-jost font-medium text-xs'>{product.Detail.detail.name}</p>
                 </div>
 
             </a>
