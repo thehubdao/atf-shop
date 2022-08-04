@@ -51,6 +51,21 @@ module.exports = {
                 destination:
                     'https://atf-test.backendboyz.repl.co/api/nfts',
             },
+            {
+                source: '/api/metaverseEvents',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/events/metaverse',
+            },
+            {
+                source: '/api/apparels',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/apparels',
+            },
+            {
+                source: '/api/eventos',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/events',
+            },
         ]
     },
 }

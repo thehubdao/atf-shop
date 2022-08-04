@@ -19,13 +19,37 @@ const Home: NextPage = () => {
     const [metaverseEvents, setMetaverseEvents] = useState([])
     const [apparels, setApparels] = useState([])
 
+    const getNFTs = async () => {
+        let call = await axios.get('/api/nfts')
+        console.log(call.data.products)
+        setNfts(call.data.products)
+    }
+
+    const getEvents = async () => {
+        console.log("Get events")
+        let call = await axios.get('/api/eventos')
+        console.log(call.data.products)
+        setEvents(call.data.products)
+        console.log("Events")
+    }
+
+    const getMetaverseEvents = async () => {
+        let call = await axios.get('/api/metaverseEvents')
+        console.log(call.data.products)
+        setMetaverseEvents(call.data.products)
+    }
+
+    const getApparels = async () => {
+        let call = await axios.get('/api/apparels')
+        console.log(call.data.products)
+        setApparels(call.data.products)
+    }
+
     useEffect(() => {
-        let getNfts = async () => {
-            let call = await axios.get('/api/nfts')
-            console.log(call.data.products)
-            setNfts(call.data.products)
-        }
-        getNfts()
+        getNFTs();
+        getEvents();
+        getMetaverseEvents();
+        getApparels();
     }, [])
 
     return (
@@ -107,11 +131,11 @@ const Home: NextPage = () => {
                 </div>
 
                 <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
-                    {nfts
-                        .map((nft:any) => (
+                    {events
+                        .map((event:any) => (
                             <ShopCard
-                                key={nft.id_product}
-                                product={nft}
+                                key={event.id_product}
+                                product={event}
                                 classes="min-w-[12rem]"
                             />
                         ))}
@@ -125,11 +149,11 @@ const Home: NextPage = () => {
                 </div>
 
                 <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
-                    {nfts
-                        .map((nft:any) => (
+                    {metaverseEvents
+                        .map((metaverseEvent:any) => (
                             <ShopCard
-                                key={nft.id_product}
-                                product={nft}
+                                key={metaverseEvent.id_product}
+                                product={metaverseEvent}
                                 classes="min-w-[12rem]"
                             />
                         ))}
@@ -143,11 +167,11 @@ const Home: NextPage = () => {
                 </div>
 
                 <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
-                    {nfts
-                        .map((nft:any) => (
+                    {apparels
+                        .map((apparel:any) => (
                             <ShopCard
-                                key={nft.id_product}
-                                product={nft}
+                                key={apparel.id_product}
+                                product={apparel}
                                 classes="min-w-[12rem]"
                             />
                         ))}
