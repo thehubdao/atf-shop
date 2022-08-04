@@ -15,16 +15,10 @@ const Home: NextPage = () => {
     const [openFilter, setOpenFilter] = useState(false)
     const [slide, setSlide] = useState(0)
     const [nfts, setNfts] = useState([])
+    const [events, setEvents] = useState([])
+    const [metaverseEvents, setMetaverseEvents] = useState([])
+    const [apparels, setApparels] = useState([])
 
-    // useEffect(()=>{
-    //     setTimeout(()=>{
-    //         if (slide > 2) {
-    //             setSlide(0)
-    //         } else {
-    //             setSlide(slide=>slide+=1)
-    //         }
-    //     }, 5000)
-    // }, [slide])
     useEffect(() => {
         let getNfts = async () => {
             let call = await axios.get('/api/nfts')
@@ -90,6 +84,60 @@ const Home: NextPage = () => {
                 <div className="flex justify-between items-end pb-3 mt-10">
                     <p className="text-xl">NFTs</p>
                     <Link href="/nfts">
+                        <a className="text-gray-500 font-jost">See all</a>
+                    </Link>
+                </div>
+
+                <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
+                    {nfts
+                        .map((nft:any) => (
+                            <ShopCard
+                                key={nft.id_product}
+                                product={nft}
+                                classes="min-w-[12rem]"
+                            />
+                        ))}
+                </div>
+
+                <div className="flex justify-between items-end pb-3 mt-10">
+                    <p className="text-xl">Events</p>
+                    <Link href="/events">
+                        <a className="text-gray-500 font-jost">See all</a>
+                    </Link>
+                </div>
+
+                <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
+                    {nfts
+                        .map((nft:any) => (
+                            <ShopCard
+                                key={nft.id_product}
+                                product={nft}
+                                classes="min-w-[12rem]"
+                            />
+                        ))}
+                </div>
+
+                <div className="flex justify-between items-end pb-3 mt-10">
+                    <p className="text-xl">Metaverse Events</p>
+                    <Link href="/metaverse-events">
+                        <a className="text-gray-500 font-jost">See all</a>
+                    </Link>
+                </div>
+
+                <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
+                    {nfts
+                        .map((nft:any) => (
+                            <ShopCard
+                                key={nft.id_product}
+                                product={nft}
+                                classes="min-w-[12rem]"
+                            />
+                        ))}
+                </div>
+
+                <div className="flex justify-between items-end pb-3 mt-10">
+                    <p className="text-xl">Apparels</p>
+                    <Link href="/apparel">
                         <a className="text-gray-500 font-jost">See all</a>
                     </Link>
                 </div>
