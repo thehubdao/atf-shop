@@ -73,7 +73,7 @@ const ShopItemDetail = () => {
             />
 
             <p className="font-bold text-3xl max-w-[80%] p-5 self-start">
-                {product.Detail.name}
+                {product.Detail.detail.name}
             </p>
 
             <img src={product.Detail.miniature} className="h-auto w-1/2 mb-10 mt-5" />
