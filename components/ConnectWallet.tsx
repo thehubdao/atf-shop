@@ -1,8 +1,9 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../state/hooks'
-import {
+import { BeaconWallet } from '@taquito/beacon-wallet'
+ import {
     connectWallet,
     disconnectWallet,
     _walletConfig,
@@ -10,8 +11,11 @@ import {
 
 const ConnectWallet = () => {
     const dispatch = useAppDispatch()
-    const { user } = useAppSelector((state) => state.account.walletConfig)
-
+    const { user }:any = useAppSelector((state) => state.account.walletConfig)
+    const [wallet, setWallet] = useState<null | BeaconWallet>(null)
+    const [Tezos, setTezos] = useState(null
+        )
+    
     const handleConnectWallet = async () => {
         await dispatch(connectWallet())
     }
@@ -19,12 +23,27 @@ const ConnectWallet = () => {
     const handleDisconnectWallet = async () => {
         await dispatch(disconnectWallet())
     }
+/*     useEffect(() => {
+        
+        ;(async () => {
+            setTezos(new TezosToolkit("https://mainnet-tezos.giganode.io"))
+            if (wallet === null) {
+                const _wallet = new (
+                    await import('@taquito/beacon-wallet')
+                ).BeaconWallet({ name: 'Demo' })
+                setWallet(_wallet)
+                Tezos.setWalletProvider(_wallet)
+                setIsMount(true)
+            }
+        })()
+    }, []) */
 
     return (
         <>
             <Head>
                 <title>ATF Shop</title>
             </Head>
+
             <div className="flex flex-col pt-20 items-center justify-center space-y-5 font-jost">
                 <div
                     onClick={
@@ -38,11 +57,6 @@ const ConnectWallet = () => {
                         ? 'Disconnect Wallet'
                         : 'Connect Wallet'}
                 </div>
-                <Link href="/orders">
-                    <a className="rounded-full mt-10 border border-black p-4 cursor-pointer w-44 text-center font-medium self-center">
-                        My Orders
-                    </a>
-                </Link>
             </div>
         </>
     )

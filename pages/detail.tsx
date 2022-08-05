@@ -58,8 +58,7 @@ const ShopItemDetail = () => {
     if (!product) {
         return <Loader />
     }
-
-    return (
+return product.Detail ? (
         <div className="w-screen min-h-screen animate__animated animate__fadeIn bg-gray-50 flex flex-col items-center">
             {basketPopUp && (
                 <p className="font-jost text-xs p-2 absolute -top-4 right-2 bg-white border border-black rounded shadow-2xl z-30 max-w-[95vw]">
@@ -73,21 +72,21 @@ const ShopItemDetail = () => {
             />
 
             <p className="font-bold text-3xl max-w-[80%] p-5 self-start">
-                {product.Detail.detail.name}
+                {product?.Detail?.detail?.name}
             </p>
 
             <img src={product.Detail.miniature} className="h-auto w-1/2 mb-10 mt-5" />
 
             <div className="fixed bottom-5 z-10 shadow-2xl rounded-full flex items-center justify-between w-[95%] p-2 bg-gray-50">
                 <div className="flex flex-col">
-                    {product.Detail.detail.priceAP && (
+                    {product.Detail?.detail.priceAP && (
                         <p className="font-bold text-xl ml-10">
-                            {product.Detail.detail.priceAP} AP
+                            {product.Detail?.detail.priceAP} AP
                         </p>
                     )}
-                    {product.Detail.detail.priceATF && (
+                    {product.Detail?.detail.priceATF && (
                         <p className="font-bold text-xl ml-10">
-                            {product.Detail.detail.priceATF} ATF
+                            {product.Detail?.detail.priceATF} ATF
                         </p>
                     )}
                 </div>
@@ -115,7 +114,7 @@ const ShopItemDetail = () => {
             </div>
 
             <div className="w-full bg-white p-5 font-jost font-light">
-                {product.Detail.detail.description}
+            {product.Detail?.detail.description}
             </div>
 
             <div className="bg-white flex flex-col w-full px-5 pb-10">
@@ -129,7 +128,7 @@ const ShopItemDetail = () => {
                 </div>
             </div>
         </div>
-    )
+    ):(<></>)
 }
 
 export default ShopItemDetail

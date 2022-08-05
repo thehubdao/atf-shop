@@ -1,9 +1,8 @@
-import { NetworkType } from '@airgap/beacon-sdk'
-import { MichelsonMap, TezosToolkit } from '@taquito/taquito'
 import * as actions from './actionType'
-import { login, wallet_instance, Tezos } from '../services/walletService'
+import { login, getWalletInstance, Tezos } from '../services/walletService'
 import dynamic from 'next/dynamic'
-
+import { NetworkType } from '@airgap/beacon-sdk'
+const wallet_instance = getWalletInstance()
 export const connectWallet = () => {
     return async (dispatch: any) => {
         try {
