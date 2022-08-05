@@ -12,9 +12,15 @@ interface loginResult {
 }
 export const Tezos = new TezosToolkit('https://ghostnet.smartpy.io')
 
-export const wallet_instance = new BeaconWallet({
-    name: 'ATF Beacon',
-})
+let wallet_instance: any = null
+
+export const getWalletInstance = () => {
+    if (!wallet_instance)
+        wallet_instance = new BeaconWallet({
+            name: 'ATF Beacon',
+        })
+    return wallet_instance
+}
 
 const notifyMobile = (result: loginResult) => {
     const aWindow: any = window as any
@@ -34,8 +40,13 @@ export const getNonce = async (address: any) => {
     return (await axios.post('/api/loginGetNonce', { address })).data
 }
 
-export const login = async (address: any, wallet: any) => {
-    const nonce = await getNonce(address)
+export const login = async (address: any, publicKey: any, wallet: any) => {
+    const nonce = await getNonce(
+        (
+            await wallet.client.getActiveAccount()
+        ).address
+    )
+    console.log(nonce, 'Nonce')
     const bytes = char2Bytes(nonce + '')
     const payloadBytes = '05' + '0100' + char2Bytes(bytes.length + '') + bytes
     const callData = (
@@ -46,7 +57,8 @@ export const login = async (address: any, wallet: any) => {
                     payload: payloadBytes,
                 })
             ).signature,
-            address: address,
+            address,
+            publicKey,
         })
     ).data
     try {
@@ -58,7 +70,7 @@ export const login = async (address: any, wallet: any) => {
 }
 
 export const checkJWT = async (jwt: any) => {
-   return axios.get('/api/validate-token', {
+    return axios.get('/api/validate-token', {
         headers: {
             Authorization: `Bearer ${jwt}`,
         },

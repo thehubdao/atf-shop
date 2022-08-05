@@ -1,16 +1,16 @@
-import "animate.css"
-import { useState } from "react";
+import WertModule from '@wert-io/module-react-component'
+import { signSmartContractData } from '@wert-io/widget-sc-signer'
+import 'animate.css'
+import { useState } from 'react'
+import { v4 } from 'uuid'
+import Profile from '../pages/profile'
 
-import { useAppSelector } from "../state/hooks";
-import Toolbar from "./general/Toolbar";
-
+import { useAppSelector } from '../state/hooks'
+import Toolbar from './general/Toolbar'
+import Wert from './Wert'
 
 const Layout = ({ children }: any) => {
-    const [openModal, setOpenModal] = useState(false)
-    // const { chainId } = useAppSelector(state => state.account)
-
-
-    return (
+         return (
         <>
             <div className="flex flex-col w-screen relative">
                 <Toolbar />
@@ -19,9 +19,8 @@ const Layout = ({ children }: any) => {
                 </div>
             </div>
 
-        </>
+        </> 
     )
 }
-
 
 export default Layout

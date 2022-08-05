@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { BsCart, BsCart2, BsPerson, BsPlus } from 'react-icons/bs'
 import { useAppSelector } from '../../state/hooks'
 import { checkJWT } from '../../services/walletService'
+import WertModal from '../Modal'
+import { getAPBalance, getATFBalance } from '../../services/contractService'
 
 const isWeb3 = async (user: any) => {
     const aWindow: any = window as any
@@ -27,10 +29,17 @@ const Toolbar = ({ dark }: any) => {
     const { basketItems } = useAppSelector((state) => state.basket)
     const { user } = useAppSelector((state) => state.account.walletConfig)
     const [_isWeb3, _setIsWeb3] = useState(false)
+    const [balances, setBalances] = useState<any>(null)
     useEffect(() => {
-        const web3Check = async () => _setIsWeb3(await isWeb3(user))
+        const web3Check = async () => {
+            _setIsWeb3(await isWeb3(user))
+            setBalances({
+                atfBalance: await getATFBalance(user.userAddress),
+                apBalance: await getAPBalance(user.userAddress),
+            })
+        }
         web3Check()
-    })
+    },[user])
     return (
         <div className="w-full flex items-center justify-between py-3 px-5">
             <div className="flex space-x-5">
@@ -39,19 +48,19 @@ const Toolbar = ({ dark }: any) => {
                         <img src="/images/atf-logo.png" className="h-12" />
                     </a>
                 </Link>
-
-                {_isWeb3 && (
+                <WertModal walletAddress={user.address} />
+                {_isWeb3 && balances && (
                     <div className="flex flex-col justify-start items-stretch space-y-1">
                         <div className="flex items-center space-x-2">
                             <p className="text-sm px-2 py-0.5 bg-gray-200 rounded-full">
-                                1000 ATF
+                                {balances.atfBalance} ATF
                             </p>
                             <BsPlus className="rounded-full border border-black text-xl" />
                         </div>
 
                         <div className="flex items-center space-x-2">
                             <p className="text-sm px-2 py-0.5 bg-gray-200 rounded-full">
-                                500 AP
+                                {balances.apBalance} AP
                             </p>
                             <Link href="/exchange">
                                 <a>

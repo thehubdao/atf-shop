@@ -1,8 +1,8 @@
-import { NetworkType } from '@airgap/beacon-sdk'
-import { TezosToolkit } from '@taquito/taquito'
 import * as actions from './actionType'
-import { login, wallet_instance, Tezos } from '../services/walletService'
-
+import { login, getWalletInstance, Tezos } from '../services/walletService'
+import dynamic from 'next/dynamic'
+import { NetworkType } from '@airgap/beacon-sdk'
+const wallet_instance = getWalletInstance()
 export const connectWallet = () => {
     return async (dispatch: any) => {
         try {
@@ -19,7 +19,9 @@ export const connectWallet = () => {
                 activeAccount = await wallet_instance.client.getActiveAccount()
             }
             const userAddress = await wallet_instance.getPKH()
+            console.log(activeAccount?.publicKey)
             let { token, refreshToken } = await login(
+                activeAccount?.address,
                 activeAccount?.publicKey,
                 wallet_instance
             )

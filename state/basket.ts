@@ -1,41 +1,52 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { basketState } from "../lib/types";
+import { basketState } from '../lib/types'
 
 const initialState: basketState = { basketItems: [] }
 
 export const basketSlice = createSlice({
-  name: 'basket',
-  initialState,
-  reducers: {
-    addItem: (state, { payload }) => {
+    name: 'basket',
+    initialState,
+    reducers: {
+        addItem: (state, { payload }) => {
+            const index = state.basketItems.findIndex(
+                (item) => item.id === payload.id
+            )
 
-      const index = state.basketItems.findIndex(item => item.id === payload.id);
-
-      if (index === -1) {
-        state.basketItems.push(payload);
-      } else {
-        state.basketItems.map(item => item.count += payload.count)
-      }
-
+            if (index === -1) {
+                state.basketItems.push(payload)
+            } else {
+                state.basketItems.map((item) => (item.count += payload.count))
+            }
+        },
+        removeItem: (state, { payload }) => {
+        
+          console.log(state.basketItems)
+            state.basketItems = state.basketItems.filter(
+                (item: any) => { 
+                  console.log(item, payload)
+                  return item.product_id !== payload}
+            )
+        },
+        increase: (state, { payload }) => {
+            const index = state.basketItems.findIndex(
+                (item) => item.id === payload
+            )
+            state.basketItems[index].count += 1
+        },
+        decrease: (state, { payload }) => {
+            const index = state.basketItems.findIndex(
+                (item) => item.id === payload
+            )
+            if (state.basketItems[index].count > 1) {
+                state.basketItems[index].count -= 1
+            } else {
+                state.basketItems = state.basketItems.filter(
+                    (item) => item.id !== payload
+                )
+            }
+        },
     },
-    removeItem: (state, { payload }) => {
-      state.basketItems = state.basketItems.filter(item => item.id !== payload)
-    },
-    increase: (state, { payload }) => {
-      const index = state.basketItems.findIndex(item => item.id === payload);
-      state.basketItems[index].count += 1
-
-    },
-    decrease: (state, { payload }) => {
-      const index = state.basketItems.findIndex(item => item.id === payload);
-      if (state.basketItems[index].count > 1) {
-        state.basketItems[index].count -= 1
-      } else {
-        state.basketItems = state.basketItems.filter(item => item.id !== payload)
-      }
-    }
-  }
 })
 
 // Action creators are generated for each case reducer function
