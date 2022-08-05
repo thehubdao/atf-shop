@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
     reactStrictMode: true,
+    typescript: { ignoreBuildErrors: true },
     images: {
         domains: ['gateway.pinata.cloud', 'ipfs.io'],
     },
