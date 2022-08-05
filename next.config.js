@@ -3,7 +3,7 @@ module.exports = {
     images: {
         domains: ['gateway.pinata.cloud', 'ipfs.io', 'images.unsplash.com'],
     },
-
+    typescript: { ignoreBuildErrors: true },
     env: {
         WERT_PARTNER_ID: process.env.WERT_PARTNER_ID,
         WERT_ORIGIN: process.env.WERT_ORIGIN,
