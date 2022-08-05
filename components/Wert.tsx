@@ -4,18 +4,9 @@ import Link from 'next/link'
 import WertModule from '@wert-io/module-react-component'
 import { signSmartContractData } from '@wert-io/widget-sc-signer'
 import { useEffect, useState } from 'react'
-import { Toolbar } from '../components'
-import { useAppDispatch, useAppSelector } from '../state/hooks'
-
 import { v4 as uuidv4, v4 } from 'uuid'
-import {
-    connectWallet,
-    disconnectWallet,
-    _walletConfig,
-} from '../state/walletActions'
 
 const Wert = ({ walletAddress }: { walletAddress?: string }) => {
-    const user = useAppSelector((state) => state.account.walletConfig.user)
     let micheline_sc_params_string = JSON.stringify({
         entrypoint: 'buy',
         value: {
