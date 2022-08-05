@@ -4,7 +4,6 @@ import * as actions from './actionType'
 import { login, wallet_instance, Tezos } from '../services/walletService'
 import dynamic from 'next/dynamic'
 
-
 export const connectWallet = () => {
     return async (dispatch: any) => {
         try {

@@ -13,13 +13,13 @@ const ShopCard = ({ product, classes }: ShopCardProps) => {
         <Link href={`/detail?id=${product.id_product}`}>
             <a className={`${classes} cursor-pointer relative rounded-xl bg-gray-100 items-center justify-start pt-8 flex flex-col w-40 h-56 overflow-hidden`}>
 
-                {product.Detail.detail.priceAP && (
+                {product?.Detail?.detail?.priceAP && (
                     <div className='absolute top-2 right-2 rounded-xl flex space-x-3 items-center justify-center min-w-max px-2 bg-white'>
                         <p className='font-bold text-sm'>{product.Detail.detail.priceAP} AP</p>
                     </div>
                 )}
 
-                {product.Detail.detail.priceATF && (
+                {product?.Detail?.detail?.priceATF && (
                     <div className={`absolute  top-2 right-2 rounded-xl flex space-x-3 items-center justify-center min-w-max px-2 bg-white`}>
                         <p className='font-bold text-sm'>{product.Detail.detail.priceATF} ATF</p>
                     </div>

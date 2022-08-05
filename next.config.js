@@ -9,6 +9,13 @@ module.exports = {
         WERT_ORIGIN: process.env.WERT_ORIGIN,
         TOKEN_CONTRACT_ADDRESS: process.env.TOKEN_CONTRACT_ADDRESS,
         WERT_PRIVATE_KEY: process.env.WERT_PRIVATE_KEY,
+        ACTION_CONTRACT_ADDRESS: process.env.ACTION_CONTRACT_ADDRESS,
+        ATF_CONTRACT: process.env.ATF_CONTRACT,
+        WALLET_PRIVATE_KEY: process.env.WALLET_PRIVATE_KEY,
+        WALLET_PUBLIC_KEY: process.env.WALLET_PUBLIC_KEY,
+        NFT_CONTRACT_ADDRESS: process.env.NFT_CONTRACT_ADDRESS,
+        MARKETPLACE_CONTRACT_ADDRESS: process.env.MARKETPLACE_CONTRACT_ADDRESS,
+        ATF_TOKEN_CONTRACT_ADDRESS: process.env.ATF_TOKEN_CONTRACT_ADDRESS,
     },
     async redirects() {
         return [
@@ -48,8 +55,11 @@ module.exports = {
             },
             {
                 source: '/api/nfts',
-                destination:
-                    'https://atf-test.backendboyz.repl.co/api/nfts',
+                destination: 'https://atf-test.backendboyz.repl.co/api/nfts',
+            },
+            {
+                source: '/api/nft/:id',
+                destination: 'https://atf-test.backendboyz.repl.co/api/nft/:id',
             },
             {
                 source: '/api/metaverseEvents',
@@ -63,8 +73,7 @@ module.exports = {
             },
             {
                 source: '/api/events',
-                destination:
-                    'https://atf-test.backendboyz.repl.co/api/events',
+                destination: 'https://atf-test.backendboyz.repl.co/api/events',
             },
         ]
     },

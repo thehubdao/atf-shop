@@ -21,7 +21,7 @@ const Wert = ({ walletAddress }: { walletAddress: string }) => {
         value: {
             prim: 'Pair',
             args: [
-                { string: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb' },
+                { string: user.userAddress },
                 { int: '1000000' },
             ],
         },
