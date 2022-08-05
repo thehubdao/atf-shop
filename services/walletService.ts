@@ -12,7 +12,7 @@ interface loginResult {
 }
 export const Tezos = new TezosToolkit('https://ghostnet.smartpy.io')
 
-let wallet_instance: any = new BeaconWallet({
+export const wallet_instance: any = new BeaconWallet({
     name: 'ATF Beacon',
 })
 
