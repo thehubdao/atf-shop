@@ -12,15 +12,11 @@ interface loginResult {
 }
 export const Tezos = new TezosToolkit('https://ghostnet.smartpy.io')
 
-let wallet_instance: any = null
+let wallet_instance: any = new BeaconWallet({
+    name: 'ATF Beacon',
+})
 
-export const getWalletInstance = () => {
-    if (!wallet_instance)
-        wallet_instance = new BeaconWallet({
-            name: 'ATF Beacon',
-        })
-    return wallet_instance
-}
+
 
 const notifyMobile = (result: loginResult) => {
     const aWindow: any = window as any
