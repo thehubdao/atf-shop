@@ -35,7 +35,7 @@ const Wert = ({ walletAddress }: { walletAddress: string }) => {
             commodity: 'XTZ',
             commodity_amount: 1,
             pk_id: 'key1',
-            sc_address: 'KT1E7yfz6NRvrZkHeuJvYKB9tZuqpTd3MyCe',
+            sc_address: process.env.SWAP_CONTRACT_ADDRESS!,
             sc_id: v4(),
             sc_input_data: micheline_sc_params_string,
         },
