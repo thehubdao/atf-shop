@@ -16,6 +16,7 @@ module.exports = {
         NFT_CONTRACT_ADDRESS: process.env.NFT_CONTRACT_ADDRESS,
         MARKETPLACE_CONTRACT_ADDRESS: process.env.MARKETPLACE_CONTRACT_ADDRESS,
         ATF_TOKEN_CONTRACT_ADDRESS: process.env.ATF_TOKEN_CONTRACT_ADDRESS,
+        SWAP_CONTRACT_ADDRESS: process.env.SWAP_CONTRACT_ADDRESS,
     },
     async redirects() {
         return [
