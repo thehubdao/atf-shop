@@ -5,25 +5,7 @@ import { useAppSelector } from '../../state/hooks'
 import { checkJWT } from '../../services/walletService'
 import WertModal from '../Modal'
 import { getAPBalance, getATFBalance } from '../../services/contractService'
-
-const isWeb3 = async (user: any) => {
-    const aWindow: any = window as any
-    //IOS case
-    let ios = aWindow.webkit?.messageHandlers?.web3LoginHandler
-    if (ios && ios?.wallet_instance) {
-        if ((await checkJWT(ios?.JWT))?.data?.user_id) return true
-        return true
-    }
-    //Android case
-    let android = aWindow.androidWeb3
-    if (android && android?.wallet_instance) {
-        if ((await checkJWT(aWindow.androidWeb3?.JWT))?.data?.user_id)
-            return true
-    }
-    if (user.wallet_instance) return true
-
-    return false
-}
+import {isWeb3} from '../../services/walletService'
 
 const Toolbar = ({ dark }: any) => {
     const { basketItems } = useAppSelector((state) => state.basket)
@@ -39,7 +21,7 @@ const Toolbar = ({ dark }: any) => {
             })
         }
         web3Check()
-    },[user])
+    }, [user])
     return (
         <div className="w-full flex items-center justify-between py-3 px-5">
             <div className="flex space-x-5">
@@ -48,7 +30,7 @@ const Toolbar = ({ dark }: any) => {
                         <img src="/images/atf-logo.png" className="h-12" />
                     </a>
                 </Link>
-                <WertModal walletAddress={user.address} />
+                {_isWeb3 && <WertModal walletAddress={user.address} />}
                 {_isWeb3 && balances && (
                     <div className="flex flex-col justify-start items-stretch space-y-1">
                         <div className="flex items-center space-x-2">
@@ -73,14 +55,16 @@ const Toolbar = ({ dark }: any) => {
             </div>
 
             <div className="flex items-center space-x-5">
-                <Link href="/basket">
-                    <a className="relative">
-                        <BsCart className="text-3xl" />
-                        {basketItems.length > 0 && (
-                            <div className="absolute h-3 w-3 -top-0 -right-1 rounded-full bg-red-500" />
-                        )}
-                    </a>
-                </Link>
+                {_isWeb3 && (
+                    <Link href="/basket">
+                        <a className="relative">
+                            <BsCart className="text-3xl" />
+                            {basketItems.length > 0 && (
+                                <div className="absolute h-3 w-3 -top-0 -right-1 rounded-full bg-red-500" />
+                            )}
+                        </a>
+                    </Link>
+                )}
 
                 <Link href="/profile">
                     <a>
