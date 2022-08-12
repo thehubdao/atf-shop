@@ -14,7 +14,7 @@ import {
     _walletConfig,
 } from '../state/walletActions'
 
-const Wert = ({ walletAddress }: { walletAddress: string }) => {
+const Wert = () => {
     const user = useAppSelector((state) => state.account.walletConfig.user)
     let micheline_sc_params_string = JSON.stringify({
         entrypoint: 'buy',
@@ -29,6 +29,7 @@ const Wert = ({ walletAddress }: { walletAddress: string }) => {
         .split('')
         .map((c: any) => c.charCodeAt(0).toString(16).padStart(2, '0'))
         .join('')
+
    const signedData = signSmartContractData(
         {
             address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
@@ -52,6 +53,8 @@ const Wert = ({ walletAddress }: { walletAddress: string }) => {
                 theme: 'white',
                 commodities: 'XTZ',
                 address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
+                autosize: false,
+                width: 360,
                 listeners: {
                     error: (name: any, message: any) =>
                         console.log(name, message),

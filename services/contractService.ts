@@ -41,46 +41,51 @@ export const getATFBalance = async (address: any) => {
 }
 
 export const buyNfts = async ({ nfts, jwt, address }: any) => {
-    let { methodsObject } = await marketplace_contract
-    let tokensMethodsObject = (await atf_token_contract).methodsObject
-    const config = {
-        headers: { Authorization: `Bearer ${jwt}` },
+    try {
+        let { methodsObject } = await marketplace_contract
+        let tokensMethodsObject = (await atf_token_contract).methodsObject
+        const config = {
+            headers: { Authorization: `Bearer ${jwt}` },
+        }
+        let batch = Tezos.wallet.batch([])
+        let total: number = 0
+        nfts.forEach((nft: any) => {
+             total += nft.Detail.detail.priceATF
+                ? nft.Detail.detail.priceATF
+                : nft.Detail.detail.priceAP
+            batch.withContractCall(
+                methodsObject.collect({
+                    to_: address,
+                    amount_ft: nft.Detail.detail.priceATF
+                        ? nft.Detail.detail.priceATF
+                        : nft.Detail.detail.priceAP,
+                    token_symbol: nft.Detail.detail.priceATF ? 'ATF' : 'AP',
+                    swap_id: nft.Detail.detail.swap_id,
+                }) as any
+            )
+        })
+        batch
+            .withContractCall(
+                tokensMethodsObject.approve({
+                    value: 0,
+                    spender: marketplace_contract_address,
+                }) as any
+            )
+            .withContractCall(
+                tokensMethodsObject.approve({
+                    value: total,
+                    spender: marketplace_contract_address,
+                }) as any
+            )
+        await (await batch.send()).confirmation()
+        nfts.forEach(async (nft: any) => {
+            console.log(nft, config.headers.Authorization)
+            try {
+                await axios.delete('/api/nft/' + nft.id_product, config)
+            } catch (error) {}
+        })
+        return true
+    } catch {
+        return false
     }
-    let batch = Tezos.wallet.batch([])
-    let total: number = 0
-    nfts.forEach((nft: any) => {
-         total += nft.Detail.detail.priceATF
-            ? nft.Detail.detail.priceATF
-            : nft.Detail.detail.priceAP
-        batch.withContractCall(
-            methodsObject.collect({
-                to_: address,
-                amount_ft: nft.Detail.detail.priceATF
-                    ? nft.Detail.detail.priceATF
-                    : nft.Detail.detail.priceAP,
-                token_symbol: nft.Detail.detail.priceATF ? 'ATF' : 'AP',
-                swap_id: nft.Detail.detail.swap_id,
-            }) as any
-        )
-    })
-    batch
-        .withContractCall(
-            tokensMethodsObject.approve({
-                value: 0,
-                spender: marketplace_contract_address,
-            }) as any
-        )
-        .withContractCall(
-            tokensMethodsObject.approve({
-                value: total,
-                spender: marketplace_contract_address,
-            }) as any
-        )
-    await (await batch.send()).confirmation()
-    nfts.forEach(async (nft: any) => {
-        console.log(nft, config.headers.Authorization)
-        try {
-            await axios.delete('/api/nft/' + nft.id_product, config)
-        } catch (error) {}
-    })
 }

@@ -14,6 +14,7 @@ import { IoMdClose } from 'react-icons/io'
 import { getLocal } from '../lib/local'
 import axios from 'axios'
 import { buyNfts } from '../services/contractService'
+import WertModal from '../components/Modal'
 
 const Basket: NextPage = () => {
     const dispatch = useAppDispatch()
@@ -21,6 +22,7 @@ const Basket: NextPage = () => {
     const [basketList, setBasketList] = useState<ProductData[]>([])
     const [nfts, setNfts] = useState<any>([])
     const { user } = useAppSelector((state) => state.account.walletConfig)
+
     useEffect(() => {
         let getNfts = async () => {
             let call = await axios.get('/api/nfts')
@@ -65,6 +67,23 @@ const Basket: NextPage = () => {
                 : 0
         })
         return totalATF
+    }
+
+    const bodyModal = () => {
+        return (
+            <div className='w-[80%] m-auto text-center my-10'>
+                <p className='font-bold'>Confirm in-App Purchsae</p>
+                <p>Click confirm to proceed with your order 1640 credits will be discounted from your connected web3 wallet.</p>
+                <div className='flex flex-col mt-10'>
+                    <button className="rounded-md my-3 bg-[#020202] text-white px-4 py-1 w-44 cursor-pointer text-center font-medium self-center">
+                        Confirm
+                    </button>
+                    <button>
+                        Back to ATF
+                    </button>
+                </div>
+            </div>
+        )
     }
 
     return (
@@ -142,15 +161,13 @@ const Basket: NextPage = () => {
                     </div>
                 </div>
 
-                <div
-                    onClick={() => {
-                        console.log(user)
-                        buyNfts({ nfts: basketList, jwt: user.token, address: user.userAddress})
-                    }}
-                    className="rounded-full mt-10 bg-[#020202] text-[#FDE100] p-4 w-44 cursor-pointer text-center font-medium self-center"
-                >
-                    Continue
-                </div>
+                <WertModal
+                    title='Confirm Purchase'
+                    body={bodyModal}
+                    buttonText='Continue'
+                    buttonClassName="rounded-full m-auto mt-10 bg-[#020202] text-[#FDE100] p-4 w-44 cursor-pointer text-center font-medium self-center"
+                    buttonExtraFunction={() => buyNfts({ nfts: basketList, jwt: user.token, address: user.userAddress })}
+                />
             </main>
         </>
     )
