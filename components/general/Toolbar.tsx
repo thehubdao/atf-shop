@@ -26,15 +26,15 @@ const Toolbar = ({ dark }: any) => {
     }, [user])
 
     const modalBody = () => {
-        return ( <div className="h-[580px] rounded-b"><Wert /></div> )
+        return (<div className="h-[580px] rounded-b"><Wert /></div>)
     }
 
     return (
         <div className="w-full flex items-center justify-between py-3 px-5">
-            <div className="flex space-x-5">
+            <div className="flex md:space-x-5">
                 <Link href="/">
-                    <a>
-                        <img src="/images/atf-logo.png" className="h-12" />
+                    <a className='max-h-12'>
+                        <img src="/images/atf-logo.png" className="h-12 w-20" />
                     </a>
                 </Link>
                 {<WertModal
@@ -47,15 +47,15 @@ const Toolbar = ({ dark }: any) => {
                 {_isWeb3 && balances && (
                     <div className="flex flex-col justify-start items-stretch space-y-1">
                         <div className="flex items-center space-x-2">
-                            <p className="text-sm px-2 py-0.5 bg-gray-200 rounded-full">
-                                {balances.atfBalance} ATF
+                            <p className="text-sm px-2 py-0.5 min-w-[60px] bg-gray-200 rounded-full">
+                                {`${balances.atfBalance} ATF`}
                             </p>
                             <BsPlus className="rounded-full border border-black text-xl" />
                         </div>
 
                         <div className="flex items-center space-x-2">
-                            <p className="text-sm px-2 py-0.5 bg-gray-200 rounded-full">
-                                {balances.apBalance} AP
+                            <p className="text-sm px-2 py-0.5 min-w-[60px] bg-gray-200 rounded-full">
+                                {`${balances.apBalance} AP`} 
                             </p>
                             <Link href="/exchange">
                                 <a>
