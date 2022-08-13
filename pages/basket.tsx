@@ -14,6 +14,8 @@ import { IoMdClose } from 'react-icons/io'
 import { getLocal } from '../lib/local'
 import axios from 'axios'
 import { buyNfts } from '../services/contractService'
+import WertModal from '../components/Modal'
+import BasketModalConfirm from '../components/modalBodies/BasketModalConfirm'
 
 const Basket: NextPage = () => {
     const dispatch = useAppDispatch()
@@ -21,6 +23,11 @@ const Basket: NextPage = () => {
     const [basketList, setBasketList] = useState<ProductData[]>([])
     const [nfts, setNfts] = useState<any>([])
     const { user } = useAppSelector((state) => state.account.walletConfig)
+    const [isConfirmedModal, setIsConfirmedModal] = useState<boolean>(false)
+    const [isSuccesfulModal, setIsSuccesfulModal] = useState<boolean>(false)
+    const [isWaitingModal, setIsWaitingModal] = useState<boolean>(true)
+
+
     useEffect(() => {
         let getNfts = async () => {
             let call = await axios.get('/api/nfts')
@@ -65,6 +72,40 @@ const Basket: NextPage = () => {
                 : 0
         })
         return totalATF
+    }
+
+    const handleConfirmModal = async () => {
+        const buyConfirm = await buyNfts({ nfts: basketList, jwt: user.token, address: user.userAddress })
+        setIsSuccesfulModal(buyConfirm)
+        setIsWaitingModal(false)
+    }
+
+    const bodyModal = () => {
+        return (<BasketModalConfirm
+            isWaiting={isWaitingModal}
+            isConfirmed={isConfirmedModal}
+            isSuccesful={isSuccesfulModal}
+            setIsWaiting={setIsWaitingModal}
+            setIsConfirmed={setIsConfirmedModal}
+            setIsSuccesful={setIsSuccesfulModal}
+            handleConfirmModal={handleConfirmModal}
+        />)
+    }
+
+    const handleCloseModal = () => {
+        setIsConfirmedModal(false)
+        setIsSuccesfulModal(false)
+        setIsWaitingModal(true)
+    }
+
+    const handleChooseTitle = () => {
+        if (!isConfirmedModal) {
+            return 'Confirm Purchase'
+        } else if (isWaitingModal) {
+            return 'Waiting Purchase'
+        } else if (isSuccesfulModal) {
+            return 'Purchase Succesful'
+        } return 'Purchase Denied'
     }
 
     return (
@@ -142,15 +183,13 @@ const Basket: NextPage = () => {
                     </div>
                 </div>
 
-                <div
-                    onClick={() => {
-                        console.log(user)
-                        buyNfts({ nfts: basketList, jwt: user.token, address: user.userAddress})
-                    }}
-                    className="rounded-full mt-10 bg-[#020202] text-[#FDE100] p-4 w-44 cursor-pointer text-center font-medium self-center"
-                >
-                    Continue
-                </div>
+                <WertModal
+                    title={handleChooseTitle()}
+                    body={bodyModal}
+                    buttonText='Continue'
+                    buttonClassName="rounded-full m-auto mt-10 bg-[#020202] text-[#FDE100] p-4 w-44 cursor-pointer text-center font-medium self-center"
+                    closeExtraFunction={handleCloseModal}
+                />
             </main>
         </>
     )

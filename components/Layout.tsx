@@ -7,7 +7,7 @@ import Profile from '../pages/profile'
 
 import { useAppSelector } from '../state/hooks'
 import Toolbar from './general/Toolbar'
-import Wert from './Wert'
+import Wert from './modalBodies/Wert'
 
 const Layout = ({ children }: any) => {
          return (
