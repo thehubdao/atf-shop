@@ -5,11 +5,12 @@ interface IModal {
   body: any,
   buttonText: string,
   buttonClassName: string
-  buttonExtraFunction?: any
+  buttonExtraFunction?: any,
+  closeExtraFunction?: any
 }
 
 
-export default function WertModal({ title, buttonText, buttonClassName, buttonExtraFunction, body }: IModal) {
+export default function WertModal({ title, buttonText, buttonClassName, buttonExtraFunction, body, closeExtraFunction }: IModal) {
   const [showModal, setShowModal] = React.useState(false);
 
   return (
@@ -37,7 +38,10 @@ export default function WertModal({ title, buttonText, buttonClassName, buttonEx
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModal(false)}
+                    onClick={() => {
+                      setShowModal(false)
+                      closeExtraFunction && closeExtraFunction()
+                    }}
                   >
                     <span className="bg-transparent text-black opacity-40 h-6 w-6 text-2xl block outline-none focus:outline-none">
                       {'x'}

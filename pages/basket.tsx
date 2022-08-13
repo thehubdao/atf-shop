@@ -15,6 +15,7 @@ import { getLocal } from '../lib/local'
 import axios from 'axios'
 import { buyNfts } from '../services/contractService'
 import WertModal from '../components/Modal'
+import BasketModalConfirm from '../components/modalBodies/BasketModalConfirm'
 
 const Basket: NextPage = () => {
     const dispatch = useAppDispatch()
@@ -22,6 +23,10 @@ const Basket: NextPage = () => {
     const [basketList, setBasketList] = useState<ProductData[]>([])
     const [nfts, setNfts] = useState<any>([])
     const { user } = useAppSelector((state) => state.account.walletConfig)
+    const [isConfirmedModal, setIsConfirmedModal] = useState<boolean>(false)
+    const [isSuccesfulModal, setIsSuccesfulModal] = useState<boolean>(false)
+    const [isWaitingModal, setIsWaitingModal] = useState<boolean>(true)
+
 
     useEffect(() => {
         let getNfts = async () => {
@@ -69,21 +74,38 @@ const Basket: NextPage = () => {
         return totalATF
     }
 
+    const handleConfirmModal = async () => {
+        const buyConfirm = await buyNfts({ nfts: basketList, jwt: user.token, address: user.userAddress })
+        setIsSuccesfulModal(buyConfirm)
+        setIsWaitingModal(false)
+    }
+
     const bodyModal = () => {
-        return (
-            <div className='w-[80%] m-auto text-center my-10'>
-                <p className='font-bold'>Confirm in-App Purchsae</p>
-                <p>Click confirm to proceed with your order 1640 credits will be discounted from your connected web3 wallet.</p>
-                <div className='flex flex-col mt-10'>
-                    <button className="rounded-md my-3 bg-[#020202] text-white px-4 py-1 w-44 cursor-pointer text-center font-medium self-center">
-                        Confirm
-                    </button>
-                    <button>
-                        Back to ATF
-                    </button>
-                </div>
-            </div>
-        )
+        return (<BasketModalConfirm
+            isWaiting={isWaitingModal}
+            isConfirmed={isConfirmedModal}
+            isSuccesful={isSuccesfulModal}
+            setIsWaiting={setIsWaitingModal}
+            setIsConfirmed={setIsConfirmedModal}
+            setIsSuccesful={setIsSuccesfulModal}
+            handleConfirmModal={handleConfirmModal}
+        />)
+    }
+
+    const handleCloseModal = () => {
+        setIsConfirmedModal(false)
+        setIsSuccesfulModal(false)
+        setIsWaitingModal(true)
+    }
+
+    const handleChooseTitle = () => {
+        if (!isConfirmedModal) {
+            return 'Confirm Purchase'
+        } else if (isWaitingModal) {
+            return 'Waiting Purchase'
+        } else if (isSuccesfulModal) {
+            return 'Purchase Succesful'
+        } return 'Purchase Denied'
     }
 
     return (
@@ -162,11 +184,11 @@ const Basket: NextPage = () => {
                 </div>
 
                 <WertModal
-                    title='Confirm Purchase'
+                    title={handleChooseTitle()}
                     body={bodyModal}
                     buttonText='Continue'
                     buttonClassName="rounded-full m-auto mt-10 bg-[#020202] text-[#FDE100] p-4 w-44 cursor-pointer text-center font-medium self-center"
-                    buttonExtraFunction={() => buyNfts({ nfts: basketList, jwt: user.token, address: user.userAddress })}
+                    closeExtraFunction={handleCloseModal}
                 />
             </main>
         </>

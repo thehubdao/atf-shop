@@ -6,7 +6,7 @@ import { checkJWT } from '../../services/walletService'
 import WertModal from '../Modal'
 import { getAPBalance, getATFBalance } from '../../services/contractService'
 import { isWeb3 } from '../../services/walletService'
-import Wert from '../Wert'
+import Wert from '../modalBodies/Wert'
 
 const Toolbar = ({ dark }: any) => {
     const { basketItems } = useAppSelector((state) => state.basket)
