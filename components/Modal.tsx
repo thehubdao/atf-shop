@@ -32,8 +32,8 @@ export default function WertModal({ title, buttonText, buttonClassName, buttonEx
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-[360px] bg-white outline-none focus:outline-none h-full">
                 {/*header*/}
-                <div className="flex items-center justify-between p-5 border-b border-solid border-slate-200 rounded-t h-[100px]">
-                  <h3 className="text-3xl font-sans">
+                <div className="flex items-center justify-between p-3 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-2xl font-sans">
                     {title}
                   </h3>
                   <button
