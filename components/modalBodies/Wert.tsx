@@ -59,7 +59,7 @@ const Wert = ({ isWalletConect }: any) => {
                 !isWalletConect ? (
                     <div className='font-jost w-[70%] m-auto text-center my-10'>
                         <p className='font-bold'>Connect Web3 Wallet</p>
-                        <p>A connected Web3 wallet is needed in order to make a purchase in ATF marketplace.</p>
+                        <p>A connected Web3 wallet is needed to purchase ATF tokens and interact with the shop.</p>
                         <div className='flex flex-col mt-10'>
                             <ConnectWallet
                                 buttonStyle="rounded-md my-3 bg-[#020202] text-white px-4 py-1 w-44 cursor-pointer text-center font-medium self-center"
