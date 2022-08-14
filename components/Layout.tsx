@@ -12,7 +12,7 @@ import Wert from './modalBodies/Wert'
 const Layout = ({ children }: any) => {
          return (
         <>
-            <div className="flex flex-col w-screen relative">
+            <div className="flex flex-col w-full relative">
                 <Toolbar />
                 <div className="w-full h-full relative">
                     {children}

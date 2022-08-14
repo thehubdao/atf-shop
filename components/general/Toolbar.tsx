@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { BsCart, BsCart2, BsPerson, BsPlus } from 'react-icons/bs'
 import { useAppSelector } from '../../state/hooks'
 import { checkJWT } from '../../services/walletService'
-import WertModal from '../Modal'
+import Modal from '../Modal'
 import { getAPBalance, getATFBalance } from '../../services/contractService'
 import { isWeb3 } from '../../services/walletService'
 import Wert from '../modalBodies/Wert'
@@ -26,7 +26,9 @@ const Toolbar = ({ dark }: any) => {
     }, [user])
 
     const modalBody = () => {
-        return (<div className="h-[580px] rounded-b"><Wert /></div>)
+        return (<div className="h-fit overflow-hidden">
+            <Wert isWalletConect={_isWeb3}/>
+        </div>)
     }
 
     return (
@@ -37,9 +39,8 @@ const Toolbar = ({ dark }: any) => {
                         <img src="/images/atf-logo.png" className="h-12 w-20" />
                     </a>
                 </Link>
-                {<WertModal
+                {<Modal
                     title='Buy ATF Tokens'
-                    /* body={<></>} footer={<></>} */
                     body={modalBody}
                     buttonText='Buy tokens'
                     buttonClassName="bg-[#ffe000] text-black active:bg-yellow font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -55,7 +56,7 @@ const Toolbar = ({ dark }: any) => {
 
                         <div className="flex items-center space-x-2">
                             <p className="text-sm px-2 py-0.5 min-w-[60px] bg-gray-200 rounded-full">
-                                {`${balances.apBalance} AP`} 
+                                {`${balances.apBalance} AP`}
                             </p>
                             <Link href="/exchange">
                                 <a>

@@ -6,6 +6,7 @@ import { signSmartContractData } from '@wert-io/widget-sc-signer'
 import { useEffect, useState } from 'react'
 import { Toolbar } from '..'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
+import dynamic from 'next/dynamic'
 
 import { v4 as uuidv4, v4 } from 'uuid'
 import {
@@ -14,8 +15,17 @@ import {
     _walletConfig,
 } from '../../state/walletActions'
 
-const Wert = () => {
+const ConnectWallet = dynamic(() => import('../ConnectWallet'), {
+    ssr: false,
+}) as any
+
+const Wert = ({ isWalletConect }: any) => {
+    // const dispatch = useAppDispatch()
     const user = useAppSelector((state) => state.account.walletConfig.user)
+    // const handleConnectWallet = async () => {
+    //     await dispatch(connectWallet())
+    // }
+
     let micheline_sc_params_string = JSON.stringify({
         entrypoint: 'buy',
         value: {
@@ -30,7 +40,7 @@ const Wert = () => {
         .map((c: any) => c.charCodeAt(0).toString(16).padStart(2, '0'))
         .join('')
 
-   const signedData = signSmartContractData(
+    const signedData = signSmartContractData(
         {
             address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
             commodity: 'XTZ',
@@ -44,23 +54,40 @@ const Wert = () => {
     )
 
     return (
-        <WertModule
-            className="w-full h-full"
-            options={{
-                ...signedData,
-                partner_id: process.env.WERT_PARTNER_ID!,
-                origin: process.env.WERT_ORIGIN!,
-                theme: 'white',
-                commodities: 'XTZ',
-                address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
-                autosize: false,
-                width: 360,
-                listeners: {
-                    error: (name: any, message: any) =>
-                        console.log(name, message),
-                },
-            }}
-        />
+        <div className='overflow-x-hidden'>
+            {
+                !isWalletConect ? (
+                    <div className='font-jost w-[70%] m-auto text-center my-10'>
+                        <p className='font-bold'>Connect Web3 Wallet</p>
+                        <p>A connected Web3 wallet is needed in order to make a purchase in ATF marketplace.</p>
+                        <div className='flex flex-col mt-10'>
+                            <ConnectWallet
+                                buttonStyle="rounded-md my-3 bg-[#020202] text-white px-4 py-1 w-44 cursor-pointer text-center font-medium self-center"
+                                connectText="Connect Web3 wallet"
+                            />
+                        </div>
+                    </div>
+                ) : (
+                    <WertModule
+                        className="h-[450px]"
+                        options={{
+                            ...signedData,
+                            partner_id: process.env.WERT_PARTNER_ID!,
+                            origin: process.env.WERT_ORIGIN!,
+                            theme: 'white',
+                            commodities: 'XTZ',
+                            address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
+                            autosize: true,
+                            width: 400,
+                            listeners: {
+                                error: (name: any, message: any) =>
+                                    console.log(name, message),
+                            },
+                        }}
+                    />
+                )
+            }
+        </div>
     )
 }
 

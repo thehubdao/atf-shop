@@ -14,7 +14,7 @@ import { IoMdClose } from 'react-icons/io'
 import { getLocal } from '../lib/local'
 import axios from 'axios'
 import { buyNfts } from '../services/contractService'
-import WertModal from '../components/Modal'
+import Modal from '../components/Modal'
 import BasketModalConfirm from '../components/modalBodies/BasketModalConfirm'
 
 const Basket: NextPage = () => {
@@ -183,7 +183,7 @@ const Basket: NextPage = () => {
                     </div>
                 </div>
 
-                <WertModal
+                <Modal
                     title={handleChooseTitle()}
                     body={bodyModal}
                     buttonText='Continue'
