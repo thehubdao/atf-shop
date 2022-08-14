@@ -13,9 +13,12 @@ import { decrease, increase, removeItem } from '../state/basket'
 import { IoMdClose } from 'react-icons/io'
 import { getLocal } from '../lib/local'
 import axios from 'axios'
-import { buyNfts } from '../services/contractService'
 import Modal from '../components/Modal'
 import BasketModalConfirm from '../components/modalBodies/BasketModalConfirm'
+
+import { buyNfts } from '../services/contractService'
+import { isWeb3 } from '../services/walletService'
+import ConnectWallet from '../components/ConnectWallet'
 
 const Basket: NextPage = () => {
     const dispatch = useAppDispatch()
@@ -26,7 +29,12 @@ const Basket: NextPage = () => {
     const [isConfirmedModal, setIsConfirmedModal] = useState<boolean>(false)
     const [isSuccesfulModal, setIsSuccesfulModal] = useState<boolean>(false)
     const [isWaitingModal, setIsWaitingModal] = useState<boolean>(true)
+    const [_isWeb3, _setIsWeb3] = useState(false)
 
+    useEffect(() => {
+        const web3Check = async () => { _setIsWeb3(await isWeb3(user)) }
+        web3Check()
+    }, [user])
 
     useEffect(() => {
         let getNfts = async () => {
@@ -47,10 +55,7 @@ const Basket: NextPage = () => {
         }
         getNfts()
 
-        console.log(basketList)
-        return () => {
-            setBasketList([])
-        }
+        return () => { setBasketList([]) }
     }, [basketItems])
 
     const calcTotalAP = () => {
@@ -183,13 +188,24 @@ const Basket: NextPage = () => {
                     </div>
                 </div>
 
-                <Modal
-                    title={handleChooseTitle()}
-                    body={bodyModal}
-                    buttonText='Continue'
-                    buttonClassName="rounded-full m-auto mt-10 bg-[#020202] text-[#FDE100] p-4 w-44 cursor-pointer text-center font-medium self-center"
-                    closeExtraFunction={handleCloseModal}
-                />
+
+                {
+                    _isWeb3 ? (
+                        <Modal
+                            title={handleChooseTitle()}
+                            body={bodyModal}
+                            buttonText='Continue'
+                            buttonClassName="rounded-full m-auto mt-10 bg-[#020202] text-[#FDE100] p-4 w-44 cursor-pointer text-center font-medium self-center"
+                            closeExtraFunction={handleCloseModal}
+                        />
+
+                    ) : (
+                        <ConnectWallet
+                            buttonStyle="rounded-full mt-0 bg-[#020202] text-[#FDE100] p-4 cursor-pointer w-44 text-center font-medium self-center"
+                            containerStyle="flex flex-col pt-20 items-center justify-center space-y-5 font-jost"
+                        />
+                    )
+                }
             </main>
         </>
     )

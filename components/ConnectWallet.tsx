@@ -8,11 +8,12 @@ import {
 } from '../state/walletActions'
 
 interface IConnectWallet {
-    buttonStyle: string
+    buttonStyle: string,
+    containerStyle: string,
     connectText?: string,
 }
 
-const ConnectWallet = ({connectText, buttonStyle}: IConnectWallet) => {
+const ConnectWallet = ({connectText, buttonStyle, containerStyle}: IConnectWallet) => {
     const dispatch = useAppDispatch()
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
     const [wallet, setWallet] = useState<null | BeaconWallet>(null)
@@ -43,7 +44,7 @@ const ConnectWallet = ({connectText, buttonStyle}: IConnectWallet) => {
 
     return (
         <>
-            <div className="flex flex-col pt-20 items-center justify-center space-y-5 font-jost">
+            <div className={containerStyle}>
                 <div
                     onClick={
                         user.wallet_instance
