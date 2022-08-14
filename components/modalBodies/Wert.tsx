@@ -6,6 +6,7 @@ import { signSmartContractData } from '@wert-io/widget-sc-signer'
 import { useEffect, useState } from 'react'
 import { Toolbar } from '..'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
+import dynamic from 'next/dynamic'
 
 import { v4 as uuidv4, v4 } from 'uuid'
 import {
@@ -14,7 +15,11 @@ import {
     _walletConfig,
 } from '../../state/walletActions'
 
-const  Wert = ({ isWalletConect }: any) => {
+const ConnectWallet = dynamic(() => import('../ConnectWallet'), {
+    ssr: false,
+}) as any
+
+const Wert = ({ isWalletConect }: any) => {
     // const dispatch = useAppDispatch()
     const user = useAppSelector((state) => state.account.walletConfig.user)
     // const handleConnectWallet = async () => {
@@ -56,12 +61,10 @@ const  Wert = ({ isWalletConect }: any) => {
                         <p className='font-bold'>Connect Web3 Wallet</p>
                         <p>A connected Web3 wallet is needed in order to make a purchase in ATF marketplace.</p>
                         <div className='flex flex-col mt-10'>
-                            <button
-                                className="rounded-md my-3 bg-[#020202] text-white px-4 py-1 w-44 cursor-pointer text-center font-medium self-center"
-                                onClick={() => {alert("funciona")}/* handleConnectWallet() */}
-                            >
-                                Connect Web3 wallet
-                            </button>
+                            <ConnectWallet
+                                buttonStyle="rounded-md my-3 bg-[#020202] text-white px-4 py-1 w-44 cursor-pointer text-center font-medium self-center"
+                                connectText="Connect Web3 wallet"
+                            />
                         </div>
                     </div>
                 ) : (
