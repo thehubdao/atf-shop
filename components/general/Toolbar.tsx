@@ -51,18 +51,18 @@ const Toolbar = ({ dark }: any) => {
                             <p className="text-sm px-2 py-0.5 min-w-[60px] bg-gray-200 rounded-full">
                                 {`${balances.atfBalance} ATF`}
                             </p>
-                            {/* <BsPlus className="rounded-full border border-black text-xl" /> */}
+                            <BsPlus className="rounded-full border border-black text-xl" /> 
                         </div>
 
                         <div className="flex items-center space-x-2">
                             <p className="text-sm px-2 py-0.5 min-w-[60px] bg-gray-200 rounded-full">
                                 {`${balances.apBalance} AP`}
                             </p>
-                            {/* <Link href="/exchange">
+                            <Link href="/exchange">
                                 <a>
                                     <BsPlus className="rounded-full border border-black text-xl" />
                                 </a>
-                            </Link> */}
+                            </Link>
                         </div>
                     </div>
                 )}
