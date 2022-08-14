@@ -14,12 +14,12 @@ import {
     _walletConfig,
 } from '../../state/walletActions'
 
-const Wert = ({ isWalletConect }: any) => {
-    const dispatch = useAppDispatch()
+const  Wert = ({ isWalletConect }: any) => {
+    // const dispatch = useAppDispatch()
     const user = useAppSelector((state) => state.account.walletConfig.user)
-    const handleConnectWallet = async () => {
-        await dispatch(connectWallet())
-    }
+    // const handleConnectWallet = async () => {
+    //     await dispatch(connectWallet())
+    // }
 
     let micheline_sc_params_string = JSON.stringify({
         entrypoint: 'buy',
@@ -58,7 +58,7 @@ const Wert = ({ isWalletConect }: any) => {
                         <div className='flex flex-col mt-10'>
                             <button
                                 className="rounded-md my-3 bg-[#020202] text-white px-4 py-1 w-44 cursor-pointer text-center font-medium self-center"
-                                onClick={() => handleConnectWallet()}
+                                onClick={() => {alert("funciona")}/* handleConnectWallet() */}
                             >
                                 Connect Web3 wallet
                             </button>
