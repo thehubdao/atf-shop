@@ -27,7 +27,7 @@ const Toolbar = ({ dark }: any) => {
 
     const modalBody = () => {
         return (<div className="h-fit overflow-hidden">
-            <Wert isWalletConect={_isWeb3}/>
+            <Wert isWalletConect={_isWeb3} />
         </div>)
     }
 
@@ -69,16 +69,14 @@ const Toolbar = ({ dark }: any) => {
             </div>
 
             <div className="flex items-center space-x-5">
-                {_isWeb3 && (
-                    <Link href="/basket">
-                        <a className="relative">
-                            <BsCart className="text-3xl" />
-                            {basketItems.length > 0 && (
-                                <div className="absolute h-3 w-3 -top-0 -right-1 rounded-full bg-red-500" />
-                            )}
-                        </a>
-                    </Link>
-                )}
+                <Link href="/basket">
+                    <a className="relative">
+                        <BsCart className="text-3xl" />
+                        {basketItems.length > 0 && (
+                            <div className="absolute h-3 w-3 -top-0 -right-1 rounded-full bg-red-500" />
+                        )}
+                    </a>
+                </Link>
 
                 <Link href="/profile">
                     <a>
