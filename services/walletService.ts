@@ -61,6 +61,7 @@ export const login = async (address: any, publicKey: any, wallet: any) => {
             publicKey,
         })
     ).data
+    callData.wallet_instance = wallet_instance
     try {
         notifyMobile(callData)
         return callData
