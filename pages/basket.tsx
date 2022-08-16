@@ -27,7 +27,6 @@ const Basket: NextPage = () => {
     const [isSuccesfulModal, setIsSuccesfulModal] = useState<boolean>(false)
     const [isWaitingModal, setIsWaitingModal] = useState<boolean>(true)
 
-
     useEffect(() => {
         let getNfts = async () => {
             let call = await axios.get('/api/nfts')
@@ -75,21 +74,29 @@ const Basket: NextPage = () => {
     }
 
     const handleConfirmModal = async () => {
-        const buyConfirm = await buyNfts({ nfts: basketList, jwt: user.token, address: user.userAddress })
+        const buyConfirm = await buyNfts({
+            nfts: basketList,
+            jwt: user.token,
+            address: user.userAddress,
+            totalAP,
+            totalATF,
+        })
         setIsSuccesfulModal(buyConfirm)
         setIsWaitingModal(false)
     }
 
     const bodyModal = () => {
-        return (<BasketModalConfirm
-            isWaiting={isWaitingModal}
-            isConfirmed={isConfirmedModal}
-            isSuccesful={isSuccesfulModal}
-            setIsWaiting={setIsWaitingModal}
-            setIsConfirmed={setIsConfirmedModal}
-            setIsSuccesful={setIsSuccesfulModal}
-            handleConfirmModal={handleConfirmModal}
-        />)
+        return (
+            <BasketModalConfirm
+                isWaiting={isWaitingModal}
+                isConfirmed={isConfirmedModal}
+                isSuccesful={isSuccesfulModal}
+                setIsWaiting={setIsWaitingModal}
+                setIsConfirmed={setIsConfirmedModal}
+                setIsSuccesful={setIsSuccesfulModal}
+                handleConfirmModal={handleConfirmModal}
+            />
+        )
     }
 
     const handleCloseModal = () => {
@@ -105,8 +112,11 @@ const Basket: NextPage = () => {
             return 'Waiting Purchase'
         } else if (isSuccesfulModal) {
             return 'Purchase Succesful'
-        } return 'Purchase Denied'
+        }
+        return 'Purchase Denied'
     }
+    let totalAP = calcTotalAP(),
+        totalATF = calcTotalATF()
 
     return (
         <>
@@ -178,15 +188,15 @@ const Basket: NextPage = () => {
                 <div className="flex items-center justify-between mt-5">
                     <p className="font-light">Grand Total</p>
                     <div className="flex flex-col min-w-max">
-                        <p className="font-bold">{calcTotalAP()} AP</p>
-                        <p className="font-bold">{calcTotalATF()} ATF</p>
+                        <p className="font-bold">{totalAP} AP</p>
+                        <p className="font-bold">{totalATF} ATF</p>
                     </div>
                 </div>
 
                 <Modal
                     title={handleChooseTitle()}
                     body={bodyModal}
-                    buttonText='Continue'
+                    buttonText="Continue"
                     buttonClassName="rounded-full m-auto mt-10 bg-[#020202] text-[#FDE100] p-4 w-44 cursor-pointer text-center font-medium self-center"
                     closeExtraFunction={handleCloseModal}
                 />

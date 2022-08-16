@@ -17,6 +17,7 @@ module.exports = {
         MARKETPLACE_CONTRACT_ADDRESS: process.env.MARKETPLACE_CONTRACT_ADDRESS,
         ATF_TOKEN_CONTRACT_ADDRESS: process.env.ATF_TOKEN_CONTRACT_ADDRESS,
         SWAP_CONTRACT_ADDRESS: process.env.SWAP_CONTRACT_ADDRESS,
+        AP_TOKEN_CONTRACT_ADDRESS: process.env.AP_TOKEN_CONTRACT_ADDRESS,
     },
     async redirects() {
         return [

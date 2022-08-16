@@ -4,12 +4,12 @@ import axios from 'axios'
 import { Tezos } from './walletService'
 
 let wallet_public_key = process.env.WALLET_PUBLIC_KEY
-let nft_contract_address = process.env.NFT_CONTRACT_ADDRESS
 let marketplace_contract_address = process.env.MARKETPLACE_CONTRACT_ADDRESS
-let nft_contract = Tezos.contract.at(nft_contract_address!)
-let marketplace_contract = Tezos.wallet.at(marketplace_contract_address!)
 let atf_token_contract_address = process.env.ATF_TOKEN_CONTRACT_ADDRESS
+let ap_token_contract_address = process.env.ACTION_CONTRACT_ADDRESS
+let marketplace_contract = Tezos.wallet.at(marketplace_contract_address!)
 let atf_token_contract = Tezos.contract.at(atf_token_contract_address!)
+let ap_token_contract = Tezos.contract.at(ap_token_contract_address!)
 
 export const getAPBalance = async (address: any) => {
     let { ledger }: any = await (
@@ -40,17 +40,52 @@ export const getATFBalance = async (address: any) => {
     return 0
 }
 
-export const buyNfts = async ({ nfts, jwt, address }: any) => {
+export const buyNfts = async ({
+    nfts,
+    jwt,
+    address,
+    totalAP,
+    totalATF,
+}: any) => {
     try {
         let { methodsObject } = await marketplace_contract
-        let tokensMethodsObject = (await atf_token_contract).methodsObject
+        let atf_token_methods = (await atf_token_contract).methodsObject
+        let ap_token_methods = (await ap_token_contract).methodsObject
         const config = {
             headers: { Authorization: `Bearer ${jwt}` },
         }
         let batch = Tezos.wallet.batch([])
         let total: number = 0
+        totalATF != 0 &&
+            batch
+                .withContractCall(
+                    atf_token_methods.approve({
+                        value: 0,
+                        spender: marketplace_contract_address,
+                    }) as any
+                )
+                .withContractCall(
+                    atf_token_methods.approve({
+                        value: totalATF,
+                        spender: marketplace_contract_address,
+                    }) as any
+                )
+        totalAP != 0 &&
+            batch
+                .withContractCall(
+                    ap_token_methods.approve({
+                        value: 0,
+                        spender: marketplace_contract_address,
+                    }) as any
+                )
+                .withContractCall(
+                    ap_token_methods.approve({
+                        value: totalAP,
+                        spender: marketplace_contract_address,
+                    }) as any
+                )
         nfts.forEach((nft: any) => {
-             total += nft.Detail.detail.priceATF
+            total += nft.Detail.detail.priceATF
                 ? nft.Detail.detail.priceATF
                 : nft.Detail.detail.priceAP
             batch.withContractCall(
@@ -64,19 +99,7 @@ export const buyNfts = async ({ nfts, jwt, address }: any) => {
                 }) as any
             )
         })
-        batch
-            .withContractCall(
-                tokensMethodsObject.approve({
-                    value: 0,
-                    spender: marketplace_contract_address,
-                }) as any
-            )
-            .withContractCall(
-                tokensMethodsObject.approve({
-                    value: total,
-                    spender: marketplace_contract_address,
-                }) as any
-            )
+
         await (await batch.send()).confirmation()
         nfts.forEach(async (nft: any) => {
             console.log(nft, config.headers.Authorization)
