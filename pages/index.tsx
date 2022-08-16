@@ -80,7 +80,7 @@ const Home: NextPage = () => {
                     />
                 </div>
 
-                <div className="w-screen -ml-5 mb-5 h-auto ">
+                <div className="w-full -ml-5 mb-5 h-auto ">
                     <img src="/images/banner-home.jpg" className={`w-full`} />
                 </div>
 
