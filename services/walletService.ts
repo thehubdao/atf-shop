@@ -16,8 +16,6 @@ export const wallet_instance: any = new BeaconWallet({
     name: 'ATF Beacon',
 })
 
-
-
 const notifyMobile = (result: loginResult) => {
     const aWindow: any = window as any
     //IOS case
@@ -58,6 +56,8 @@ export const login = async (address: any, publicKey: any, wallet: any) => {
         })
     ).data
     try {
+        callData.wallet_instance = wallet_instance
+        console.log(callData)
         notifyMobile(callData)
         return callData
     } catch (err) {
