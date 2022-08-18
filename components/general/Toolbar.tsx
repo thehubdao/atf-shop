@@ -17,34 +17,45 @@ const Toolbar = ({ dark }: any) => {
     useEffect(() => {
         const web3Check = async () => {
             _setIsWeb3(await isWeb3(user))
+            let userAddress = (window as any)?.walletLogin?.isValidLogin
+                ? user.userAddress
+                : (window as any)?.walletLogin?.walletAddress
             setBalances({
-                atfBalance: await getATFBalance(user.userAddress),
-                apBalance: await getAPBalance(user.userAddress),
+                atfBalance: await getATFBalance(userAddress),
+                apBalance: await getAPBalance(userAddress),
             })
         }
         web3Check()
     }, [user])
 
     const modalBody = () => {
-        return (<div className="h-fit overflow-hidden">
-            <Wert isWalletConect={_isWeb3}/>
-        </div>)
+        return (
+            <div className="h-fit overflow-hidden">
+                <Wert
+                    isWalletConect={
+                        (window as any)?.walletLogin ? _isWeb3 : false
+                    }
+                />
+            </div>
+        )
     }
 
     return (
         <div className="w-full flex items-center justify-between py-3 px-5">
             <div className="flex md:space-x-5">
                 <Link href="/">
-                    <a className='max-h-12'>
+                    <a className="max-h-12">
                         <img src="/images/atf-logo.png" className="h-12 w-20" />
                     </a>
                 </Link>
-                {<Modal
-                    title='Buy ATF Tokens'
-                    body={modalBody}
-                    buttonText='Buy tokens'
-                    buttonClassName="bg-[#ffe000] text-black active:bg-yellow font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                />}
+                {
+                    <Modal
+                        title="Buy ATF Tokens"
+                        body={modalBody}
+                        buttonText="Buy tokens"
+                        buttonClassName="bg-[#ffe000] text-black active:bg-yellow font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    />
+                }
                 {_isWeb3 && balances && (
                     <div className="flex flex-col justify-start items-stretch space-y-1">
                         <div className="flex items-center space-x-2">

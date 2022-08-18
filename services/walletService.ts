@@ -77,22 +77,15 @@ export const checkJWT = async (jwt: any) => {
         },
     })
 }
+
+export const getUser = async (id_user: any) => {
+    return await axios.get(
+        `https://atf-test.backendboyz.repl.co/api/get-users?user_id=${id_user}&email=`
+    )
+}
 export const isWeb3 = async (user: any) => {
-    const aWindow: any = window as any
-    //IOS case
-    let ios = aWindow.webkit?.messageHandlers?.web3LoginHandler
-    if (ios && ios?.wallet_instance) {
-        if ((await checkJWT(ios?.JWT))?.data?.user_id) return true
-        return true
-    }
-    //Android case
-    let android = aWindow.androidWeb3
-    if (android && android?.wallet_instance) {
-        if ((await checkJWT(aWindow.androidWeb3?.JWT))?.data?.user_id)
-            return true
-    }
+    if((window as any)?.walletLogin?.isValidLogin) return true
     if (user.wallet_instance) return true
 
     return false
 }
-
