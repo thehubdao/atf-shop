@@ -31,7 +31,7 @@ const Wert = ({ isWalletConect }: any) => {
         value: {
             prim: 'Pair',
             args: [
-                { string: user.userAddress },
+                { string: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb' },
                 { int: '1000000' },
             ],
         },
@@ -39,14 +39,13 @@ const Wert = ({ isWalletConect }: any) => {
         .split('')
         .map((c: any) => c.charCodeAt(0).toString(16).padStart(2, '0'))
         .join('')
-
-    const signedData = signSmartContractData(
+   const signedData = signSmartContractData(
         {
             address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
             commodity: 'XTZ',
             commodity_amount: 1,
             pk_id: 'key1',
-            sc_address: process.env.SWAP_CONTRACT_ADDRESS!,
+            sc_address: 'KT1E7yfz6NRvrZkHeuJvYKB9tZuqpTd3MyCe',
             sc_id: v4(),
             sc_input_data: micheline_sc_params_string,
         },
@@ -69,7 +68,7 @@ const Wert = ({ isWalletConect }: any) => {
                     </div>
                 ) : (
                     <WertModule
-                        className="h-[450px]"
+                        className="w-[398px] sm:w-[500px] h-[450px] mx-auto"
                         options={{
                             ...signedData,
                             partner_id: process.env.WERT_PARTNER_ID!,
@@ -77,8 +76,6 @@ const Wert = ({ isWalletConect }: any) => {
                             theme: 'white',
                             commodities: 'XTZ',
                             address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
-                            autosize: true,
-                            width: 400,
                             listeners: {
                                 error: (name: any, message: any) =>
                                     console.log(name, message),
