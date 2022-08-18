@@ -80,7 +80,7 @@ export const checkJWT = async (jwt: any) => {
 
 export const getUser = async (id_user: any) => {
     return await axios.get(
-        `https://atf-test.backendboyz.repl.co/api/get-users?user_id=${id_user}&email=`
+        `/api/get-users?user_id=${id_user}&email=`
     )
 }
 export const isWeb3 = async (user: any) => {

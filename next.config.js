@@ -36,6 +36,7 @@ module.exports = {
                 destination: 'https://app.metagamehub.io/valuation',
                 permanent: true,
             },
+
         ]
     },
     async rewrites() {
@@ -76,6 +77,10 @@ module.exports = {
             {
                 source: '/api/events',
                 destination: 'https://atf-test.backendboyz.repl.co/api/events',
+            },
+            {
+                source: '/api/get-users',
+                destination: 'https://atf-test.backendboyz.repl.co/api/get-users',
             },
         ]
     },
