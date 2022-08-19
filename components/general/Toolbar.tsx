@@ -13,10 +13,11 @@ const Toolbar = ({ dark }: any) => {
     const { user } = useAppSelector((state) => state.account.walletConfig)
     const [_isWeb3, _setIsWeb3] = useState(false)
     const [balances, setBalances] = useState<any>(null)
-
+    const [isValidLoginMobile, setIsValidLoginMobile] = useState()
     useEffect(() => {
         const web3Check = async () => {
             _setIsWeb3(await isWeb3(user))
+            setIsValidLoginMobile((window as any)?.walletLogin?.isValidLogin)
             let userAddress = (window as any)?.walletLogin?.isValidLogin
                 ? user.userAddress
                 : (window as any)?.walletLogin?.walletAddress
@@ -33,7 +34,7 @@ const Toolbar = ({ dark }: any) => {
             <div className="h-fit overflow-hidden">
                 <Wert
                     isWalletConect={
-                        (window as any)?.walletLogin ? _isWeb3 : false
+                        _isWeb3 
                     }
                 />
             </div>
@@ -56,7 +57,7 @@ const Toolbar = ({ dark }: any) => {
                         buttonClassName="bg-[#ffe000] text-black active:bg-yellow font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     />
                 }
-                {_isWeb3 && balances && (
+                {_isWeb3 || isValidLoginMobile && balances && (
                     <div className="flex flex-col justify-start items-stretch space-y-1">
                         <div className="flex items-center space-x-2">
                             <p className="text-sm px-2 py-0.5 min-w-[60px] bg-gray-200 rounded-full">
