@@ -34,7 +34,7 @@ const Toolbar = ({ dark }: any) => {
             <div className="h-fit overflow-hidden">
                 <Wert
                     isWalletConect={
-                        _isWeb3 
+                        _isWeb3
                     }
                 />
             </div>
@@ -46,28 +46,34 @@ const Toolbar = ({ dark }: any) => {
             <div className="flex md:space-x-5">
                 <Link href="/">
                     <a className="max-h-12">
-                        <img src="/images/atf-logo.png" className="h-12 w-20" />
+                        <img src="/images/atf-logo.png" className="h-14 w-14" />
                     </a>
                 </Link>
-                {
+                {/* {
                     <Modal
                         title="Buy ATF Tokens"
                         body={modalBody}
                         buttonText="Buy tokens"
                         buttonClassName="bg-[#ffe000] text-black active:bg-yellow font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     />
-                }
-                {_isWeb3 || isValidLoginMobile && balances && (
+                } */}
+                {_isWeb3 || isValidLoginMobile && balances &&(
                     <div className="flex flex-col justify-start items-stretch space-y-1">
-                        <div className="flex items-center space-x-2">
-                            <p className="text-sm px-2 py-0.5 min-w-[60px] bg-gray-200 rounded-full">
+                        <div className="flex items-center space-x-2 min-w-full">
+                            <p className="text-sm px-2 py-0.5 min-w-max bg-gray-200 rounded-full">
                                 {`${balances.atfBalance} ATF`}
                             </p>
+                            <Modal
+                                title="Buy ATF Tokens"
+                                body={modalBody}
+                                buttonText="+"
+                                buttonClassName="bg-[#ffe000] text-black active:bg-yellow font-bold uppercase text-sm px-2 py-1 rounded-full shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                            />
                             {/* <BsPlus className="rounded-full border border-black text-xl" /> */}
                         </div>
 
                         <div className="flex items-center space-x-2">
-                            <p className="text-sm px-2 py-0.5 min-w-[60px] bg-gray-200 rounded-full">
+                            <p className="text-sm px-2 py-0.5 min-w-max bg-gray-200 rounded-full">
                                 {`${balances.apBalance} AP`}
                             </p>
                             {/* <Link href="/exchange">
