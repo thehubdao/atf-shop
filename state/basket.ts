@@ -21,11 +21,10 @@ export const basketSlice = createSlice({
         },
         removeItem: (state, { payload }) => {
         
-          console.log(state.basketItems)
+        //   console.log(state.basketItems)
             state.basketItems = state.basketItems.filter(
                 (item: any) => { 
-                  console.log(item, payload)
-                  return item.product_id !== payload}
+                  return +item.id !== payload}
             )
         },
         increase: (state, { payload }) => {

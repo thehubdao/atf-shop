@@ -140,16 +140,20 @@ const Basket: NextPage = () => {
                             key={item.id_product}
                             className="flex items-center space-x-5"
                         >
-                            <BsTrash
-                                onClick={() => {
-                                    console.log(item.id_product)
-                                    dispatch(removeItem(item.id_product))
-                                }}
-                                className="text-3xl cursor-pointer"
+                            <img
+                                src={item.Detail.miniature}
+                                className="h-auto w-10"
                             />
                             <p className="font-medium text-xs w-full">
                                 {item.Detail.detail.name}
                             </p>
+                            <BsTrash
+                                onClick={() => {
+                                    console.log(item.Detail.id_detail)
+                                    dispatch(removeItem(item.Detail.id_detail))
+                                }}
+                                className="text-3xl cursor-pointer"
+                            />
                             {/*                             <div className="flex items-center space-x-2">
                                 <BsDash
                                     onClick={() => dispatch(decrease(item.id_product))}

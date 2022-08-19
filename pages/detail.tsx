@@ -100,9 +100,10 @@ const ShopItemDetail = () => {
                 {inBasketCount === 0 ? (
                     <div
                         onClick={addToBasket}
-                        className="bg-[#020202] text-[#FDE100] rounded-full p-4 font-jost text-lg cursor-pointer min-w-max"
+                        className="relative bg-[#020202] text-[#FDE100] rounded-full p-4 font-jost text-lg cursor-pointer min-w-max text-center"
                     >
                         Add to basket
+                        {basketPopUp && <div className='h-full w-full absolute inset-0 bg-[#FDE100] text-[#020202] rounded-full animate__animated animate__fadeIn p-4 font-jost text-lg text-center'>Added</div>}
                     </div>
                 ) : (
                     <div className="flex items-center space-x-5">
