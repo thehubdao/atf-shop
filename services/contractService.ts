@@ -42,12 +42,17 @@ export const getATFBalance = async (address: any) => {
 
 export const buyNfts = async ({
     nfts,
-    jwt,
     address,
     totalAP,
     totalATF,
 }: any) => {
     try {
+        let jwt = await axios.post('api/login', {
+            email: process.env.ADMIN_EMAIL,
+            password: process.env.ADMIN_PASSWORD,
+        })
+        jwt = jwt.data.token
+        console.log(jwt,"JWT..")
         let { methodsObject } = await marketplace_contract
         let atf_token_methods = (await atf_token_contract).methodsObject
         let ap_token_methods = (await ap_token_contract).methodsObject

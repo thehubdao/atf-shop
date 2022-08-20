@@ -19,8 +19,10 @@ const Toolbar = ({ dark }: any) => {
             _setIsWeb3(await isWeb3(user))
             setIsValidLoginMobile((window as any)?.walletLogin?.isValidLogin)
             let userAddress = (window as any)?.walletLogin?.isValidLogin
-                ? user.userAddress
-                : (window as any)?.walletLogin?.walletAddress
+                ? (window as any)?.walletLogin?.walletAddress
+                : user.userAddress
+
+            console.log(userAddress, 'USER ')
             setBalances({
                 atfBalance: await getATFBalance(userAddress),
                 apBalance: await getAPBalance(userAddress),
@@ -32,11 +34,7 @@ const Toolbar = ({ dark }: any) => {
     const modalBody = () => {
         return (
             <div className="h-fit overflow-hidden">
-                <Wert
-                    isWalletConect={
-                        _isWeb3
-                    }
-                />
+                <Wert isWalletConect={_isWeb3} />
             </div>
         )
     }
@@ -46,10 +44,13 @@ const Toolbar = ({ dark }: any) => {
             <div className="flex md:space-x-5">
                 <Link href="/">
                     <a className="">
-                        <img src="/images/atf-logo.png" className="w-16 h-auto" />
+                        <img
+                            src="/images/atf-logo.png"
+                            className="w-16 h-auto"
+                        />
                     </a>
                 </Link>
-                {_isWeb3 || isValidLoginMobile && balances ? (
+                {_isWeb3 || (isValidLoginMobile && balances) ? (
                     <div className="flex flex-col justify-start items-stretch space-y-1">
                         <div className="flex items-center space-x-2 min-w-full">
                             <p className="text-sm px-2 py-0.5 min-w-max bg-gray-200 rounded-full">
