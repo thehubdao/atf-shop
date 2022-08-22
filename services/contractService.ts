@@ -40,19 +40,13 @@ export const getATFBalance = async (address: any) => {
     return 0
 }
 
-export const buyNfts = async ({
-    nfts,
-    address,
-    totalAP,
-    totalATF,
-}: any) => {
+export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
     try {
         let jwt = await axios.post('api/login', {
             email: process.env.ADMIN_EMAIL,
             password: process.env.ADMIN_PASSWORD,
         })
         jwt = jwt.data.token
-        console.log(jwt,"JWT..")
         let { methodsObject } = await marketplace_contract
         let atf_token_methods = (await atf_token_contract).methodsObject
         let ap_token_methods = (await ap_token_contract).methodsObject
@@ -60,7 +54,6 @@ export const buyNfts = async ({
             headers: { Authorization: `Bearer ${jwt}` },
         }
         let batch = Tezos.wallet.batch([])
-        let total: number = 0
         totalATF != 0 &&
             batch
                 .withContractCall(
@@ -90,9 +83,6 @@ export const buyNfts = async ({
                     }) as any
                 )
         nfts.forEach((nft: any) => {
-            total += nft.Detail.detail.priceATF
-                ? nft.Detail.detail.priceATF
-                : nft.Detail.detail.priceAP
             batch.withContractCall(
                 methodsObject.collect({
                     to_: address,

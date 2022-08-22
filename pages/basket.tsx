@@ -9,7 +9,7 @@ import ShopItemDetail from '../components/ShopItemDetail'
 import { useAppDispatch, useAppSelector } from '../state/hooks'
 import products from '../data/products.json'
 import { ProductData, basketItem } from '../lib/types'
-import { decrease, increase, removeItem } from '../state/basket'
+import { decrease, increase, removeItem, restartBasket } from '../state/basket'
 import { IoMdClose } from 'react-icons/io'
 import { getLocal } from '../lib/local'
 import axios from 'axios'
@@ -21,7 +21,6 @@ const Basket: NextPage = () => {
     const dispatch = useAppDispatch()
     const { basketItems } = useAppSelector((state) => state.basket)
     const [basketList, setBasketList] = useState<ProductData[]>([])
-    const [nfts, setNfts] = useState<any>([])
     const { user } = useAppSelector((state) => state.account.walletConfig)
     const [isConfirmedModal, setIsConfirmedModal] = useState<boolean>(false)
     const [isSuccesfulModal, setIsSuccesfulModal] = useState<boolean>(false)
@@ -30,12 +29,14 @@ const Basket: NextPage = () => {
     useEffect(() => {
         let getNfts = async () => {
             let call = await axios.get('/api/nfts')
+            console.log(basketItems, 'Basket items')
             basketItems.forEach((item) => {
                 setBasketList((basketList) => {
                     return [
                         ...basketList,
                         {
                             ...call.data.products.filter((nft: any) => {
+                                console.log(nft, 'NFTs')
                                 return nft.id_product == item.id
                             })[0],
                             count: item.count,
@@ -45,8 +46,6 @@ const Basket: NextPage = () => {
             })
         }
         getNfts()
-
-        console.log(basketList)
         return () => {
             setBasketList([])
         }
@@ -54,10 +53,10 @@ const Basket: NextPage = () => {
 
     const calcTotalAP = () => {
         let totalAP: number = 0
-
+        console.log(basketList, 'Basket List')
         basketList.map((item) => {
-            totalAP += item.Detail.detail.priceAP
-                ? item.Detail.detail.priceAP * (item.count || 1)
+            totalAP += item?.Detail?.detail?.priceAP
+                ? item?.Detail?.detail?.priceAP * (item.count || 1)
                 : 0
         })
         return totalAP
@@ -66,8 +65,8 @@ const Basket: NextPage = () => {
     const calcTotalATF = () => {
         let totalATF: number = 0
         basketList.map((item) => {
-            totalATF += item.Detail.detail.priceATF
-                ? item.Detail.detail.priceATF * (item.count || 1)
+            totalATF += item?.Detail?.detail?.priceATF
+                ? item?.Detail?.detail?.priceATF * (item.count || 1)
                 : 0
         })
         return totalATF
@@ -83,6 +82,8 @@ const Basket: NextPage = () => {
         })
         setIsSuccesfulModal(buyConfirm)
         setIsWaitingModal(false)
+        dispatch(restartBasket())
+        setBasketList([])
     }
 
     const bodyModal = () => {
@@ -137,20 +138,22 @@ const Basket: NextPage = () => {
                 <div className="flex flex-col space-y-10 w-full">
                     {basketList.map((item) => (
                         <div
-                            key={item.id_product}
+                            key={item?.id_product}
                             className="flex items-center space-x-5"
                         >
                             <img
-                                src={item.Detail.miniature}
+                                src={item?.Detail?.miniature}
                                 className="h-auto w-10"
                             />
                             <p className="font-medium text-xs w-full">
-                                {item.Detail.detail.name}
+                                {item?.Detail?.detail?.name}
                             </p>
                             <BsTrash
                                 onClick={() => {
-                                    console.log(item.Detail.id_detail)
-                                    dispatch(removeItem(item.Detail.id_detail))
+                                    console.log(item?.Detail?.id_detail)
+                                    dispatch(
+                                        removeItem(item?.Detail?.id_detail)
+                                    )
                                 }}
                                 className="text-3xl cursor-pointer"
                             />

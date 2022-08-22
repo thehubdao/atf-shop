@@ -24,14 +24,10 @@ export const getWalletInstance = () => {
 
 const notifyMobile = (result: loginResult) => {
     const aWindow: any = window as any
-    //IOS case
     if (aWindow.webkit?.messageHandlers?.web3LoginHandler) {
         aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(result)
     }
-    //Android case
-    console.log(aWindow.androidWeb3, 'Left out')
     if (aWindow.androidWeb3) {
-        console.log(aWindow.androidWeb3, 'Joined')
         aWindow.androidWeb3.onLoginResult(JSON.stringify(result))
     }
 }
@@ -46,7 +42,6 @@ export const login = async (address: any, publicKey: any, wallet: any) => {
             await wallet.client.getActiveAccount()
         ).address
     )
-    console.log(nonce, 'Nonce')
     const bytes = char2Bytes(nonce + '')
     const payloadBytes = '05' + '0100' + char2Bytes(bytes.length + '') + bytes
     const callData = (
