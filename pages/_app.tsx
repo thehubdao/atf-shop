@@ -38,7 +38,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             }
             ;(window as any).walletLogin = walletLogin
         }
-        window.addEventListener('message', (ev) => {console.log(ev,"EVENT")})
+        window.addEventListener('message', (ev) => {
+            alert("EVENT")})
     }, [])
     return (
         <>
