@@ -9,12 +9,13 @@ import '../styles/globals.css'
 
 import Head from 'next/head'
 import { checkJWT, getUser } from '../services/walletService'
+import Script from 'next/script'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <Head>
-                <script>
+                <Script>
                     {async function getAppInfo(options: {
                         os: string
                         token: string
@@ -39,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         }
                         ;(window as any).walletLogin = walletLogin
                     }}
-                </script>
+                </Script>
             </Head>
             <Provider store={store}>
                 <Layout>
