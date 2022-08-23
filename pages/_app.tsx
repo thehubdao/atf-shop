@@ -60,6 +60,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     }
                 }
                 ;(window as any).walletLogin = walletLogin
+                console.log((window as any).walletLogin)
             }
         })
     }, [])
