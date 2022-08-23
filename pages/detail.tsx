@@ -48,7 +48,7 @@ const ShopItemDetail = () => {
 
     useEffect(() => {
         if (id) {
-            const item = basketItems.find((item) => item.id === id[0])
+            const item =  basketItems.find((item) => item.id === id[0])
             item && setInBasketCount(item.count)
         }
         return () => setInBasketCount(0)

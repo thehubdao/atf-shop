@@ -29,14 +29,12 @@ const Basket: NextPage = () => {
     useEffect(() => {
         let getNfts = async () => {
             let call = await axios.get('/api/nfts')
-            console.log(basketItems, 'Basket items')
             basketItems.forEach((item) => {
                 setBasketList((basketList) => {
                     return [
                         ...basketList,
                         {
                             ...call.data.products.filter((nft: any) => {
-                                console.log(nft, 'NFTs')
                                 return nft.id_product == item.id
                             })[0],
                             count: item.count,
@@ -53,7 +51,6 @@ const Basket: NextPage = () => {
 
     const calcTotalAP = () => {
         let totalAP: number = 0
-        console.log(basketList, 'Basket List')
         basketList.map((item) => {
             totalAP += item?.Detail?.detail?.priceAP
                 ? item?.Detail?.detail?.priceAP * (item.count || 1)
@@ -80,10 +77,9 @@ const Basket: NextPage = () => {
             totalAP,
             totalATF,
         })
-        setIsSuccesfulModal(buyConfirm)
-        setIsWaitingModal(false)
+         setIsSuccesfulModal(buyConfirm)
+        setIsWaitingModal(false) 
         dispatch(restartBasket())
-        setBasketList([])
     }
 
     const bodyModal = () => {
@@ -150,7 +146,6 @@ const Basket: NextPage = () => {
                             </p>
                             <BsTrash
                                 onClick={() => {
-                                    console.log(item?.Detail?.id_detail)
                                     dispatch(
                                         removeItem(item?.Detail?.id_detail)
                                     )

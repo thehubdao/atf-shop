@@ -7,25 +7,16 @@ import {
 import basketReducer from './basket'
 import persistedReducer from './wallet'
 
-const combinedReducer = combineReducers({
-    basket: basketReducer,
-    account: persistedReducer,
-})
-
-const rootReducer = (state: any, action: any) => {
-    console.log(action.type, "ACTION")
-    if (action.type === 'basket/restartBasket') {
-        console.log("RESTART BASKET")
-        const { persistedReducer } = state
-        state = { persistedReducer }
-    }
-    return combinedReducer(state, action)
-}
-
 const store = configureStore({
-    reducer: rootReducer,
+    reducer: {
+        basket: basketReducer,
+        account: persistedReducer,
+    },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({ serializableCheck: false }),
+        getDefaultMiddleware({
+            serializableCheck: false,
+            immutableCheck: false,
+        }),
 })
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>

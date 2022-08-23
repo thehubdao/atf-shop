@@ -18,7 +18,6 @@ const NFTs: NextPage = () => {
     useEffect(() => {
         let getNfts = async () => {
             let call = await axios.get('/api/nfts')
-            console.log(call.data.products)
             setNfts(call.data.products)
         }
         getNfts()

@@ -97,7 +97,6 @@ export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
 
         await (await batch.send()).confirmation()
         nfts.forEach(async (nft: any) => {
-            console.log(nft, config.headers.Authorization)
             try {
                 await axios.delete('/api/nft/' + nft.id_product, config)
             } catch (error) {}

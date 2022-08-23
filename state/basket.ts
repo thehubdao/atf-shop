@@ -20,7 +20,6 @@ export const basketSlice = createSlice({
             }
         },
         removeItem: (state, { payload }) => {
-            //   console.log(state.basketItems)
             state.basketItems = state.basketItems.filter((item: any) => {
                 return +item.id !== payload
             })
@@ -43,9 +42,9 @@ export const basketSlice = createSlice({
                 )
             }
         },
-        restartBasket: () => {
-console.log("RESTARt")
-        }
+        restartBasket: (state) => {
+            state.basketItems = []
+        },
     },
 })
 

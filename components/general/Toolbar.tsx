@@ -21,8 +21,6 @@ const Toolbar = ({ dark }: any) => {
             let userAddress = (window as any)?.walletLogin?.isValidLogin
                 ? (window as any)?.walletLogin?.walletAddress
                 : user.userAddress
-
-            console.log(userAddress, 'USER ')
             setBalances({
                 atfBalance: await getATFBalance(userAddress),
                 apBalance: await getAPBalance(userAddress),
