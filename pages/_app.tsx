@@ -39,7 +39,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             ;(window as any).walletLogin = walletLogin
         }
         window.addEventListener('message', (ev) => {
-            alert(ev.origin)})
+            console.log(ev)
+            //alert(ev.origin)
+        })
     }, [])
     return (
         <>
