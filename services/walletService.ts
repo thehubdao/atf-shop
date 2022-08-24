@@ -24,14 +24,10 @@ export const getWalletInstance = () => {
 
 const notifyMobile = (result: loginResult) => {
     const aWindow: any = window as any
-    //IOS case
     if (aWindow.webkit?.messageHandlers?.web3LoginHandler) {
         aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(result)
     }
-    //Android case
-    console.log(aWindow.androidWeb3, 'Left out')
     if (aWindow.androidWeb3) {
-        console.log(aWindow.androidWeb3, 'Joined')
         aWindow.androidWeb3.onLoginResult(JSON.stringify(result))
     }
 }
@@ -46,7 +42,6 @@ export const login = async (address: any, publicKey: any, wallet: any) => {
             await wallet.client.getActiveAccount()
         ).address
     )
-    console.log(nonce, 'Nonce')
     const bytes = char2Bytes(nonce + '')
     const payloadBytes = '05' + '0100' + char2Bytes(bytes.length + '') + bytes
     const callData = (
@@ -71,20 +66,26 @@ export const login = async (address: any, publicKey: any, wallet: any) => {
 }
 
 export const checkJWT = async (jwt: any) => {
-    return axios.get('/api/validate-token', {
-        headers: {
-            Authorization: `Bearer ${jwt}`,
-        },
-    })
+    try {
+        return (
+            await axios.get('/api/validate-token', {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+        ).data
+    } catch (err) {
+        return {}
+    }
 }
 
 export const getUser = async (id_user: any) => {
-    return await axios.get(
-        `/api/get-users?user_id=${id_user}&email=`
-    )
+    if (id_user)
+        return (await axios.get(`/api/get-users?user_id=${id_user}&email=`)).data
+    else return {}
 }
 export const isWeb3 = async (user: any) => {
-    if((window as any)?.walletLogin?.isValidLogin) return true
+    if ((window as any)?.walletLogin?.isValidLogin) return true
     if (user.wallet_instance) return true
 
     return false

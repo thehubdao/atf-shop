@@ -18,6 +18,9 @@ module.exports = {
         ATF_TOKEN_CONTRACT_ADDRESS: process.env.ATF_TOKEN_CONTRACT_ADDRESS,
         SWAP_CONTRACT_ADDRESS: process.env.SWAP_CONTRACT_ADDRESS,
         AP_TOKEN_CONTRACT_ADDRESS: process.env.AP_TOKEN_CONTRACT_ADDRESS,
+        ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+        ADMIN_USERNAME: process.env.ADMIN_USERNAME,
+        ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
     },
     async redirects() {
         return [
@@ -36,7 +39,6 @@ module.exports = {
                 destination: 'https://app.metagamehub.io/valuation',
                 permanent: true,
             },
-
         ]
     },
     async rewrites() {
@@ -80,7 +82,13 @@ module.exports = {
             },
             {
                 source: '/api/get-users',
-                destination: 'https://atf-test.backendboyz.repl.co/api/get-users',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/get-users',
+            },
+            {
+                source: '/api/login',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/login',
             },
         ]
     },

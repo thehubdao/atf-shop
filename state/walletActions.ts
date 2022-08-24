@@ -19,7 +19,6 @@ export const connectWallet = () => {
                 activeAccount = await wallet_instance.client.getActiveAccount()
             }
             const userAddress = await wallet_instance.getPKH()
-            console.log(activeAccount?.publicKey)
             let { token, refreshToken } = await login(
                 activeAccount?.address,
                 activeAccount?.publicKey,

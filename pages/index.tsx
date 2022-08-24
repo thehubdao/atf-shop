@@ -21,27 +21,21 @@ const Home: NextPage = () => {
 
     const getNFTs = async () => {
         let call = await axios.get('/api/nfts')
-        console.log(call.data.products)
         setNfts(call.data.products)
     }
 
     const getEvents = async () => {
-        console.log("Get events")
         let call = await axios.get('/api/events')
-        console.log(call.data.products)
         setEvents(call.data.products)
-        console.log("Events")
     }
 
     const getMetaverseEvents = async () => {
         let call = await axios.get('/api/metaverseEvents')
-        console.log(call.data.products)
         setMetaverseEvents(call.data.products)
     }
 
     const getApparels = async () => {
         let call = await axios.get('/api/apparels')
-        console.log(call.data.products)
         setApparels(call.data.products)
     }
 

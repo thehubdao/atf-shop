@@ -1,4 +1,8 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import {
+    combineReducers,
+    configureStore,
+    getDefaultMiddleware,
+} from '@reduxjs/toolkit'
 
 import basketReducer from './basket'
 import persistedReducer from './wallet'
@@ -9,9 +13,11 @@ const store = configureStore({
         account: persistedReducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({ serializableCheck: false }),
+        getDefaultMiddleware({
+            serializableCheck: false,
+            immutableCheck: false,
+        }),
 })
-
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
