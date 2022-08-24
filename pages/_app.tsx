@@ -17,13 +17,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         window.addEventListener('message', async (ev) => {
             let { options } = ev.data
             if (options) {
-                try {
-                    var { user_id } = await checkJWT(options?.token)
-                } catch (err) {
-                    var user_id
-                }
-
-                let { walletAddress } = (await getUser(user_id)).data
+                let { user_id } = await checkJWT(options?.token)
+                let { walletAddress } = await getUser(user_id)
                 let walletLogin = {}
                 if (user_id && walletAddress) {
                     //1. Validate if token is valid

@@ -80,7 +80,9 @@ export const checkJWT = async (jwt: any) => {
 }
 
 export const getUser = async (id_user: any) => {
-    return await axios.get(`/api/get-users?user_id=${id_user}&email=`)
+    if (id_user)
+        return (await axios.get(`/api/get-users?user_id=${id_user}&email=`)).data
+    else return null
 }
 export const isWeb3 = async (user: any) => {
     if ((window as any)?.walletLogin?.isValidLogin) return true
