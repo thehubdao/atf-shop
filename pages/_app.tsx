@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     }
                 }
                 ;(window as any).walletLogin = walletLogin
-                console.log
+                console.log(walletLogin)
             }
         })
     }, [])
