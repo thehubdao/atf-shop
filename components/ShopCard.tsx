@@ -17,24 +17,7 @@ const ShopCard = ({ product, classes }: ShopCardProps) => {
                         className={`absolute left-2 top-2 rounded-xl flex space-x-3 items-center justify-center min-w-max px-2 bg-white`}
                     >
                         <p className="font-bold text-sm">
-                            LVL {product.Detail.detail.buyLevel} 
-                        </p>
-                    </div>
-                )}
-                {product?.Detail?.detail?.priceAP && (
-                    <div className="absolute top-2 right-2 rounded-xl flex space-x-3 items-center justify-center min-w-max px-2 bg-white">
-                        <p className="font-bold text-sm">
-                            {product.Detail.detail.priceAP} AP
-                        </p>
-                    </div>
-                )}
-
-                {product?.Detail?.detail?.priceATF && (
-                    <div
-                        className={`absolute  top-2 right-2 rounded-xl flex space-x-3 items-center justify-center min-w-max px-2 bg-white`}
-                    >
-                        <p className="font-bold text-sm">
-                            {product.Detail.detail.priceATF} ATF
+                            LVL {product.Detail.detail.buyLevel}
                         </p>
                     </div>
                 )}
@@ -50,6 +33,24 @@ const ShopCard = ({ product, classes }: ShopCardProps) => {
                 {product.category === 'events' && (
                     <div className="font-jost absolute bottom-16 z-10 bg-[#020202] rounded-xl text-[#FDE100] px-2 py-1 text-xs cursor-pointer">
                         Buy metaverse ticket
+                    </div>
+                )}
+
+                {product?.Detail?.detail?.priceAP && (
+                    <div className="absolute bottom-14 z-20 left-2 rounded-xl flex space-x-3 items-center justify-center min-w-max px-2 bg-white">
+                        <p className="font-bold text-sm">
+                            {product.Detail.detail.priceAP} AP
+                        </p>
+                    </div>
+                )}
+
+                {product?.Detail?.detail?.priceATF && (
+                    <div
+                        className={`absolute bottom-14 z-20 right-2 rounded-xl flex space-x-3 items-center justify-center min-w-max px-2 bg-white`}
+                    >
+                        <p className="font-bold text-sm">
+                            {product.Detail.detail.priceATF} ATF
+                        </p>
                     </div>
                 )}
 
