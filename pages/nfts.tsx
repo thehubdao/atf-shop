@@ -61,7 +61,7 @@ const NFTs: NextPage = () => {
                         <ShopCard
                             key={nft.id_product}
                             product={nft}
-                            classes="min-w-[12rem]"
+                            classes="min-w-[10rem]"
                         />
                     ))}
                 </div>
