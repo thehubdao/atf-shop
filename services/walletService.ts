@@ -66,20 +66,24 @@ export const login = async (address: any, publicKey: any, wallet: any) => {
 }
 
 export const checkJWT = async (jwt: any) => {
-    return axios.get('/api/validate-token', {
-        headers: {
-            Authorization: `Bearer ${jwt}`,
-        },
-    })
+    try {
+        return (
+            await axios.get('/api/validate-token', {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+        ).data
+    } catch (err) {
+        return null
+    }
 }
 
 export const getUser = async (id_user: any) => {
-    return await axios.get(
-        `/api/get-users?user_id=${id_user}&email=`
-    )
+    return await axios.get(`/api/get-users?user_id=${id_user}&email=`)
 }
 export const isWeb3 = async (user: any) => {
-    if((window as any)?.walletLogin?.isValidLogin) return true
+    if ((window as any)?.walletLogin?.isValidLogin) return true
     if (user.wallet_instance) return true
 
     return false

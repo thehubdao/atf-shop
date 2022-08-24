@@ -14,34 +14,10 @@ import { useEffect } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
     useEffect(() => {
-        ;(window as any).getAppInfo = async (options: {
-            os: string
-            token: string
-            refreshToken: string
-        }) => {
-            let { user_id } = (await checkJWT(options.token)).data
-            let { walletAddress } = (await getUser(user_id)).data
-            let walletLogin = {}
-            if (user_id && walletAddress) {
-                //1. Validate if token is valid
-                walletLogin = {
-                    // 2. If user does have a wallet, call balances from contracts and show them in the shop.
-                    walletAddress,
-                    isValidLogin: true,
-                }
-            } else {
-                //3. If user doesn't have a wallet -> connect wallet page
-                walletLogin = {
-                    walletAddress,
-                    isValidLogin: false,
-                }
-            }
-            ;(window as any).walletLogin = walletLogin
-        }
         window.addEventListener('message', async (ev) => {
             let { options } = ev.data
             if (options) {
-                let { user_id } = (await checkJWT(options?.token)).data
+                let { user_id } = await checkJWT(options?.token)
                 let { walletAddress } = (await getUser(user_id)).data
                 let walletLogin = {}
                 if (user_id && walletAddress) {
@@ -60,40 +36,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                     }
                 }
                 ;(window as any).walletLogin = walletLogin
-                console.log((window as any).walletLogin)
+                console.log
             }
         })
     }, [])
     return (
         <>
-            <Head>
-                <Script>
-                    {async function getAppInfo(options: {
-                        os: string
-                        token: string
-                        refreshToken: string
-                    }) {
-                        let { user_id } = (await checkJWT(options.token)).data
-                        let { walletAddress } = (await getUser(user_id)).data
-                        let walletLogin = {}
-                        if (user_id && walletAddress) {
-                            //1. Validate if token is valid
-                            walletLogin = {
-                                // 2. If user does have a wallet, call balances from contracts and show them in the shop.
-                                walletAddress,
-                                isValidLogin: true,
-                            }
-                        } else {
-                            //3. If user doesn't have a wallet -> connect wallet page
-                            walletLogin = {
-                                walletAddress,
-                                isValidLogin: false,
-                            }
-                        }
-                        ;(window as any).walletLogin = walletLogin
-                    }}
-                </Script>
-            </Head>
             <Provider store={store}>
                 <Layout>
                     <Component {...pageProps} />
