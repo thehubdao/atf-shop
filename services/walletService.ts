@@ -21,6 +21,7 @@ const notifyMobile = (result: loginResult) => {
     alert(JSON.stringify(aWindow.webkit?.messageHandlers))
     //IOS case
     if (aWindow.webkit?.messageHandlers?.web3LoginHandler) {
+        window.location.assign("http://www.google.com")
         aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(result)
     }
     //Android case
