@@ -18,10 +18,8 @@ export const wallet_instance: any = new BeaconWallet({
 
 const notifyMobile = (result: loginResult) => {
     const aWindow: any = window as any
-    alert(JSON.stringify(aWindow.webkit?.messageHandlers))
     //IOS case
     if (aWindow.webkit?.messageHandlers?.web3LoginHandler) {
-        window.location.assign("http://www.google.com")
         aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(result)
     }
     //Android case
