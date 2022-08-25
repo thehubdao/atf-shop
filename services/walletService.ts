@@ -21,8 +21,8 @@ const notifyMobile = (result: loginResult) => {
     //IOS case
     if (aWindow.webkit) {
         let obj = { window: aWindow.webkit, result }
-        ;(document.getElementById('textTest') as any).innerHTML =
-            JSON.stringify(obj)
+        /* ;(document.getElementById('textTest') as any).innerHTML =
+            JSON.stringify(obj) */
     }
     if (aWindow.webkit?.messageHandlers?.web3LoginHandler) {
         aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(result)
