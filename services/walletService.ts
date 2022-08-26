@@ -79,9 +79,13 @@ export const checkJWT = async (jwt: any) => {
     }
 }
 
-export const getUser = async (id_user: any) => {
+export const getUser = async (id_user: any,jwt:any) => {
     if (id_user)
-        return (await axios.get(`/api/get-users?user_id=${id_user}&email=`)).data
+        return (await axios.get(`/api/get-users?user_id=${id_user}&email=`,{
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+            },
+        })).data
     else return {}
 }
 export const isWeb3 = async (user: any) => {
