@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   email: process.env.ADMIN_EMAIL,
                   password: process.env.ADMIN_PASSWORD,
               })
+              jwt = jwt.data.token
                 let { walletAddress } = await getUser(user_id, jwt)
                 let walletLogin = {}
                 if (user_id && walletAddress) {
