@@ -11,6 +11,7 @@ import Head from 'next/head'
 import { checkJWT, getUser } from '../services/walletService'
 import Script from 'next/script'
 import { useEffect } from 'react'
+import axios from 'axios'
 
 function MyApp({ Component, pageProps }: AppProps) {
     useEffect(() => {
@@ -18,7 +19,12 @@ function MyApp({ Component, pageProps }: AppProps) {
             let { options } = ev.data
             if (options) {
                 let { user_id } = await checkJWT(options?.token)
-                let { walletAddress } = await getUser(user_id)
+                let jwt = await axios.post('api/login', {
+                  email: process.env.ADMIN_EMAIL,
+                  password: process.env.ADMIN_PASSWORD,
+              })
+              jwt = jwt.data.token
+                let { walletAddress } = await getUser(user_id, jwt)
                 let walletLogin = {}
                 if (user_id && walletAddress) {
                     //1. Validate if token is valid
