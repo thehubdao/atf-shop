@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         isValidLogin: false,
                     }
                 }
-                dispatch(setWalletLogin(walletLogin))
+                // dispatch(setWalletLogin(walletLogin))
                 // ;(window as any).walletLogin = walletLogin
                 console.log(walletLogin)
             }
