@@ -16,7 +16,7 @@ import { useAppDispatch } from '../state/hooks'
 import {setWalletLogin} from "../state/walletLogin"
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const dispatch = useAppDispatch()
+    // const dispatch = useAppDispatch()
 
     
     useEffect(() => {
