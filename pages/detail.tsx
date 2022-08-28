@@ -16,35 +16,44 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 const ShopItemDetail = () => {
     const router = useRouter()
-    const { id } = router.query
+    const { id, category } = router.query
     const dispatch = useAppDispatch()
     const { basketItems } = useAppSelector((state) => state.basket)
+    const { nfts, events, metaverseEvents, apparel } = useAppSelector(state => state.data)
     const [inBasketCount, setInBasketCount] = useState(0)
     const [loading, setLoading] = useState(false)
     const [basketPopUp, setBasketPopUp] = useState(false)
-    const [nfts, setNfts] = useState([])
+    // const [nfts, setNfts] = useState([])
 
     let [product, setProduct] = useState<any>()
     // const { data, error } = useSWR(`https://atf-test.backendboyz.repl.co/api/product/${id}`, fetcher)
     // const product = data
 
+    // useEffect(() => {
+    //     let getNfts = async () => {
+    //         let call = await axios.get('/api/nfts')
+    //         setNfts(call.data.products)
+    //     }
+    //     getNfts()
+    // }, [])
     useEffect(() => {
-        let getNfts = async () => {
-            let call = await axios.get('/api/nfts')
-            setNfts(call.data.products)
+        let products: any[] = [];
+
+        if(category === "nfts") {
+            products = nfts
+        } else if (category === "events") {
+            products = events
+        } else if (category === "metaverseEvents") {
+            products = metaverseEvents
+        } else if (category === "apparel") {
+            products = apparel
         }
-        getNfts()
-    }, [])
-    useEffect(() => {
-        setProduct(nfts.filter((product: any) => product.id_product == id)[0])
-    }, [nfts])
-    const addToBasket = () => {
-        dispatch(addItem({ id: id, count: 1 }))
-        setBasketPopUp(true)
-        setTimeout(() => {
-            setBasketPopUp(false)
-        }, 2000)
-    }
+
+        setProduct(products.filter((product: any) => product.id_product == id)[0])
+
+        // setProduct(nfts.filter((product: any) => product.id_product == id)[0])
+
+    }, [nfts, events, metaverseEvents, apparel])
 
     useEffect(() => {
         if (id) {
@@ -53,6 +62,14 @@ const ShopItemDetail = () => {
         }
         return () => setInBasketCount(0)
     }, [basketItems])
+
+    const addToBasket = () => {
+        dispatch(addItem({ id: id, count: 1 }))
+        setBasketPopUp(true)
+        setTimeout(() => {
+            setBasketPopUp(false)
+        }, 2000)
+    }
 
     // if (error || !id) return <Error />
     if (!product) {

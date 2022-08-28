@@ -6,37 +6,47 @@ import { Toolbar } from '../components'
 import ShopCard from '../components/ShopCard'
 import { BsFilterRight } from 'react-icons/bs'
 
+import {isEmpty} from "lodash"
+
 import products from '../data/products.json'
 import Filter from '../components/Filter'
 import Link from 'next/link'
 import axios from 'axios'
+import { setNFTs, setApparel, setEvents, setMetaverseEvents } from "../state/data";
+import { useAppDispatch, useAppSelector } from '../state/hooks'
 
 const Home: NextPage = () => {
+    const dispatch = useAppDispatch()
+    const { nfts, events, metaverseEvents, apparel } = useAppSelector(state => state.data)
     const [openFilter, setOpenFilter] = useState(false)
     const [slide, setSlide] = useState(0)
-    const [nfts, setNfts] = useState([])
-    const [events, setEvents] = useState([])
-    const [metaverseEvents, setMetaverseEvents] = useState([])
+    // const [nfts, setNfts] = useState([])
+    // const [events, setEvents] = useState([])
+    // const [metaverseEvents, setMetaverseEvents] = useState([])
     const [apparels, setApparels] = useState([])
 
     const getNFTs = async () => {
         let call = await axios.get('/api/nfts')
-        setNfts(call.data.products)
+        !isEmpty(call.data.products) && dispatch(setNFTs(call.data.products))
+        // setNfts(call.data.products)
     }
 
     const getEvents = async () => {
         let call = await axios.get('/api/events')
-        setEvents(call.data.products)
+        !isEmpty(call.data.products) && dispatch(setEvents(call.data.products))
+        // setEvents(call.data.products)
     }
 
     const getMetaverseEvents = async () => {
         let call = await axios.get('/api/metaverseEvents')
-        setMetaverseEvents(call.data.products)
+        !isEmpty(call.data.products) && dispatch(setMetaverseEvents(call.data.products))
+        // setMetaverseEvents(call.data.products)
     }
 
     const getApparels = async () => {
         let call = await axios.get('/api/apparels')
-        setApparels(call.data.products)
+        !isEmpty(call.data.products) && dispatch(setApparel(call.data.products))
+        // setApparels(call.data.products)
     }
 
     useEffect(() => {
@@ -45,6 +55,8 @@ const Home: NextPage = () => {
         getMetaverseEvents();
         getApparels();
     }, [])
+
+    console.log()
 
     return (
         <>
@@ -112,6 +124,7 @@ const Home: NextPage = () => {
                             <ShopCard
                                 key={nft.id_product}
                                 product={nft}
+                                category="nfts"
                                 classes="min-w-[12rem]"
                             />
                         ))}
@@ -130,6 +143,7 @@ const Home: NextPage = () => {
                             <ShopCard
                                 key={event.id_product}
                                 product={event}
+                                category="events"
                                 classes="min-w-[12rem]"
                             />
                         ))}
@@ -148,6 +162,7 @@ const Home: NextPage = () => {
                             <ShopCard
                                 key={metaverseEvent.id_product}
                                 product={metaverseEvent}
+                                category="metaverseEvents"
                                 classes="min-w-[12rem]"
                             />
                         ))}
@@ -166,6 +181,7 @@ const Home: NextPage = () => {
                             <ShopCard
                                 key={apparel.id_product}
                                 product={apparel}
+                                category="apparels"
                                 classes="min-w-[12rem]"
                             />
                         ))}

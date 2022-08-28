@@ -2,13 +2,14 @@ import Link from 'next/link'
 import { ProductData } from '../lib/types'
 
 interface ShopCardProps {
-    product: ProductData
+    product: ProductData,
+    category: string,
     classes?: string
 }
 
-const ShopCard = ({ product, classes }: ShopCardProps) => {
+const ShopCard = ({ product, category, classes }: ShopCardProps) => {
     return (
-        <Link href={`/detail?id=${product.id_product}`}>
+        <Link href={`/detail?id=${product.id_product}&category=${category}`}>
             <a
                 className={`${classes} cursor-pointer relative rounded-xl bg-gray-100 items-center justify-start pt-10 flex flex-col w-40 h-56 overflow-hidden`}
             >

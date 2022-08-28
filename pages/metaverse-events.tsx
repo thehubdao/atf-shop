@@ -12,9 +12,9 @@ import Link from 'next/link';
 import { useAppSelector } from '../state/hooks';
 
 
-const Apparel: NextPage = (data) => {
+const Events: NextPage = (data) => {
     const [openFilter, setOpenFilter] = useState(false)
-    const { apparel } = useAppSelector(state => state.data)
+    const { metaverseEvents } = useAppSelector(state => state.data)
 
     return (
         <>
@@ -41,11 +41,11 @@ const Apparel: NextPage = (data) => {
                 </div>
 
 
-                <p className='font-bold text-3xl mb-5'>Apparel</p>
+                <p className='font-bold text-3xl mb-5'>Metaverse Events</p>
 
                 <div className="grid grid-cols-2 place-items-center gap-5">
-                    {apparel.map(product => (
-                        <ShopCard key={product.id_product} product={product} category="apparel" classes="min-w-[10rem]" />
+                    {metaverseEvents.map(product => (
+                        <ShopCard key={product.id_product} product={product} category="metaverseEvents" classes="min-w-[10rem]" />
                     ))}
                 </div>
 
@@ -63,4 +63,4 @@ const Apparel: NextPage = (data) => {
   
 
 
-export default Apparel
+export default Events

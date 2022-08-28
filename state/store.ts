@@ -5,12 +5,14 @@ import {
 } from '@reduxjs/toolkit'
 
 import basketReducer from './basket'
+import dataReducer from './data'
 import persistedReducer from './wallet'
 
 const store = configureStore({
     reducer: {
         basket: basketReducer,
         account: persistedReducer,
+        data: dataReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

@@ -10,18 +10,20 @@ import products from '../data/products.json'
 import Filter from '../components/Filter'
 import Link from 'next/link'
 import axios from 'axios'
+import { useAppSelector } from '../state/hooks'
 
 const NFTs: NextPage = () => {
+    const { nfts } = useAppSelector(state => state.data)
     const [openFilter, setOpenFilter] = useState(false)
-    const [nfts, setNfts] = useState([])
+    // const [nfts, setNfts] = useState([])
 
-    useEffect(() => {
-        let getNfts = async () => {
-            let call = await axios.get('/api/nfts')
-            setNfts(call.data.products)
-        }
-        getNfts()
-    }, [])
+    // useEffect(() => {
+    //     let getNfts = async () => {
+    //         let call = await axios.get('/api/nfts')
+    //         setNfts(call.data.products)
+    //     }
+    //     getNfts()
+    // }, [])
     return (
         <>
             <Head>
@@ -61,6 +63,7 @@ const NFTs: NextPage = () => {
                         <ShopCard
                             key={nft.id_product}
                             product={nft}
+                            category="nfts"
                             classes="min-w-[10rem]"
                         />
                     ))}
