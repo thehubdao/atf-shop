@@ -14,6 +14,8 @@ import Link from 'next/link'
 import axios from 'axios'
 import { setNFTs, setApparel, setEvents, setMetaverseEvents } from "../state/data";
 import { useAppDispatch, useAppSelector } from '../state/hooks'
+import { checkJWT, getUser } from '../services/walletService'
+import { setWalletLogin } from '../state/walletLogin'
 
 const Home: NextPage = () => {
     const dispatch = useAppDispatch()
@@ -55,8 +57,40 @@ const Home: NextPage = () => {
         getMetaverseEvents();
         getApparels();
     }, [])
-
-    console.log()
+    
+    useEffect(() => {
+        window.addEventListener('message', async (ev) => {
+            let { options } = ev.data
+            if (options) {
+                let { user_id } = await checkJWT(options?.token)
+                let jwt = await axios.post('api/login', {
+                  email: process.env.ADMIN_EMAIL,
+                  password: process.env.ADMIN_PASSWORD,
+              })
+              jwt = jwt.data.token
+                let { walletAddress } = await getUser(user_id, jwt)
+                let walletLogin = {}
+                if (user_id && walletAddress) {
+                    //1. Validate if token is valid
+                    walletLogin = {
+                        // 2. If user does have a wallet, call balances from contracts and show them in the shop.
+                        walletAddress,
+                        isValidLogin: true,
+                    }
+                } else {
+                    console.log("User hasn't wallet")
+                    //3. If user doesn't have a wallet -> connect wallet page
+                    walletLogin = {
+                        walletAddress,
+                        isValidLogin: false,
+                    }
+                }
+                dispatch(setWalletLogin(walletLogin))
+                // ;(window as any).walletLogin = walletLogin
+                console.log(walletLogin)
+            }
+        })
+    }, [])
 
     return (
         <>
