@@ -11,6 +11,7 @@ import Wert from '../modalBodies/Wert'
 const Toolbar = ({ dark }: any) => {
     const { basketItems } = useAppSelector((state) => state.basket)
     const { user } = useAppSelector((state) => state.account.walletConfig)
+    const { walletLogin } = useAppSelector((state) => state.walletLogin)
     const [_isWeb3, _setIsWeb3] = useState(false)
     const [balances, setBalances] = useState<any>(null)
     const [isValidLoginMobile, setIsValidLoginMobile] = useState()
@@ -27,7 +28,7 @@ const Toolbar = ({ dark }: any) => {
             })
         }
         web3Check()
-    }, [user,(window as any).walletLogin])
+    }, [user, walletLogin)
 
     const modalBody = () => {
         return (

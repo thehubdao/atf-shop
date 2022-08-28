@@ -7,12 +7,14 @@ import {
 import basketReducer from './basket'
 import dataReducer from './data'
 import persistedReducer from './wallet'
+import walletLoginReducer from "./walletLogin"
 
 const store = configureStore({
     reducer: {
         basket: basketReducer,
         account: persistedReducer,
-        data: dataReducer
+        data: dataReducer,
+        walletLogin: walletLoginReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

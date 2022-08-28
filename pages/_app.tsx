@@ -12,8 +12,13 @@ import { checkJWT, getUser } from '../services/walletService'
 import Script from 'next/script'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { useAppDispatch } from '../state/hooks'
+import {setWalletLogin} from "../state/walletLogin"
 
 function MyApp({ Component, pageProps }: AppProps) {
+    const dispatch = useAppDispatch()
+
+    
     useEffect(() => {
         window.addEventListener('message', async (ev) => {
             let { options } = ev.data
@@ -41,7 +46,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                         isValidLogin: false,
                     }
                 }
-                ;(window as any).walletLogin = walletLogin
+                dispatch(setWalletLogin(walletLogin))
+                // ;(window as any).walletLogin = walletLogin
                 console.log(walletLogin)
             }
         })
