@@ -37,6 +37,7 @@ export const connectWallet = () => {
             dispatch(_walletConfig(user))
         } catch (error) {
             console.log(error)
+            throw new Error(JSON.stringify(error))
             dispatch({
                 type: actions.CONNECT_WALLET_ERROR,
             })
