@@ -19,13 +19,14 @@ export const connectWallet = () => {
                 })
                 activeAccount = await wallet_instance.client.getActiveAccount()
             }
-            console.log("BEFORE DISPATCH INSIDE")
+
             const userAddress = await wallet_instance.getPKH()
             let { token, refreshToken } = await login(
                 activeAccount?.address,
                 activeAccount?.publicKey,
                 wallet_instance
             )
+            console.log("BEFORE DISPATCH INSIDE")
             user = {
                 userAddress: userAddress,
                 wallet_instance: wallet_instance,
