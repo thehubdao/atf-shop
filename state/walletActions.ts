@@ -26,17 +26,14 @@ export const connectWallet = () => {
                 activeAccount?.publicKey,
                 wallet_instance
             )
-           console.log("USER")
             user = {
                 userAddress: userAddress,
                 wallet_instance: wallet_instance,
                 token,
                 refreshToken,
             }
-            console.log("DISPATCH")
             dispatch(_walletConfig(user))
         } catch (error) {
-            console.log(error)
             throw new Error(JSON.stringify(error))
             dispatch({
                 type: actions.CONNECT_WALLET_ERROR,
