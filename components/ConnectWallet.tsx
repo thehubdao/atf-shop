@@ -27,20 +27,6 @@ const ConnectWallet = ({connectText, buttonStyle, containerStyle}: IConnectWalle
     const handleDisconnectWallet = async () => {
         await dispatch(disconnectWallet())
     }
-    /*     useEffect(() => {
-            
-            ;(async () => {
-                setTezos(new TezosToolkit("https://mainnet-tezos.giganode.io"))
-                if (wallet === null) {
-                    const _wallet = new (
-                        await import('@taquito/beacon-wallet')
-                    ).BeaconWallet({ name: 'Demo' })
-                    setWallet(_wallet)
-                    Tezos.setWalletProvider(_wallet)
-                    setIsMount(true)
-                }
-            })()
-        }, []) */
 
     return (
         <>

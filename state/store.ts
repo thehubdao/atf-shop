@@ -1,7 +1,4 @@
-import {
-    configureStore,
-} from '@reduxjs/toolkit'
-
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import persistedReducer from './wallet'
 
 const store = configureStore({
@@ -9,11 +6,9 @@ const store = configureStore({
         account: persistedReducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: false,
-            immutableCheck: false,
-        }),
+        getDefaultMiddleware({ serializableCheck: false }),
 })
+
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
