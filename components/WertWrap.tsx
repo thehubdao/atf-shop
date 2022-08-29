@@ -3,18 +3,13 @@ import { useEffect, useState } from 'react'
 import Wert from '../components/Wert'
 import { isWeb3 } from '../services/walletService'
 import { useAppDispatch, useAppSelector } from '../state/hooks'
-import { connectWallet } from '../state/walletAction'
+import { connectWallet } from '../state/walletActions'
+import ConnectWallet from './ConnectWallet'
 
 const WertWrap = () => {
-    const dispatch = useAppDispatch()
     const { user } = useAppSelector((state) => state.account.walletConfig)
 
-    useEffect(() => {
-        const checkWeb3 = async () => {
-            await dispatch(connectWallet())
-        }
-        checkWeb3()
-    }, [])
+
 
     return user.wallet_instance ? (
         <Wert walletAddress={user.userAddress} />
@@ -26,7 +21,10 @@ const WertWrap = () => {
                 interact with the shop.
             </p>
             <div className="flex flex-col mt-10 font-bold">
-                Connect your wallet to buy tokens
+                <ConnectWallet
+                    buttonStyle="rounded-full mt-10 bg-[#020202] text-[#FDE100] p-4 cursor-pointer w-44 text-center font-medium self-center"
+                    containerStyle="flex flex-col pt-0 items-center justify-center space-y-5 font-jost"
+                />
             </div>
         </div>
     )
