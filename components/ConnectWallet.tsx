@@ -20,8 +20,7 @@ const ConnectWallet = ({
 }: IConnectWallet) => {
     const dispatch = useAppDispatch()
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
-    const [wallet, setWallet] = useState<null | BeaconWallet>(null)
-    const [Tezos, setTezos] = useState(null)
+    console.log(user.userAddress,"Reload")
 
     const handleConnectWallet = async () => {
         await dispatch(connectWallet())
