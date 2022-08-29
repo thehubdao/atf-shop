@@ -8,17 +8,15 @@ import { connectWallet } from '../state/walletAction'
 const WertWrap = () => {
     const dispatch = useAppDispatch()
     const { user } = useAppSelector((state) => state.account.walletConfig)
-    const [_isWeb3, _setIsWeb3] = useState(false)
 
     useEffect(() => {
         const checkWeb3 = async () => {
             await dispatch(connectWallet())
         }
-        user && checkWeb3()
-        _setIsWeb3(isWeb3(user))
-    }, [user])
+        checkWeb3()
+    }, [])
 
-    return _isWeb3 ? (
+    return user.wallet_instance ? (
         <Wert walletAddress={user.userAddress} />
     ) : (
         <div className="font-jost w-[70%] m-auto text-center my-10">
