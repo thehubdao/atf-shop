@@ -20,7 +20,8 @@ const ConnectWallet = ({
 }: IConnectWallet) => {
     const dispatch = useAppDispatch()
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
-    console.log(user.userAddress,"Reload")
+    console.log(user.userAddress)
+    console.log("RELOAD")
 
     const handleConnectWallet = async () => {
         await dispatch(connectWallet())
