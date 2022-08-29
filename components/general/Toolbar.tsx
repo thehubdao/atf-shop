@@ -18,9 +18,9 @@ const Toolbar = ({ dark }: any) => {
     useEffect(() => {
         const web3Check = async () => {
             _setIsWeb3(await isWeb3(user))
-            setIsValidLoginMobile((window as any)?.walletLogin?.isValidLogin)
-            let userAddress = (window as any)?.walletLogin?.isValidLogin
-                ? (window as any)?.walletLogin?.walletAddress
+            setIsValidLoginMobile((walletLogin as any)?.isValidLogin)
+            let userAddress = isValidLoginMobile
+                ? (walletLogin as any).walletAddress
                 : user.userAddress
             setBalances({
                 atfBalance: await getATFBalance(userAddress),
