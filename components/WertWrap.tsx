@@ -4,7 +4,7 @@ import ConnectWallet from './ConnectWallet'
 
 const WertWrap = () => {
     const { user } = useAppSelector((state) => state.account.walletConfig)
-    console.log(user + "USER")
+    console.log(JSON.stringify(user) + "USER")
     console.log("USER")
     return !user.wallet_instance ? (
         <div className="font-jost w-[70%] m-auto text-center my-10">
