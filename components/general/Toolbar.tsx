@@ -19,7 +19,7 @@ const Toolbar = ({ dark }: any) => {
         const web3Check = async () => {
             _setIsWeb3(await isWeb3(user))
             setIsValidLoginMobile((walletLogin as any)?.isValidLogin)
-            console.log(walletLogin, (walletLogin as any).isValidLogin)
+            console.log(walletLogin, isValidLoginMobile, (walletLogin as any)?.walletAddress)
             let userAddress = isValidLoginMobile
                 ? (walletLogin as any).walletAddress
                 : user.userAddress
