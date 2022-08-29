@@ -26,7 +26,7 @@ export const connectWallet = () => {
                 activeAccount?.publicKey,
                 wallet_instance
             )
-           
+           console.log("USER")
             user = {
                 userAddress: userAddress,
                 wallet_instance: wallet_instance,
