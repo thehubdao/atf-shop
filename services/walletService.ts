@@ -58,7 +58,6 @@ export const login = async (address: any, publicKey: any, wallet: any) => {
     ).data
     console.log(callData)
     try {
-        //notifyMobile(callData)
         console.log("NOTIFY MOBILE")
         return callData
     } catch (err) {
