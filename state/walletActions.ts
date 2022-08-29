@@ -30,6 +30,7 @@ export const connectWallet = () => {
                 token,
                 refreshToken,
             }
+            console.log("DISPATCH")
             dispatch(_walletConfig(user))
         } catch (error) {
             console.log(error)
