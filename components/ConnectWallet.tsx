@@ -23,6 +23,7 @@ const ConnectWallet = ({
     console.log(user.userAddress + " RELOAD")
 
     const handleConnectWallet = async () => {
+        console.log("BEFORE DISPATCH")
         await dispatch(connectWallet())
     }
 
