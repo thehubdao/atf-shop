@@ -7,31 +7,32 @@ import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
     useEffect(() => {
-        ;(function () {
-            var old = console.log
-            var logger = document.getElementById('log')
-            console.log = function (message) {
-                let params = arguments
-                if (typeof message == 'object') {
-                    ;(logger as any).innerHTML +=
-                        JSON && JSON.stringify
-                            ? JSON.stringify(message)
-                            : message
-                    ;(params as any).forEach((el: any) => {
-                        ;(logger as any).innerHTML +=
-                            ', ' +
-                            (JSON && JSON.stringify ? JSON.stringify(el) : el)
-                    })
-                    ;(logger as any).innerHTML += '<br />'
-                } else {
-                    ;(logger as any).innerHTML += message
-                    ;(params as any).forEach((el: any) => {
-                        ;(logger as any).innerHTML += ', ' + el
-                    })
-                    ;(logger as any).innerHTML += '<br />'
+        (function (logger:any) {
+            (console as any).old = console.log;
+            console.log = function () {
+                var output = "", arg, i;
+        
+                for (i = 0; i < arguments.length; i++) {
+                    arg = arguments[i];
+                    output += "<span class=\"log-" + (typeof arg) + "\">";
+        
+                    if (
+                        typeof arg === "object" &&
+                        typeof JSON === "object" &&
+                        typeof JSON.stringify === "function"
+                    ) {
+                        output += JSON.stringify(arg);   
+                    } else {
+                        output += arg;   
+                    }
+        
+                    output += "</span>&nbsp;";
                 }
-            }
-        })()
+        
+                logger.innerHTML += output + "<br>";
+                (console as any).old.apply(undefined, arguments);
+            };
+        })(document.getElementById("logger"));
     })
     return (
         <Provider store={store}>
