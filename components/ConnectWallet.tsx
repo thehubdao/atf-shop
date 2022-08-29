@@ -8,17 +8,20 @@ import {
 } from '../state/walletActions'
 
 interface IConnectWallet {
-    buttonStyle: string,
-    containerStyle: string,
-    connectText?: string,
+    buttonStyle: string
+    containerStyle: string
+    connectText?: string
 }
 
-const ConnectWallet = ({connectText, buttonStyle, containerStyle}: IConnectWallet) => {
+const ConnectWallet = ({
+    connectText,
+    buttonStyle,
+    containerStyle,
+}: IConnectWallet) => {
     const dispatch = useAppDispatch()
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
     const [wallet, setWallet] = useState<null | BeaconWallet>(null)
-    const [Tezos, setTezos] = useState(null
-    )
+    const [Tezos, setTezos] = useState(null)
 
     const handleConnectWallet = async () => {
         await dispatch(connectWallet())
@@ -30,6 +33,7 @@ const ConnectWallet = ({connectText, buttonStyle, containerStyle}: IConnectWalle
 
     return (
         <>
+            <div>{user?.walletAddress}</div>
             <div className={containerStyle}>
                 <div
                     onClick={
