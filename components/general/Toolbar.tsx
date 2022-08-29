@@ -19,9 +19,11 @@ const Toolbar = ({ dark }: any) => {
         const web3Check = async () => {
             _setIsWeb3(await isWeb3(user))
             setIsValidLoginMobile((walletLogin as any)?.isValidLogin)
+            console.log(walletLogin, (walletLogin as any).isValidLogin)
             let userAddress = isValidLoginMobile
                 ? (walletLogin as any).walletAddress
                 : user.userAddress
+            console.log(userAddress,"userAddress")
             setBalances({
                 atfBalance: await getATFBalance(userAddress),
                 apBalance: await getAPBalance(userAddress),
