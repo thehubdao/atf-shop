@@ -12,20 +12,22 @@ interface loginResult {
 }
 export const Tezos = new TezosToolkit('https://ghostnet.smartpy.io')
 
-export const wallet_instance = new BeaconWallet({
-    name: 'ATF Beacon',
-})
+let wallet_instance: any = null
+
+export const getWalletInstance = () => {
+    if (!wallet_instance)
+        wallet_instance = new BeaconWallet({
+            name: 'ATF Beacon',
+        })
+    return wallet_instance
+}
 
 const notifyMobile = (result: loginResult) => {
     const aWindow: any = window as any
-    //IOS case
     if (aWindow.webkit?.messageHandlers?.web3LoginHandler) {
         aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(result)
     }
-    //Android case
-    console.log(aWindow.androidWeb3, 'Left out')
     if (aWindow.androidWeb3) {
-        console.log(aWindow.androidWeb3, 'Joined')
         aWindow.androidWeb3.onLoginResult(JSON.stringify(result))
     }
 }
@@ -34,9 +36,12 @@ export const getNonce = async (address: any) => {
     return (await axios.post('/api/loginGetNonce', { address })).data
 }
 
-export const login = async (address: any, wallet: any) => {
-    const nonce = await getNonce(address)
-    console.log(nonce,"Nonce")
+export const login = async (address: any, publicKey: any, wallet: any) => {
+    const nonce = await getNonce(
+        (
+            await wallet.client.getActiveAccount()
+        ).address
+    )
     const bytes = char2Bytes(nonce + '')
     const payloadBytes = '05' + '0100' + char2Bytes(bytes.length + '') + bytes
     const callData = (
@@ -47,9 +52,11 @@ export const login = async (address: any, wallet: any) => {
                     payload: payloadBytes,
                 })
             ).signature,
-            address: address,
+            address,
+            publicKey,
         })
     ).data
+    callData.wallet_instance = wallet_instance
     try {
         notifyMobile(callData)
         return callData
@@ -59,9 +66,31 @@ export const login = async (address: any, wallet: any) => {
 }
 
 export const checkJWT = async (jwt: any) => {
-   return axios.get('/api/validate-token', {
-        headers: {
-            Authorization: `Bearer ${jwt}`,
-        },
-    })
+    try {
+        return (
+            await axios.get('/api/validate-token', {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+        ).data
+    } catch (err) {
+        return {}
+    }
+}
+
+export const getUser = async (id_user: any,jwt:any) => {
+    if (id_user)
+        return (await axios.get(`/api/get-users?user_id=${id_user}&email=`,{
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+            },
+        })).data
+    else return {}
+}
+export const isWeb3 = (user: any) => {
+    if ((window as any)?.walletLogin?.isValidLogin) return true
+    if (user.wallet_instance) return true
+
+    return false
 }

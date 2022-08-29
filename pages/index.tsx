@@ -1,13 +1,16 @@
 import type { NextPage } from 'next'
-import Wert from '../components/Wert';
-
-
+import dynamic from 'next/dynamic'
+import { useEffect, useState } from 'react'
+import Wert from '../components/Wert'
+import { isWeb3 } from '../services/walletService'
+import { useAppDispatch, useAppSelector } from '../state/hooks'
+import { connectWallet } from '../state/walletAction'
+const WertWrap = dynamic(() => import('../components/WertWrap'), {
+    ssr: false,
+}) as any
 const Home: NextPage = () => {
 
-    return (
-        <Wert />
-    )
+    return <WertWrap/>
 }
-
 
 export default Home

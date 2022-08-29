@@ -9,7 +9,8 @@ module.exports = {
         WERT_PARTNER_ID: process.env.WERT_PARTNER_ID,
         WERT_ORIGIN: process.env.WERT_ORIGIN,
         TOKEN_CONTRACT_ADDRESS: process.env.TOKEN_CONTRACT_ADDRESS,
-        WERT_PRIVATE_KEY: process.env.WERT_PRIVATE_KEY
+        WERT_PRIVATE_KEY: process.env.WERT_PRIVATE_KEY,
+        SWAP_CONTRACT_ADDRESS:process.env.SWAP_CONTRACT_ADDRESS,
     },
     async redirects() {
         return [
