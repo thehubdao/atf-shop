@@ -1,13 +1,8 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Link from 'next/link'
 import WertModule from '@wert-io/module-react-component'
 import { signSmartContractData } from '@wert-io/widget-sc-signer'
-import { useEffect, useState } from 'react'
-import { v4 as uuidv4, v4 } from 'uuid'
+import { v4 } from 'uuid'
 
-const Wert = ({ walletAddress }: { walletAddress?: string }) => {
-console.log(walletAddress)
+const Wert = ({ walletAddress }: { walletAddress: string }) => {
     let micheline_sc_params_string = JSON.stringify({
         entrypoint: 'buy',
         value: {

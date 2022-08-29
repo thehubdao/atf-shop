@@ -1,19 +1,11 @@
-import type { NextPage } from 'next'
-import { useEffect, useState } from 'react'
 import Wert from '../components/Wert'
-import { isWeb3 } from '../services/walletService'
-import { useAppDispatch, useAppSelector } from '../state/hooks'
-import { connectWallet } from '../state/walletActions'
+import {useAppSelector } from '../state/hooks'
 import ConnectWallet from './ConnectWallet'
 
 const WertWrap = () => {
     const { user } = useAppSelector((state) => state.account.walletConfig)
 
-
-
-    return user.wallet_instance ? (
-        <Wert walletAddress={user.userAddress} />
-    ) : (
+    return !user.wallet_instance ? (
         <div className="font-jost w-[70%] m-auto text-center my-10">
             <p className="font-bold">Connect Web3 Wallet</p>
             <p>
@@ -27,6 +19,8 @@ const WertWrap = () => {
                 />
             </div>
         </div>
+    ) : (
+        <Wert walletAddress={user.userAddress} />
     )
 }
 
