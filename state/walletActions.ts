@@ -5,7 +5,7 @@ import { NetworkType } from '@airgap/beacon-sdk'
 const wallet_instance = getWalletInstance()
 export const connectWallet = () => {
     return async (dispatch: any) => {
-        console.log("BEFORE DISPATCH INSIDE")
+
         try {
             let user = {}
             Tezos.setWalletProvider(wallet_instance)
@@ -19,6 +19,7 @@ export const connectWallet = () => {
                 })
                 activeAccount = await wallet_instance.client.getActiveAccount()
             }
+            console.log("BEFORE DISPATCH INSIDE")
             const userAddress = await wallet_instance.getPKH()
             let { token, refreshToken } = await login(
                 activeAccount?.address,
