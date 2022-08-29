@@ -7,10 +7,7 @@ const Wert = ({ walletAddress }: { walletAddress: string }) => {
         entrypoint: 'buy',
         value: {
             prim: 'Pair',
-            args: [
-                { string: walletAddress },
-                { int: '1000000' },
-            ],
+            args: [{ string: walletAddress }, { int: '1000000' }],
         },
     })
         .split('')
@@ -42,7 +39,7 @@ const Wert = ({ walletAddress }: { walletAddress: string }) => {
                 address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
                 listeners: {
                     error: (name: any, message: any) =>
-                        console.log(name, message),
+                        alert(JSON.stringify(name + message)),
                 },
             }}
         />
