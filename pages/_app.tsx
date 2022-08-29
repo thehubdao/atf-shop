@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 logger.innerHTML += output + "<br>";
                 (console as any).old.apply(undefined, arguments);
             };
-        })(document.getElementById("logger"));
+        })(document.getElementById("log"));
     })
     return (
         <Provider store={store}>
