@@ -24,8 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     })
     return (
         <Provider store={store}>
-            <div id='log'></div>
+
             <Component {...pageProps} />
+            <div id='log' className="overflow-y-auto"></div>
         </Provider>
     )
 }
