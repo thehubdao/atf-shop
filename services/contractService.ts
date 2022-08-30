@@ -38,8 +38,6 @@ export const getATFBalance = async (token: any) => {
 
 export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
     try {
-        const dispatch = useAppDispatch()
-        const { user } = useAppSelector((state) => state.account.walletConfig)
         let jwt = await axios.post('api/login', {
             email: process.env.ADMIN_EMAIL,
             password: process.env.ADMIN_PASSWORD,
@@ -99,7 +97,6 @@ export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
                 await axios.delete('/api/nft/' + nft.id_product, config)
             } catch (error) {}
         })
-        dispatch(_walletConfig(user))
         return true
     } catch {
         return false
