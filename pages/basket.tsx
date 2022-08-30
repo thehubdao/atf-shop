@@ -16,6 +16,7 @@ import axios from 'axios'
 import { buyNfts } from '../services/contractService'
 import Modal from '../components/Modal'
 import BasketModalConfirm from '../components/modalBodies/BasketModalConfirm'
+import { _walletConfig } from '../state/walletActions'
 
 const Basket: NextPage = () => {
     const dispatch = useAppDispatch()
@@ -25,7 +26,6 @@ const Basket: NextPage = () => {
     const [isConfirmedModal, setIsConfirmedModal] = useState<boolean>(false)
     const [isSuccesfulModal, setIsSuccesfulModal] = useState<boolean>(false)
     const [isWaitingModal, setIsWaitingModal] = useState<boolean>(true)
-
     useEffect(() => {
         let getNfts = async () => {
             let call = await axios.get('/api/nfts')
@@ -77,9 +77,11 @@ const Basket: NextPage = () => {
             totalAP,
             totalATF,
         })
-         setIsSuccesfulModal(buyConfirm)
-        setIsWaitingModal(false) 
-        dispatch(restartBasket())
+        setIsSuccesfulModal(buyConfirm)
+        setIsWaitingModal(false)
+        if (buyConfirm) {
+            dispatch(restartBasket())
+        }
     }
 
     const bodyModal = () => {
