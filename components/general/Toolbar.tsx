@@ -33,7 +33,6 @@ const Toolbar = ({ dark }: any) => {
         }
 
         web3Check()
-        return ()=>{web3Check()}
     }, [user, walletLogin])
 
     const modalBody = () => {
