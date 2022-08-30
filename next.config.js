@@ -90,6 +90,16 @@ module.exports = {
                 destination:
                     'https://atf-test.backendboyz.repl.co/api/login',
             },
+            {
+                source: '/api/getAPBalance',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/getAPBalance',
+            },
+            {
+                source: '/api/getATFBalance',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/getATFBalance',
+            },
         ]
     },
 }

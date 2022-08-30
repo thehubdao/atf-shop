@@ -13,21 +13,25 @@ const Toolbar = ({ dark }: any) => {
     const { user } = useAppSelector((state) => state.account.walletConfig)
     const { walletLogin } = useAppSelector((state) => state.walletLogin)
     const [_isWeb3, _setIsWeb3] = useState(false)
-    const [balances, setBalances] = useState<any>(null)
-    const [isValidLoginMobile, setIsValidLoginMobile] = useState()
+    const [balances, setBalances] = useState<any>({
+        atfBalance: 0,
+        apBalance: 0,
+    })
+    const [isValidLoginMobile, setIsValidLoginMobile] = useState(false)
     useEffect(() => {
         const web3Check = async () => {
             _setIsWeb3(await isWeb3(user))
             setIsValidLoginMobile((walletLogin as any)?.isValidLogin)
-            let userAddress = (walletLogin as any)?.isValidLogin
-                ? (walletLogin as any).walletAddress
-                : user.userAddress
-            console.log(userAddress,"userAddress")
+            let userToken = (walletLogin as any)?.isValidLogin
+                ? (walletLogin as any).token
+                : user.token
+            if(userToken)
             setBalances({
-                atfBalance: await getATFBalance(userAddress),
-                apBalance: await getAPBalance(userAddress),
+                atfBalance: await getATFBalance(userToken),
+                apBalance: await getAPBalance(userToken),
             })
         }
+
         web3Check()
     }, [user, walletLogin])
 

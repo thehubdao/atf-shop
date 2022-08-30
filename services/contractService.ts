@@ -11,31 +11,25 @@ let marketplace_contract = Tezos.wallet.at(marketplace_contract_address!)
 let atf_token_contract = Tezos.contract.at(atf_token_contract_address!)
 let ap_token_contract = Tezos.contract.at(ap_token_contract_address!)
 
-export const getAPBalance = async (address: any) => {
-    let { ledger }: any = await (
-        await Tezos.contract.at(process.env.ACTION_CONTRACT_ADDRESS!)
-    ).storage()
+export const getAPBalance = async (token: any) => {
     let rtr
     try {
-        rtr = await ledger.get(address + '')
+        rtr = await axios.get('/api/getAPBalance?', { params: { token } })
     } catch (err) {}
-    if (rtr != undefined) {
-        return rtr.toNumber()
+    if (rtr) {
+        console.log(rtr.data.balance)
+        return rtr.data.balance
     }
     return 0
 }
 
-export const getATFBalance = async (address: any) => {
-    let { ledger }: any = await (
-        await Tezos.contract.at(process.env.ATF_TOKEN_CONTRACT_ADDRESS!)
-    ).storage()
-
+export const getATFBalance = async (token: any) => {
     let rtr
     try {
-        rtr = await ledger.get(address + '')
+        rtr = await axios.get('/api/getATFBalance?', { params: { token } })
     } catch (err) {}
-    if (rtr != undefined) {
-        return rtr.toNumber()
+    if (rtr) {
+        return  rtr.data.balance
     }
     return 0
 }
