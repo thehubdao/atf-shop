@@ -58,7 +58,7 @@ export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
                 )
                 .withContractCall(
                     atf_token_methods.approve({
-                        value: totalATF,
+                        value: totalATF * 10**5,
                         spender: marketplace_contract_address,
                     }) as any
                 )
@@ -81,7 +81,7 @@ export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
                 methodsObject.collect({
                     to_: address,
                     amount_ft: nft.Detail.detail.priceATF
-                        ? nft.Detail.detail.priceATF
+                        ? nft.Detail.detail.priceATF * 10**5
                         : nft.Detail.detail.priceAP,
                     token_symbol: nft.Detail.detail.priceATF ? 'ATF' : 'AP',
                     swap_id: nft.Detail.detail.swap_id,
