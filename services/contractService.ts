@@ -2,7 +2,6 @@ import { MichelsonMap, TezosToolkit } from '@taquito/taquito'
 import { char2Bytes } from '@taquito/utils'
 import axios from 'axios'
 import { useAppDispatch, useAppSelector } from '../state/hooks'
-import { _walletConfig } from '../state/walletActions'
 import { Tezos } from './walletService'
 
 let wallet_public_key = process.env.WALLET_PUBLIC_KEY
@@ -97,6 +96,7 @@ export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
                 await axios.delete('/api/nft/' + nft.id_product, config)
             } catch (error) {}
         })
+
         return true
     } catch {
         return false

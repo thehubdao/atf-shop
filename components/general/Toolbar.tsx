@@ -23,7 +23,7 @@ const Toolbar = ({ dark }: any) => {
             _setIsWeb3(await isWeb3(user))
             setIsValidLoginMobile((walletLogin as any)?.isValidLogin)
             let userToken = (walletLogin as any)?.isValidLogin
-                ? (walletLogin as any).token
+                ? (walletLogin as any)?.token
                 : user.token
             if(userToken)
             setBalances({

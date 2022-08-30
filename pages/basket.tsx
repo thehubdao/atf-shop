@@ -81,6 +81,7 @@ const Basket: NextPage = () => {
         setIsWaitingModal(false)
         if (buyConfirm) {
             dispatch(restartBasket())
+            
         }
     }
 
