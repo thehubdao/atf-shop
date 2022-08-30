@@ -17,7 +17,7 @@ import { buyNfts } from '../services/contractService'
 import Modal from '../components/Modal'
 import BasketModalConfirm from '../components/modalBodies/BasketModalConfirm'
 import { _walletConfig } from '../state/walletActions'
-
+export let buyConfirm: boolean
 const Basket: NextPage = () => {
     const dispatch = useAppDispatch()
     const { basketItems } = useAppSelector((state) => state.basket)
@@ -70,7 +70,8 @@ const Basket: NextPage = () => {
     }
 
     const handleConfirmModal = async () => {
-        const buyConfirm = await buyNfts({
+        buyConfirm = false
+        buyConfirm = await buyNfts({
             nfts: basketList,
             jwt: user.token,
             address: user.userAddress,
@@ -81,7 +82,6 @@ const Basket: NextPage = () => {
         setIsWaitingModal(false)
         if (buyConfirm) {
             dispatch(restartBasket())
-            
         }
     }
 

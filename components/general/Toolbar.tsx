@@ -7,7 +7,7 @@ import Modal from '../Modal'
 import { getAPBalance, getATFBalance } from '../../services/contractService'
 import { isWeb3 } from '../../services/walletService'
 import Wert from '../modalBodies/Wert'
-
+import {buyConfirm} from '../../pages/basket'
 const Toolbar = ({ dark }: any) => {
     const { basketItems } = useAppSelector((state) => state.basket)
     const { user } = useAppSelector((state) => state.account.walletConfig)
@@ -33,7 +33,7 @@ const Toolbar = ({ dark }: any) => {
         }
 
         web3Check()
-    }, [user, walletLogin])
+    }, [user, walletLogin,buyConfirm])
 
     const modalBody = () => {
         return (
