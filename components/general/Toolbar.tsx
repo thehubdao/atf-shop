@@ -1,23 +1,22 @@
 import { Component, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { BsCart, BsCart2, BsPerson, BsPlus } from 'react-icons/bs'
-import { useAppSelector } from '../../state/hooks'
-import { checkJWT } from '../../services/walletService'
+import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import Modal from '../Modal'
 import { getAPBalance, getATFBalance } from '../../services/contractService'
 import { isWeb3 } from '../../services/walletService'
 import Wert from '../modalBodies/Wert'
-import {buyConfirm} from '../../pages/basket'
+import { setBalances } from '../../state/balances'
+
 const Toolbar = ({ dark }: any) => {
+    const dispatch = useAppDispatch()
     const { basketItems } = useAppSelector((state) => state.basket)
     const { user } = useAppSelector((state) => state.account.walletConfig)
+    const { balances } = useAppSelector((state) => state.balance)
     const { walletLogin } = useAppSelector((state) => state.walletLogin)
     const [_isWeb3, _setIsWeb3] = useState(false)
-    const [balances, setBalances] = useState<any>({
-        atfBalance: 0,
-        apBalance: 0,
-    })
     const [isValidLoginMobile, setIsValidLoginMobile] = useState(false)
+
     useEffect(() => {
         const web3Check = async () => {
             _setIsWeb3(await isWeb3(user))
@@ -25,16 +24,17 @@ const Toolbar = ({ dark }: any) => {
             let userToken = (walletLogin as any)?.isValidLogin
                 ? (walletLogin as any)?.token
                 : user.token
-                console.log(walletLogin,userToken)
-            if(userToken)
-            setBalances({
-                atfBalance: await getATFBalance(userToken),
-                apBalance: await getAPBalance(userToken),
-            })
+            if (userToken)
+                dispatch(
+                    setBalances({
+                        atfBalance: await getATFBalance(userToken),
+                        apBalance: await getAPBalance(userToken),
+                    })
+                )
         }
 
         web3Check()
-    }, [user, walletLogin,buyConfirm])
+    }, [user, walletLogin])
 
     const modalBody = () => {
         return (

@@ -13,11 +13,16 @@ import { decrease, increase, removeItem, restartBasket } from '../state/basket'
 import { IoMdClose } from 'react-icons/io'
 import { getLocal } from '../lib/local'
 import axios from 'axios'
-import { buyNfts } from '../services/contractService'
+import {
+    buyNfts,
+    getAPBalance,
+    getATFBalance,
+} from '../services/contractService'
 import Modal from '../components/Modal'
 import BasketModalConfirm from '../components/modalBodies/BasketModalConfirm'
 import { _walletConfig } from '../state/walletActions'
-export let buyConfirm: boolean
+import { setBalances } from '../state/balances'
+
 const Basket: NextPage = () => {
     const dispatch = useAppDispatch()
     const { basketItems } = useAppSelector((state) => state.basket)
@@ -26,6 +31,7 @@ const Basket: NextPage = () => {
     const [isConfirmedModal, setIsConfirmedModal] = useState<boolean>(false)
     const [isSuccesfulModal, setIsSuccesfulModal] = useState<boolean>(false)
     const [isWaitingModal, setIsWaitingModal] = useState<boolean>(true)
+    const { walletLogin } = useAppSelector((state) => state.walletLogin)
     useEffect(() => {
         let getNfts = async () => {
             let call = await axios.get('/api/nfts')
@@ -70,18 +76,27 @@ const Basket: NextPage = () => {
     }
 
     const handleConfirmModal = async () => {
-        buyConfirm = false
-        buyConfirm = await buyNfts({
+        let buyConfirm = await buyNfts({
             nfts: basketList,
             jwt: user.token,
             address: user.userAddress,
             totalAP,
             totalATF,
         })
+
         setIsSuccesfulModal(buyConfirm)
         setIsWaitingModal(false)
         if (buyConfirm) {
             dispatch(restartBasket())
+            let userToken = (walletLogin as any)?.isValidLogin
+                ? (walletLogin as any)?.token
+                : user.token
+            dispatch(
+                setBalances({
+                    atfBalance: await getATFBalance(userToken),
+                    apBalance: await getAPBalance(userToken),
+                })
+            )
         }
     }
 
