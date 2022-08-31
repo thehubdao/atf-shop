@@ -9,6 +9,7 @@ import dataReducer from './data'
 import persistedReducer from './wallet'
 import walletLoginReducer from './walletLogin'
 import balancesReducer from './balances'
+import { persistStore } from 'redux-persist'
 const store = configureStore({
     reducer: {
         basket: basketReducer,
@@ -27,5 +28,7 @@ const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch
+
+export const persistor = persistStore(store)
 
 export default store
