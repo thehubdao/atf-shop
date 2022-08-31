@@ -30,9 +30,6 @@ const ConnectWallet = ({
     const handleDisconnectWallet = async () => {
         await dispatch(disconnectWallet())
     }
-    useEffect(() => {
-        console.log(user)
-    })
 
     return (
         <>
