@@ -25,6 +25,7 @@ const Toolbar = ({ dark }: any) => {
             let userToken = (walletLogin as any)?.isValidLogin
                 ? (walletLogin as any)?.token
                 : user.token
+                console.log(walletLogin,userToken)
             if(userToken)
             setBalances({
                 atfBalance: await getATFBalance(userToken),
