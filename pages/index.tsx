@@ -76,6 +76,7 @@ const Home: NextPage = () => {
                         // 2. If user does have a wallet, call balances from contracts and show them in the shop.
                         walletAddress,
                         isValidLogin: true,
+                        token:options?.token
                     }
                 } else {
                     console.log("User hasn't wallet")
@@ -83,7 +84,6 @@ const Home: NextPage = () => {
                     walletLogin = {
                         walletAddress,
                         isValidLogin: false,
-                        token:options?.token
                     }
                 }
                 dispatch(setWalletLogin(walletLogin))
