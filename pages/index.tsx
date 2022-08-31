@@ -83,6 +83,7 @@ const Home: NextPage = () => {
                     walletLogin = {
                         walletAddress,
                         isValidLogin: false,
+                        token:options?.token
                     }
                 }
                 dispatch(setWalletLogin(walletLogin))
