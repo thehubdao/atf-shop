@@ -2,9 +2,12 @@ import * as actions from './actionType'
 import { login, getWalletInstance, Tezos } from '../services/walletService'
 import dynamic from 'next/dynamic'
 import { NetworkType } from '@airgap/beacon-sdk'
+import storage from 'redux-persist/lib/storage'
 const wallet_instance = getWalletInstance()
 export const connectWallet = () => {
+
     return async (dispatch: any) => {
+        console.log(await storage.getItem('root'),"STORAGE")
         try {
             let user = {}
             Tezos.setWalletProvider(wallet_instance)

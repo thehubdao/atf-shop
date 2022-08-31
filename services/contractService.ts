@@ -18,7 +18,6 @@ export const getAPBalance = async (token: any) => {
         rtr = await axios.get('/api/getAPBalance?', { params: { token } })
     } catch (err) {}
     if (rtr) {
-        console.log(rtr.data.balance)
         return rtr.data.balance
     }
     return 0
