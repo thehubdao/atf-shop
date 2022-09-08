@@ -82,7 +82,7 @@ export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
                     to_: address,
                     amount_ft: nft.Detail.detail.priceATF
                         ? nft.Detail.detail.priceATF * 10**5
-                        : nft.Detail.detail.priceAP,
+                        : nft.Detail.detail.priceAP * 10**5,
                     token_symbol: nft.Detail.detail.priceATF ? 'ATF' : 'AP',
                     swap_id: nft.Detail.detail.swap_id,
                 }) as any
