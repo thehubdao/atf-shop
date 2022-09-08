@@ -72,7 +72,7 @@ export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
                 )
                 .withContractCall(
                     ap_token_methods.approve({
-                        value: totalAP,
+                        value: totalAP * 10**5,
                         spender: marketplace_contract_address,
                     }) as any
                 )
