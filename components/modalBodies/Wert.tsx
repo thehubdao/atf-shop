@@ -41,7 +41,7 @@ const Wert = ({ isWalletConect }: any) => {
     const signedData = signSmartContractData(
         {
             address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
-            commodity: 'XTZ',
+            commodity: 'ATF',
             commodity_amount: 1,
             pk_id: 'key1',
             sc_address: process.env.SWAP_CONTRACT_ADDRESS!,
@@ -50,7 +50,7 @@ const Wert = ({ isWalletConect }: any) => {
         },
         process.env.WERT_PRIVATE_KEY!
     )
-
+console.log(user)
     return (
         <div className="overflow-x-hidden">
             {!isWalletConect ? (
@@ -71,12 +71,12 @@ const Wert = ({ isWalletConect }: any) => {
                 <WertModule
                     className="h-[450px]"
                     options={{
-                        ...signedData,
+                        commodity_amount:1,
+                        commodity:'ATF',
                         partner_id: process.env.WERT_PARTNER_ID!,
                         origin: process.env.WERT_ORIGIN!,
                         theme: 'white',
-                        commodities: 'XTZ',
-                        address: 'tz1T2uyYTshSGrEg13VGJFqsWwbi2H175hZb',
+                        address: user.userAddress,
                         autosize: true,
                         width: 400,
                         listeners: {
