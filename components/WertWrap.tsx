@@ -15,9 +15,6 @@ const WertWrap = () => {
         const web3Check = async () => {
             _setIsWeb3(isWeb3(user))
             setIsValidLoginMobile((walletLogin as any)?.isValidLogin)
-            let userToken = (walletLogin as any)?.isValidLogin
-                ? (walletLogin as any)?.token
-                : user.token
         }
 
         web3Check()
