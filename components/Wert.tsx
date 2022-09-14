@@ -1,6 +1,4 @@
 import WertModule from '@wert-io/module-react-component'
-import { signSmartContractData } from '@wert-io/widget-sc-signer'
-import { v4 } from 'uuid'
 
 const Wert = ({ walletAddress }: { walletAddress: string }) => {
 

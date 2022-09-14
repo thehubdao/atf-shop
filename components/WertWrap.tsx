@@ -1,15 +1,32 @@
+import { useEffect, useState } from 'react'
 import Wert from '../components/Wert'
-import {useAppSelector } from '../state/hooks'
+import { isWeb3 } from '../services/walletService'
+import { useAppDispatch, useAppSelector } from '../state/hooks'
 import ConnectWallet from './ConnectWallet'
 
 const WertWrap = () => {
     const { user } = useAppSelector((state) => state.account.walletConfig)
-    return !user.wallet_instance ? (
+    const dispatch = useAppDispatch()
+    const { walletLogin } = useAppSelector((state) => state.walletLogin)
+    const [_isWeb3, _setIsWeb3] = useState(false)
+    const [isValidLoginMobile, setIsValidLoginMobile] = useState(false)
+
+    useEffect(() => {
+        const web3Check = async () => {
+            _setIsWeb3(isWeb3(user))
+            setIsValidLoginMobile((walletLogin as any)?.isValidLogin)
+            let userToken = (walletLogin as any)?.isValidLogin
+                ? (walletLogin as any)?.token
+                : user.token
+        }
+
+        web3Check()
+    }, [user, walletLogin])
+
+    return !user.wallet_instance && isValidLoginMobile ? (
         <div className="font-jost w-[70%] m-auto text-center my-10">
             <p className="font-bold">Connect Web3 Wallet</p>
-            <p>
-                A connected Web3 wallet is needed to purchase ATF tokens.
-            </p>
+            <p>A connected Web3 wallet is needed to purchase ATF tokens.</p>
             <div className="flex flex-col mt-10 font-bold">
                 <ConnectWallet
                     buttonStyle="rounded-full mt-10 bg-[#020202] text-[#FDE100] p-4 cursor-pointer w-44 text-center font-medium self-center"
@@ -18,7 +35,7 @@ const WertWrap = () => {
             </div>
         </div>
     ) : (
-        <Wert walletAddress={user.userAddress} />
+        <Wert walletAddress={isValidLoginMobile? (walletLogin as any).walletAddress:user.userAddress} />
     )
 }
 

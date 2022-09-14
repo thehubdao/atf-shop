@@ -1,9 +1,11 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import persistedReducer from './wallet'
+import walletLoginReducer from './walletLogin'
 
 const store = configureStore({
     reducer: {
         account: persistedReducer,
+        walletLogin: walletLoginReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({ serializableCheck: false }),
