@@ -11,7 +11,7 @@ module.exports = {
         TOKEN_CONTRACT_ADDRESS: process.env.TOKEN_CONTRACT_ADDRESS,
         WERT_PRIVATE_KEY: process.env.WERT_PRIVATE_KEY,
         SWAP_CONTRACT_ADDRESS:process.env.SWAP_CONTRACT_ADDRESS,
-        ADMIN_USERNAME: process.env.ADMIN_USERNAME,
+        ADMIN_EMAIL: process.env.ADMIN_EMAIL,
         ADMIN_PASSWORD: process.env.ADMIN_PASSWORD
     },
     async redirects() {
