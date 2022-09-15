@@ -94,7 +94,7 @@ export const getUser = async (id_user: any, jwt: any) => {
 export const linkWallet = async (jwt: any, walletAddress: any) => {
         return (
             await axios.put(
-                `https://atf-test.backendboyz.repl.co/api/user/update`,
+                `/api/user/update`,
                 { walletAddress },
                 {
                     headers: {

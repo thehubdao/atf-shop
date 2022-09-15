@@ -100,6 +100,10 @@ module.exports = {
                 destination:
                     'https://atf-test.backendboyz.repl.co/api/getATFBalance',
             },
+            {
+                source: '/api/user/update',
+                destination: 'https://atf-test.backendboyz.repl.co/api/user/update',
+            }
         ]
     },
 }
