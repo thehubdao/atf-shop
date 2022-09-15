@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { NetworkType } from '@airgap/beacon-sdk'
 import storage from 'redux-persist/lib/storage'
 const wallet_instance = getWalletInstance()
+
 export const connectWallet = () => {
 
     return async (dispatch: any) => {

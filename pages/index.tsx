@@ -78,11 +78,12 @@ const Home: NextPage = () => {
                         isValidLogin: true,
                         token:options?.token
                     }
-                } else {
+                }else {
                     console.log("User hasn't wallet")
                     //3. If user doesn't have a wallet -> connect wallet page
                     walletLogin = {
                         walletAddress,
+                        token:options?.token,
                         isValidLogin: false,
                     }
                 }

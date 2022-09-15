@@ -79,14 +79,30 @@ export const checkJWT = async (jwt: any) => {
     }
 }
 
-export const getUser = async (id_user: any,jwt:any) => {
+export const getUser = async (id_user: any, jwt: any) => {
     if (id_user)
-        return (await axios.get(`/api/get-users?user_id=${id_user}&email=`,{
-            headers: {
-                Authorization: `Bearer ${jwt}`,
-            },
-        })).data
+        return (
+            await axios.get(`/api/get-users?user_id=${id_user}&email=`, {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+        ).data
     else return {}
+}
+
+export const linkWallet = async (jwt: any, wallet: any) => {
+        return (
+            await axios.put(
+                `https://atf-test.backendboyz.repl.co/api/user/update`,
+                { wallet },
+                {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                }
+            )
+        ).data
 }
 export const isWeb3 = async (user: any) => {
     if ((window as any)?.walletLogin?.isValidLogin) return true
