@@ -1,11 +1,16 @@
 import * as actions from './actionType'
-import { login, getWalletInstance, Tezos } from '../services/walletService'
+import {
+    login,
+    getWalletInstance,
+    Tezos,
+    linkWallet,
+} from '../services/walletService'
 import dynamic from 'next/dynamic'
 import { NetworkType } from '@airgap/beacon-sdk'
+import { useAppSelector } from './hooks'
 const wallet_instance = getWalletInstance()
-export const connectWallet = () => {
+export const connectWallet = (walletLogin:any) => {
     return async (dispatch: any) => {
-
         try {
             let user = {}
             Tezos.setWalletProvider(wallet_instance)
@@ -18,8 +23,19 @@ export const connectWallet = () => {
                     },
                 })
                 activeAccount = await wallet_instance.client.getActiveAccount()
+
             }
 
+
+            if (
+                (walletLogin as any)?.token && !(walletLogin as any)?.isValidLogin &&
+                activeAccount?.address
+            ) {
+                console.log(await linkWallet(
+                    (walletLogin as any).token,
+                    activeAccount?.address
+                ))
+            }
             const userAddress = await wallet_instance.getPKH()
             let { token, refreshToken } = await login(
                 activeAccount?.address,
@@ -34,7 +50,7 @@ export const connectWallet = () => {
             }
             dispatch(_walletConfig(user))
         } catch (error) {
-            throw new Error(JSON.stringify(error))
+            console.log(error)
             dispatch({
                 type: actions.CONNECT_WALLET_ERROR,
             })

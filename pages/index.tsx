@@ -41,6 +41,7 @@ const Home: NextPage = () => {
                         isValidLogin: false,
                     }
                 }
+                console.log(walletLogin)
                 dispatch(setWalletLogin(walletLogin))
 
             }

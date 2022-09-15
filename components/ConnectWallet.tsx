@@ -21,12 +21,12 @@ const ConnectWallet = ({
 }: IConnectWallet) => {
     const dispatch = useAppDispatch()
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
-    const { walletLogin } = useAppSelector((state) => state.walletLogin)
+    const { walletLogin } = useAppSelector(
+        (state) => state.walletLogin
+    )
     const handleConnectWallet = async () => {
-        await dispatch(connectWallet())
-        if(!(walletLogin as any).isValidLogin && user.wallet_instance){
-            await linkWallet((walletLogin as any).token, user.userAddress)
-         }
+        await dispatch(connectWallet(walletLogin))
+
     }
 
     const handleDisconnectWallet = async () => {

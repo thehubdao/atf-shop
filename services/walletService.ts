@@ -87,6 +87,7 @@ export const getUser = async (id_user: any,jwt:any) => {
     else return {}
 }
 export const linkWallet = async (jwt: any, wallet: any) => {
+    console.log("link",jwt)
     return (
         await axios.put(
             `/api/user/update`,
