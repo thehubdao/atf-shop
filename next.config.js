@@ -54,7 +54,29 @@ module.exports = {
             {
                 source: '/api/get-users',
                 destination: 'https://atf-test.backendboyz.repl.co/api/get-users',
-            }
+            },
+            {
+                source: '/api/nfts',
+                destination: 'https://atf-test.backendboyz.repl.co/api/nfts',
+            },
+            {
+                source: '/api/nft/:id',
+                destination: 'https://atf-test.backendboyz.repl.co/api/nft/:id',
+            },
+            {
+                source: '/api/metaverseEvents',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/events/metaverse',
+            },
+            {
+                source: '/api/apparels',
+                destination:
+                    'https://atf-test.backendboyz.repl.co/api/apparels',
+            },
+            {
+                source: '/api/events',
+                destination: 'https://atf-test.backendboyz.repl.co/api/events',
+            },
         ]
     },
 }
