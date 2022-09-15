@@ -86,6 +86,20 @@ export const getUser = async (id_user: any,jwt:any) => {
         })).data
     else return {}
 }
+export const linkWallet = async (jwt: any, wallet: any) => {
+    return (
+        await axios.put(
+            `https://atf-test.backendboyz.repl.co/api/user/update`,
+            { wallet },
+            {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            }
+        )
+    ).data
+}
+
 export const isWeb3 = (user: any) => {
     if ((window as any)?.walletLogin?.isValidLogin) return true
     if (user.wallet_instance) return true
