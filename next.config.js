@@ -44,6 +44,10 @@ module.exports = {
             {
                 source: '/api/validate-token',
                 destination: 'https://atf-test.backendboyz.repl.co/api/validate-token',
+            },
+            {
+                source: '/api/user/update',
+                destination: 'https://atf-test.backendboyz.repl.co/api/user/update',
             }
         ]
     },
