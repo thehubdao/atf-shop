@@ -50,6 +50,10 @@ module.exports = {
             {
                 source: '/api/user/update',
                 destination: 'https://atf-test.backendboyz.repl.co/api/user/update',
+            },
+            {
+                source: '/api/get-users',
+                destination: 'https://atf-test.backendboyz.repl.co/api/get-users',
             }
         ]
     },
