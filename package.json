@@ -5,10 +5,8 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "postbuild:old": "next-sitemap",
         "start": "next start",
-        "lint": "next lint",
-        "postbuild": "cross-env next-sitemap --config next-sitemap.js"
+        "lint": "next lint"
     },
     "dependencies": {
         "@airgap/beacon-sdk": "^3.1.1",
