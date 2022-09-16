@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../state/hooks'
-import { BeaconWallet } from '@taquito/beacon-wallet'
 import {
     connectWallet,
     disconnectWallet,
@@ -20,9 +19,9 @@ const ConnectWallet = ({
     containerStyle,
 }: IConnectWallet) => {
     const dispatch = useAppDispatch()
-    const { user }: any = useAppSelector((state) => state.account.walletConfig)
+    const { user }: any = useAppSelector((state:any) => state.account.walletConfig)
     const { walletLogin } = useAppSelector(
-        (state) => state.walletLogin
+        (state:any) => state.walletLogin
     )
     const handleConnectWallet = async () => {
         await dispatch(connectWallet(walletLogin))
