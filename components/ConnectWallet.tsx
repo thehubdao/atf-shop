@@ -31,7 +31,7 @@ const ConnectWallet = ({
     const handleDisconnectWallet = async () => {
         await dispatch(disconnectWallet())
     }
-
+    
     return (
         <>
             <div>{user?.walletAddress}</div>
