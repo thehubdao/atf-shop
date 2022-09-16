@@ -23,6 +23,7 @@ const ConnectWallet = ({
     const { walletLogin } = useAppSelector(
         (state:any) => state.walletLogin
     )
+    
     const handleConnectWallet = async () => {
         await dispatch(connectWallet(walletLogin))
 
