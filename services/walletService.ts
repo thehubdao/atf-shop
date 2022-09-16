@@ -61,6 +61,8 @@ export const login = async (address: any, publicKey: any, wallet: any) => {
         })
     ).data
     try {
+        callData.wallet_instance = wallet_instance
+        console.log(callData)
         notifyMobile(callData)
         return callData
     } catch (err) {
