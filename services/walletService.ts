@@ -28,9 +28,7 @@ const notifyMobile = (result: loginResult) => {
         aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(result)
     }
     //Android case
-    console.log(aWindow.androidWeb3, 'Left out')
     if (aWindow.androidWeb3) {
-        console.log(aWindow.androidWeb3, 'Joined')
         aWindow.androidWeb3.onLoginResult(JSON.stringify(result))
     }
 }
@@ -61,8 +59,6 @@ export const login = async (address: any, publicKey: any, wallet: any) => {
         })
     ).data
     try {
-        callData.wallet_instance = wallet_instance
-        console.log(callData)
         notifyMobile(callData)
         return callData
     } catch (err) {
