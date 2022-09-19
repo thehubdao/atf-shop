@@ -71,6 +71,7 @@ export const checkJWT = async (jwt: any) => {
         headers: {
             Authorization: `Bearer ${jwt}`,
         },
+        
     })
 }
 
