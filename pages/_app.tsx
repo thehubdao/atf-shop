@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 }
             }
         })()
+        console.log("CONSOLE SHOWING")
     },[])
 
     return (
