@@ -17,26 +17,13 @@ function MyApp({ Component, pageProps }: AppProps) {
             console.log = function (message) {
                 let params = arguments
                 if (typeof message == 'object') {
-                    ;(logger as any).innerHTML +=
-                        JSON && JSON.stringify
-                            ? JSON.stringify(message)
-                            : message
-                    ;(params as any).forEach((el: any) => {
-                        ;(logger as any).innerHTML +=
-                            ', ' +
-                            (JSON && JSON.stringify ? JSON.stringify(el) : el)
-                    })
-                    ;(logger as any).innerHTML += '<br />'
+                            (logger as any).innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
                 } else {
-                    ;(logger as any).innerHTML += message
-                    ;(params as any).forEach((el: any) => {
-                        ;(logger as any).innerHTML += ', ' + el
-                    })
-                    ;(logger as any).innerHTML += '<br />'
+                    (logger as any).innerHTML += message + '<br />';
                 }
             }
         })()
-    })
+    },[])
 
     return (
         <Provider store={store}>
