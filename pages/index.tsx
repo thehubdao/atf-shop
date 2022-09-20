@@ -16,7 +16,9 @@ const Home: NextPage = () => {
     useEffect(() => {
         window.addEventListener('message', async (ev) => {
             let { options } = ev.data
+            console.log(options)
             if (options) {
+                console.log(options?.token)
                 let { user_id } = await checkJWT(options?.token)
                 let jwt = await axios.post('api/login', {
                   email: process.env.ADMIN_EMAIL,
