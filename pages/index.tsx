@@ -10,10 +10,21 @@ const WertWrap = dynamic(() => import('../components/WertWrap'), {
     ssr: false,
 }) as any
 
+const notifyMobile = (msg: any) => {
+    const aWindow: any = window as any
+    if (aWindow.webkit?.messageHandlers?.web3LoginHandler) {
+        aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(msg)
+    }
+    if (aWindow.androidWeb3) {
+        aWindow.androidWeb3.onLoginResult(JSON.stringify(msg))
+    }
+}
+
 const Home: NextPage = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
+        notifyMobile("LOADED")
         window.addEventListener('message', async (ev) => {
             let { options } = ev.data
             console.log(options)

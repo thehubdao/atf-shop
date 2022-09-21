@@ -22,15 +22,7 @@ export const getWalletInstance = () => {
     return wallet_instance
 }
 
-const notifyMobile = (result: loginResult) => {
-    const aWindow: any = window as any
-    if (aWindow.webkit?.messageHandlers?.web3LoginHandler) {
-        aWindow.webkit?.messageHandlers?.web3LoginHandler.postMessage(result)
-    }
-    if (aWindow.androidWeb3) {
-        aWindow.androidWeb3.onLoginResult(JSON.stringify(result))
-    }
-}
+
 
 export const getNonce = async (address: any) => {
     return (await axios.post('/api/loginGetNonce', { address })).data
