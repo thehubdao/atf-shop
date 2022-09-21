@@ -60,6 +60,7 @@ const Home: NextPage = () => {
         })
     }, [])
     return <WertWrap/>
+    
 }
 
 export default Home
