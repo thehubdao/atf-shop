@@ -10,7 +10,9 @@ import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
-    useEffect(() => {
+/*  Visual console log
+
+useEffect(() => {
         ;(function () {
             var old = console.log
             var logger = document.getElementById('log')
@@ -24,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             }
         })()
         console.log("CONSOLE SHOWING")
-    },[])
+    },[]) */
 
     return (
         <Provider store={store}>
