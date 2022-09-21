@@ -23,7 +23,6 @@ const notifyMobile = (msg: any) => {
 const Home: NextPage = () => {
     const dispatch = useAppDispatch()
 
-    
     useEffect(() => {
         notifyMobile("LOADED")
         window.addEventListener('message', async (ev) => {
