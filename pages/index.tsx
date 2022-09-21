@@ -19,7 +19,6 @@ const notifyMobile = (msg: any) => {
         aWindow.androidWeb3.onLoginResult(JSON.stringify(msg))
     }
 }
-
 const Home: NextPage = () => {
     const dispatch = useAppDispatch()
 
