@@ -20,8 +20,7 @@ const WertWrap = () => {
         web3Check()
     }, [user, walletLogin])
 
-    return !user.wallet_instance && !isValidLoginMobile ? (
-        <div className="font-jost w-[70%] m-auto text-center my-10">
+    return <div className="font-jost w-[70%] m-auto text-center my-10">
             <p className="font-bold">Connect Web3 Wallet</p>
             <p>A connected Web3 wallet is needed to purchase ATF tokens.</p>
             <div className="flex flex-col mt-10 font-bold">
@@ -31,9 +30,7 @@ const WertWrap = () => {
                 />
             </div>
         </div>
-    ) : (
-        <Wert walletAddress={isValidLoginMobile? (walletLogin as any).walletAddress:user.userAddress} />
-    )
+    
 }
 
 export default WertWrap
