@@ -5,7 +5,7 @@ import {
     disconnectWallet,
     _walletConfig,
 } from '../state/walletActions'
-import { linkWallet } from '../services/walletService'
+
 
 interface IConnectWallet {
     buttonStyle: string
