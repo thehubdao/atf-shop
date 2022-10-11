@@ -62,7 +62,7 @@ const Toolbar = ({ dark }: any) => {
                                 {`${balances.atfBalance} ATF`}
                             </p>
                             <Modal
-                                title="Buy ATF Tokens"
+                                title="Get ATF Token"
                                 body={modalBody}
                                 buttonText="+"
                                 buttonClassName="bg-[#ffe000] text-black active:bg-yellow font-bold uppercase text-sm px-2 py-1 rounded-full shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
@@ -83,7 +83,7 @@ const Toolbar = ({ dark }: any) => {
                     </div>
                 ) : (
                     <Modal
-                        title="Buy ATF Tokens"
+                        title="Get ATF Token"
                         body={modalBody}
                         buttonText="Buy tokens"
                         buttonClassName="bg-[#ffe000] text-black active:bg-yellow font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
