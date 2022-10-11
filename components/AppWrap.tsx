@@ -1,7 +1,10 @@
 import type { AppProps } from 'next/app'
 import Layout from './Layout'
-import ConnectWallet from './ConnectWallet'
+const ConnectWallet = dynamic(() => import('./ConnectWallet'), {
+    ssr: false,
+}) as any
 import { useAppSelector } from '../state/hooks'
+import dynamic from 'next/dynamic'
 
 export function AppWrap({ Component, pageProps }: any) {
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
