@@ -1,10 +1,11 @@
 import * as actions from './actionType'
-import { login, getWalletInstance, Tezos } from '../services/walletService'
+import { login, getWalletInstance, Tezos, linkWallet } from '../services/walletService'
 import dynamic from 'next/dynamic'
 import { NetworkType } from '@airgap/beacon-sdk'
 import storage from 'redux-persist/lib/storage'
 const wallet_instance = getWalletInstance()
-export const connectWallet = () => {
+
+export const connectWallet = (walletLogin:any) => {
 
     return async (dispatch: any) => {
         console.log(await storage.getItem('root'),"STORAGE")
@@ -20,6 +21,15 @@ export const connectWallet = () => {
                     },
                 })
                 activeAccount = await wallet_instance.client.getActiveAccount()
+            }
+            if (
+                (walletLogin as any)?.token && !(walletLogin as any)?.isValidLogin &&
+                activeAccount?.address
+            ) {
+                console.log(await linkWallet(
+                    (walletLogin as any).token,
+                    activeAccount?.address
+                ))
             }
             const userAddress = await wallet_instance.getPKH()
             let { token, refreshToken } = await login(

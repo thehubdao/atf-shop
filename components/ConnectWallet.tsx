@@ -6,6 +6,7 @@ import {
     disconnectWallet,
     _walletConfig,
 } from '../state/walletActions'
+import { linkWallet } from '../services/walletService'
 
 interface IConnectWallet {
     buttonStyle: string
@@ -22,9 +23,12 @@ const ConnectWallet = ({
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
     const [wallet, setWallet] = useState<null | BeaconWallet>(null)
     const [Tezos, setTezos] = useState(null)
-
+    const { walletLogin } = useAppSelector(
+        (state) => state.walletLogin
+    )
     const handleConnectWallet = async () => {
-        await dispatch(connectWallet())
+        await dispatch(connectWallet(walletLogin))
+
     }
 
     const handleDisconnectWallet = async () => {

@@ -2,7 +2,6 @@ import type { AppProps } from 'next/app'
 import { Router } from 'next/router'
 import { Provider } from 'react-redux'
 import store from '../state/store'
-import { persistor } from '../state/store'
 import Layout from '../components/Layout'
 
 import '../styles/globals.css'
@@ -20,11 +19,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <Provider store={store}>
-                <PersistGate persistor={persistor}>
+                {/* <PersistGate persistor={persistor}> */}
                     <Layout>
                         <Component {...pageProps} />
                     </Layout>
-                </PersistGate>
+              {/*   </PersistGate> */}
             </Provider>
         </>
     )
