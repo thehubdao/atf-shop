@@ -11,19 +11,17 @@ import { checkJWT, getUser } from '../services/walletService'
 import Script from 'next/script'
 import { useEffect } from 'react'
 import axios from 'axios'
-import { useAppDispatch } from '../state/hooks'
+import { useAppDispatch, useAppSelector } from '../state/hooks'
 import { setWalletLogin } from '../state/walletLogin'
 import { PersistGate } from 'redux-persist/integration/react'
+import ConnectWallet from '../components/ConnectWallet'
+import { AppWrap } from '../components/AppWrap'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <Provider store={store}>
-                {/* <PersistGate persistor={persistor}> */}
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
-              {/*   </PersistGate> */}
+                <AppWrap Component={Component} pageProps={pageProps} />
             </Provider>
         </>
     )

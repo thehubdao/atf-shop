@@ -16,6 +16,7 @@ import { setNFTs, setApparel, setEvents, setMetaverseEvents } from "../state/dat
 import { useAppDispatch, useAppSelector } from '../state/hooks'
 import { checkJWT, getUser } from '../services/walletService'
 import { setWalletLogin } from '../state/walletLogin'
+import ConnectWallet from '../components/ConnectWallet'
 
 const Home: NextPage = () => {
     const dispatch = useAppDispatch()
@@ -93,6 +94,7 @@ const Home: NextPage = () => {
             }
         })
     }, [])
+
 
     return (
         <>
