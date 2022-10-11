@@ -46,63 +46,63 @@ module.exports = {
             {
                 source: '/api/loginGetNonce',
                 destination:
-                    'https://atf-test.backendboyz.repl.co/api/loginGetNonce',
+                    'https://prod.alltokenfootball.com/api/loginGetNonce',
             },
             {
                 source: '/api/loginWallet',
                 destination:
-                    'https://atf-test.backendboyz.repl.co/api/loginWallet',
+                    'https://prod.alltokenfootball.com/api/loginWallet',
             },
             {
                 source: '/api/validate-token',
                 destination:
-                    'https://atf-test.backendboyz.repl.co/api/validate-token',
+                    'https://prod.alltokenfootball.com/api/validate-token',
             },
             {
                 source: '/api/nfts',
-                destination: 'https://atf-test.backendboyz.repl.co/api/nfts',
+                destination: 'https://prod.alltokenfootball.com/api/nfts',
             },
             {
                 source: '/api/nft/:id',
-                destination: 'https://atf-test.backendboyz.repl.co/api/nft/:id',
+                destination: 'https://prod.alltokenfootball.com/api/nft/:id',
             },
             {
                 source: '/api/metaverseEvents',
                 destination:
-                    'https://atf-test.backendboyz.repl.co/api/events/metaverse',
+                    'https://prod.alltokenfootball.com/api/events/metaverse',
             },
             {
                 source: '/api/apparels',
                 destination:
-                    'https://atf-test.backendboyz.repl.co/api/apparels',
+                    'https://prod.alltokenfootball.com/api/apparels',
             },
             {
                 source: '/api/events',
-                destination: 'https://atf-test.backendboyz.repl.co/api/events',
+                destination: 'https://prod.alltokenfootball.com/api/events',
             },
             {
                 source: '/api/get-users',
                 destination:
-                    'https://atf-test.backendboyz.repl.co/api/get-users',
+                    'https://prod.alltokenfootball.com/api/get-users',
             },
             {
                 source: '/api/login',
                 destination:
-                    'https://atf-test.backendboyz.repl.co/api/login',
+                    'https://prod.alltokenfootball.com/api/login',
             },
             {
                 source: '/api/getAPBalance',
                 destination:
-                    'https://atf-test.backendboyz.repl.co/api/getAPBalance',
+                    'https://prod.alltokenfootball.com/api/getAPBalance',
             },
             {
                 source: '/api/getATFBalance',
                 destination:
-                    'https://atf-test.backendboyz.repl.co/api/getATFBalance',
+                    'https://prod.alltokenfootball.com/api/getATFBalance',
             },
             {
                 source: '/api/user/update',
-                destination: 'https://atf-test.backendboyz.repl.co/api/user/update',
+                destination: 'https://prod.alltokenfootball.com/api/user/update',
             }
         ]
     },
