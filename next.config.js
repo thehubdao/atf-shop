@@ -37,27 +37,27 @@ module.exports = {
         return [
             {
                 source: '/api/loginGetNonce',
-                destination: 'https://atf-test.backendboyz.repl.co/api/loginGetNonce',
+                destination: 'https://prod.alltokenfootball.com/api/loginGetNonce',
             },
             {
                 source: '/api/loginWallet',
-                destination: 'https://atf-test.backendboyz.repl.co/api/loginWallet',
+                destination: 'https://prod.alltokenfootball.com/api/loginWallet',
             },
             {
                 source: '/api/validate-token',
-                destination: 'https://atf-test.backendboyz.repl.co/api/validate-token',
+                destination: 'https://prod.alltokenfootball.com/api/validate-token',
             },
             {
                 source: '/api/user/update',
-                destination: 'https://atf-test.backendboyz.repl.co/api/user/update',
+                destination: 'https://prod.alltokenfootball.com/api/user/update',
             },
             {
                 source: '/api/login',
-                destination: 'https://atf-test.backendboyz.repl.co/api/login',
+                destination: 'https://prod.alltokenfootball.com/api/login',
             },
             {
                 source: '/api/get-users',
-                destination: 'https://atf-test.backendboyz.repl.co/api/get-users',
+                destination: 'https://prod.alltokenfootball.com/api/get-users',
             }
         ]
     },
