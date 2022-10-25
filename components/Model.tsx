@@ -8,11 +8,11 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import React, { useRef } from "react";
 // import { useGLTF } from "@react-three/drei";
 
-// export function Model(props: any) {
+// export default function Model(props: any) {
 //   const { nodes, materials } = useGLTF("/images/test.glb");
 //   return (
 //     <group {...props} dispose={null} >
-//       <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+//       <group rotation={[Math.PI / 2, 0, 0]} scale={0.05}>
 //         <primitive object={nodes.Avatar_Hips} />
 //         <skinnedMesh
 //           geometry={nodes.Mesh074.geometry}
@@ -32,10 +32,10 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // useGLTF.preload("/images/test.glb");
 
 export default function Model () {
-    const gltf = useLoader(GLTFLoader, "/images/test3.glb");
+    const gltf = useLoader(GLTFLoader, "/images/test6.glb");
     return (
       <>
-        <primitive object={gltf.scene} scale={1.5} />
+        <primitive object={gltf.scene} scale={2}/>
       </>
     );
   };

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Suspense } from 'react'
 import Link from 'next/link'
 import { useLoader, Canvas } from '@react-three/fiber'
-import {useGLTF} from "@react-three/drei"
+import { useGLTF } from "@react-three/drei"
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as THREE from 'three'
 import Model from '../components/Model'
@@ -40,14 +40,12 @@ const Test: NextPage = () => {
                     </Link>
                 </div>
 
-                <div className="w-screen h-screen bg-red-500">
-
-                    <Canvas className=''>
+                <div className=" w-96 h-96 bg-red-500 flex items-center justify-center">
+                    <Canvas>
                         <Suspense fallback={null}>
                             <Model />
                         </Suspense>
                     </Canvas>
-
                 </div>
 
                 <div className="flex justify-between items-end pb-3 mt-10">
