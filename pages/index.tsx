@@ -136,8 +136,7 @@ const Home: NextPage = () => {
                 </div>
 
                 <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
-                    {products
-                        .filter((product) => product.category === 'apparel')
+                    {apparel
                         .map((product:any) => (
                             <ShopCard
                                 key={product.id}
