@@ -204,24 +204,7 @@ const Home: NextPage = () => {
                         ))}
                 </div>
 
-                <div className="flex justify-between items-end pb-3 mt-10">
-                    <p className="text-xl">Apparels</p>
-                    <Link href="/apparel">
-                        <a className="text-gray-500 font-jost">See all</a>
-                    </Link>
-                </div>
 
-                <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
-                    {apparels
-                        .map((apparel:any) => (
-                            <ShopCard
-                                key={apparel.id_product}
-                                product={apparel}
-                                category="apparels"
-                                classes="min-w-[12rem]"
-                            />
-                        ))}
-                </div>
 
 {/*                 <div className="flex justify-between items-end pb-3 mt-10">
                     <p className="text-xl">Events</p>
