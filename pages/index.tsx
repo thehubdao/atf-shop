@@ -128,7 +128,7 @@ const Home: NextPage = () => {
 
                 <p className="font-bold text-3xl">Shop</p>
 
-{/*                 <div className="flex justify-between items-end pb-3 mt-10">
+                <div className="flex justify-between items-end pb-3 mt-10">
                     <p className="text-xl">Apparel</p>
                     <Link href="/apparel">
                         <a className="text-gray-500 font-jost">See all</a>
@@ -136,16 +136,16 @@ const Home: NextPage = () => {
                 </div>
 
                 <div className="flex space-x-5 overflow-x-auto no-scroll-bar max-w-full">
-                    {products
-                        .filter((product) => product.category === 'apparel')
+                    {apparel
                         .map((product:any) => (
                             <ShopCard
                                 key={product.id}
                                 product={product}
+                                category="apparel"
                                 classes="min-w-[12rem]"
                             />
                         ))}
-                </div> */}
+                </div>
 
                 <div className="flex justify-between items-end pb-3 mt-10">
                     <p className="text-xl">NFTs</p>
