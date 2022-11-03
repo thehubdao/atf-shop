@@ -5,6 +5,7 @@ const ConnectWallet = dynamic(() => import('./ConnectWallet'), {
 }) as any
 import { useAppSelector } from '../state/hooks'
 import dynamic from 'next/dynamic'
+import { getLinkedCheck } from '../services/commonService'
 
 export function AppWrap({ Component, pageProps }: any) {
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
@@ -21,6 +22,7 @@ export function AppWrap({ Component, pageProps }: any) {
                         <p>
                             A connected Web3 wallet is needed to enter the shop.
                         </p>
+                        {getLinkedCheck() && <p>You connected a wallet different from the one linked to your email, please connect the correct wallet</p>}
                         <div className="flex flex-col mt-10 font-bold">
                             <ConnectWallet
                                 buttonStyle="rounded-full mt-10 bg-[#020202] text-[#FDE100] p-4 cursor-pointer w-44 text-center font-medium self-center"

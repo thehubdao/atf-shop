@@ -1,14 +1,18 @@
 import * as actions from './actionType'
-import { login, getWalletInstance, Tezos, linkWallet } from '../services/walletService'
+import {
+    login,
+    getWalletInstance,
+    Tezos,
+    linkWallet,
+} from '../services/walletService'
 import dynamic from 'next/dynamic'
 import { NetworkType } from '@airgap/beacon-sdk'
 import storage from 'redux-persist/lib/storage'
 const wallet_instance = getWalletInstance()
 
-export const connectWallet = (walletLogin:any) => {
-
+export const connectWallet = (walletLogin: any) => {
     return async (dispatch: any) => {
-        console.log(await storage.getItem('root'),"STORAGE")
+        console.log(await storage.getItem('root'), 'STORAGE')
         try {
             let user = {}
             Tezos.setWalletProvider(wallet_instance)
@@ -23,13 +27,16 @@ export const connectWallet = (walletLogin:any) => {
                 activeAccount = await wallet_instance.client.getActiveAccount()
             }
             if (
-                (walletLogin as any)?.token && !(walletLogin as any)?.isValidLogin &&
+                (walletLogin as any)?.token &&
+                !(walletLogin as any)?.isValidLogin &&
                 activeAccount?.address
             ) {
-                console.log(await linkWallet(
-                    (walletLogin as any).token,
-                    activeAccount?.address
-                ))
+                console.log(
+                    await linkWallet(
+                        (walletLogin as any).token,
+                        activeAccount?.address
+                    )
+                )
             }
             const userAddress = await wallet_instance.getPKH()
             let { token, refreshToken } = await login(
@@ -62,9 +69,7 @@ export const _walletConfig = (user: any) => {
 
 export const disconnectWallet = () => {
     return async (dispatch: any) => {
-        dispatch({
-            type: actions.DISCONNECT_WALLET,
-        })
+        dispatch(_walletConfig({}))
         if (wallet_instance) {
             await wallet_instance.client.clearActiveAccount()
         }
