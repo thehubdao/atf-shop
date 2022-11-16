@@ -31,7 +31,8 @@ const BasketModalConfirm = ({ isWaiting, isConfirmed, isSuccesful, setIsWaiting,
         !isConfirmed ? (
           <>
             <p className='font-bold'>Confirm in-App Purchsae</p>
-            <p>Click confirm to proceed with your order 1640 credits will be discounted from your connected web3 wallet.</p>
+            <p>Click confirm to proceed with your order, this will redirect you to Temple wallet. 
+              After confirming the transaction come back to the shop, this process may take a moment.</p>
             <div className='flex flex-col mt-10'>
               <button
                 className="rounded-md my-3 bg-[#020202] text-white px-4 py-1 w-44 cursor-pointer text-center font-medium self-center"
