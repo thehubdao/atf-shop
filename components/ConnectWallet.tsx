@@ -8,6 +8,7 @@ import {
 } from '../state/walletActions'
 import { linkWallet } from '../services/walletService'
 import { setLinkedCheck } from '../services/commonService'
+import Popup from './general/Popup'
 
 interface IConnectWallet {
     buttonStyle: string
@@ -25,6 +26,7 @@ const ConnectWallet = ({
     const [wallet, setWallet] = useState<null | BeaconWallet>(null)
     const [Tezos, setTezos] = useState(null)
     const { walletLogin }: any = useAppSelector((state) => state.walletLogin)
+    const [isActive, setIsActive] = useState(false)
     const handleConnectWallet = async () => {
         await dispatch(connectWallet(walletLogin))
     }
@@ -46,11 +48,12 @@ const ConnectWallet = ({
         <>
             <div className={containerStyle}>
                 <div
-                    onClick={
+                    onClick={() => {
+                        setIsActive(true)
                         user.wallet_instance
-                            ? handleDisconnectWallet
-                            : handleConnectWallet
-                    }
+                            ? handleDisconnectWallet()
+                            : handleConnectWallet()
+                    }}
                     className={buttonStyle}
                 >
                     {user.wallet_instance
@@ -58,6 +61,21 @@ const ConnectWallet = ({
                         : connectText || 'Connect Wallet'}
                 </div>
             </div>
+            {isActive && (
+                <div className="rounded-full m-auto mt-10  p-4 w-44 cursor-pointer text-center font-medium self-center ">
+                    <Popup
+                        title={'Warning Note'}
+                        message="Please open your Wallet, press connect button and sign the required message. After signing come back to the shop, this may take a moment."
+                        buttonText="OK"
+                        onButtonClick={() => {
+                            setIsActive(false)
+                        }}
+                        onExit={() => {
+                            setIsActive(false)
+                        }}
+                    />
+                </div>
+            )}
         </>
     )
 }

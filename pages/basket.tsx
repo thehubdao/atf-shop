@@ -32,28 +32,51 @@ const Basket: NextPage = () => {
     const [isSuccesfulModal, setIsSuccesfulModal] = useState<boolean>(false)
     const [isWaitingModal, setIsWaitingModal] = useState<boolean>(true)
     const { walletLogin } = useAppSelector((state) => state.walletLogin)
+
+    const { nfts, events, metaverseEvents, apparel } = useAppSelector(state => state.data)
+    const allData = nfts.concat(events, metaverseEvents, apparel)
+
     useEffect(() => {
-        let getNfts = async () => {
-            let call = await axios.get('/api/nfts')
-            basketItems.forEach((item) => {
-                setBasketList((basketList) => {
-                    return [
-                        ...basketList,
-                        {
-                            ...call.data.products.filter((nft: any) => {
-                                return nft.id_product == item.id
-                            })[0],
-                            count: item.count,
-                        },
-                    ]
-                })
+        basketItems.forEach((item) => {
+            setBasketList((basketList) => {
+                return [
+                    ...basketList,
+                    {
+                        ...allData.filter((product: any) => {
+                            return product.id_product == item.id
+                        })[0],
+                        count: item.count,
+                    },
+                ]
             })
-        }
-        getNfts()
+        })
         return () => {
             setBasketList([])
         }
     }, [basketItems])
+
+    // useEffect(() => {
+    //     let getNfts = async () => {
+    //         let call = await axios.get('/api/nfts')
+    //         basketItems.forEach((item) => {
+    //             setBasketList((basketList) => {
+    //                 return [
+    //                     ...basketList,
+    //                     {
+    //                         ...call.data.products.filter((nft: any) => {
+    //                             return nft.id_product == item.id
+    //                         })[0],
+    //                         count: item.count,
+    //                     },
+    //                 ]
+    //             })
+    //         })
+    //     }
+    //     getNfts()
+    //     return () => {
+    //         setBasketList([])
+    //     }
+    // }, [basketItems])
 
     const calcTotalAP = () => {
         let totalAP: number = 0
