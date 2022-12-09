@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ProductData } from '../lib/types'
+import { useAppSelector } from '../state/hooks'
 
 interface ShopCardProps {
     product: ProductData,
@@ -8,6 +9,8 @@ interface ShopCardProps {
 }
 
 const ShopCard = ({ product, category, classes }: ShopCardProps) => {
+    const { user }: any = useAppSelector((state) => state.account.walletConfig)
+
     return (
         <Link href={`/detail?id=${product.id_product}&category=${category}`}>
             <a
@@ -37,13 +40,13 @@ const ShopCard = ({ product, category, classes }: ShopCardProps) => {
 
                 {product.category === 'apparel' && (
                     <div className="font-jost absolute bottom-16 z-10 bg-[#020202] rounded-xl text-[#FDE100] px-2 py-1 text-xs cursor-pointer">
-                        Buy digital twin
+                        {user.wallet_instance ? "Buy digital twin" : "Get digital twin"}
                     </div>
                 )}
 
                 {product.category === 'events' && (
                     <div className="font-jost absolute bottom-16 z-10 bg-[#020202] rounded-xl text-[#FDE100] px-2 py-1 text-xs cursor-pointer">
-                        Buy metaverse ticket
+                        {user.wallet_instance ? "Buy metaverse ticket" : "Get metaverse ticket"}
                     </div>
                 )}
 
