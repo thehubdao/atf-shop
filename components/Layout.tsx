@@ -8,18 +8,17 @@ import Profile from '../pages/profile'
 import { useAppSelector } from '../state/hooks'
 import Toolbar from './general/Toolbar'
 import Wert from './modalBodies/Wert'
+import { useRouter } from 'next/router'
 
 const Layout = ({ children }: any) => {
-         return (
+    const router = useRouter()
+    return (
         <>
             <div className="flex flex-col w-full relative">
-                <Toolbar />
-                <div className="w-full h-full relative">
-                    {children}
-                </div>
+                {router.route == '/login' || router.route == '/wert' ? <></> : <Toolbar />}
+                <div className="w-full h-full relative">{children}</div>
             </div>
-
-        </> 
+        </>
     )
 }
 

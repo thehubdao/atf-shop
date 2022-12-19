@@ -104,7 +104,7 @@ export const linkWallet = async (jwt: any, walletAddress: any) => {
             )
         ).data
 }
-export const isWeb3 = async (user: any) => {
+export const isWeb3 =  (user: any) => {
     if ((window as any)?.walletLogin?.isValidLogin) return true
     if (user.wallet_instance) return true
 
