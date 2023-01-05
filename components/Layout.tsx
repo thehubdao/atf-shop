@@ -15,7 +15,7 @@ const Layout = ({ children }: any) => {
     return (
         <>
             <div className="flex flex-col w-full relative">
-                {router.route == '/login' || router.route == '/wert' ? <></> : <Toolbar />}
+                {router.route == '/login' || router.route == '/wert' || router.route == '/' ? <></> : <Toolbar />}
                 <div className="w-full h-full relative">{children}</div>
             </div>
         </>

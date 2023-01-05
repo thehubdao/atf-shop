@@ -3,7 +3,6 @@ import { Router } from 'next/router'
 import { Provider } from 'react-redux'
 import store from '../state/store'
 import Layout from '../components/Layout'
-
 import '../styles/globals.css'
 
 import Head from 'next/head'
