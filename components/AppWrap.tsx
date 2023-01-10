@@ -6,6 +6,7 @@ const ConnectWallet = dynamic(() => import('./ConnectWallet'), {
 import { useAppSelector } from '../state/hooks'
 import dynamic from 'next/dynamic'
 import { getLinkedCheck } from '../services/commonService'
+import Home from '../pages'
 
 export function AppWrap({ Component, pageProps }: any) {
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
@@ -13,9 +14,9 @@ export function AppWrap({ Component, pageProps }: any) {
     return (
         <>
      {/* {!user.wallet_instance ? ( */}
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
+                    {/* <Layout> */}
+                        <Home />
+                    {/* </Layout> */}
                 {/* ) : (
                     <div className="font-jost w-[70%] m-auto text-center my-10">
                         <p className="font-bold">Connect Web3 Wallet</p>
