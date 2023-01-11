@@ -62,7 +62,7 @@ const ConnectWallet = ({
             </div>
             </div>
             <div className={containerStyle}>
-            <div>
+           { !user.wallet_instance && <div>
                 <div
                     onClick={() => {
                         user.wallet_instance
@@ -76,7 +76,7 @@ const ConnectWallet = ({
                         : connectText || 'Connect Web3Auth'}
                 </div>
             </div>
-            </div>
+            }</div>
 
             
             {isActive && (
