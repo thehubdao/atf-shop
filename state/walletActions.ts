@@ -14,8 +14,7 @@ import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
 const wallet_instance = getWalletInstance()
 
 export const connectWallet = (walletLogin: any) => {
-    /* const { isWeb3Auth } = walletLogin */
-    const isWeb3Auth = true
+    const { isWeb3Auth } = walletLogin 
     return async (dispatch: any) => {
         try {
             let user = {}
@@ -94,8 +93,7 @@ export const _walletConfig = (user: any) => {
 }
 
 export const disconnectWallet = (walletLogin: any) => {
-    /* const { isWeb3Auth } = walletLogin */
-    const isWeb3Auth = true
+    const { isWeb3Auth } = walletLogin 
     return async (dispatch: any) => {
         dispatch(_walletConfig({}))
         if (isWeb3Auth) {

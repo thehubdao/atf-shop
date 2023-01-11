@@ -44,7 +44,7 @@ const ConnectWallet = ({
 
     return (
         <>
-            (
+            <div className={containerStyle}>
             <div>
                 <div
                     onClick={() => {
@@ -60,7 +60,9 @@ const ConnectWallet = ({
                         : connectText || 'Connect Wallet'}
                 </div>
             </div>
-            )
+            </div>
+
+            
             {isActive && (
                 <div className="rounded-full m-auto mt-10  p-4 w-44 cursor-pointer text-center font-medium self-center ">
                     <Popup
