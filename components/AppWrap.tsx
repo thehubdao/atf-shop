@@ -2,41 +2,14 @@ import Layout from './Layout'
 import { useAppSelector } from '../state/hooks'
 import dynamic from 'next/dynamic'
 import { getLinkedCheck } from '../services/commonService'
-import { Web3Auth } from '@web3auth/modal'
-import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
+
 import { useEffect } from 'react'
 
-/* const web3auth = new Web3Auth({
-    clientId: process.env.WEB3AUTH_PROJECT_ID!, // get it from Web3Auth Dashboard
-    web3AuthNetwork: 'cyan',
-    chainConfig: {
-        chainNamespace: 'other', // for all non EVM and SOLANA chains, use "other"
-        rpcTarget: 'https://ghostnet.smartpy.io',
-        displayName: 'Tezos',
-        blockExplorer: 'https://tzstats.com',
-        ticker: 'XTZ',
-        tickerName: 'Tezos',
-    },
-})
 
-const openloginAdapter = new OpenloginAdapter({
-    adapterSettings: {
-        uxMode: 'popup',
-    },
-})
 
-web3auth.configureAdapter(openloginAdapter) */
 export default function AppWrap({ Component, pageProps }: any) {
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
-    useEffect(() => {
-        const initModal = async () => {
-            try{
-                console.log("INIT MODAL")
-            /* await web3auth.initModal() */
-            }catch(err) {console.log(err)}
-        }
-        initModal()
-    },[])
+
     return (
         <>
      {/* {!user.wallet_instance ? ( */}
@@ -62,4 +35,3 @@ export default function AppWrap({ Component, pageProps }: any) {
     )
 }
 
-/* export {web3auth} */

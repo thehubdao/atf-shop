@@ -9,12 +9,15 @@ import {
 import { linkWallet } from '../services/walletService'
 import { setLinkedCheck } from '../services/commonService'
 import Popup from './general/Popup'
-
+import { Web3Auth } from '@web3auth/modal'
+import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
 interface IConnectWallet {
     buttonStyle: string
     containerStyle: string
     connectText?: string
 }
+
+let web3auth:any = null
 
 const ConnectWallet = ({
     connectText,
@@ -26,8 +29,8 @@ const ConnectWallet = ({
     const { walletLogin }: any = useAppSelector((state) => state.walletLogin)
     const [isActive, setIsActive] = useState(false)
     const handleConnectWallet = async (isWeb3Auth:boolean) => {
-        console.log(isWeb3Auth)
-        /* await dispatch(connectWallet(walletLogin,isWeb3Auth)) */
+
+        await dispatch(connectWallet(walletLogin,isWeb3Auth))
     }
 
     const handleDisconnectWallet = async () => {
@@ -43,6 +46,31 @@ const ConnectWallet = ({
         }
     }, [walletLogin])
 
+    const initModal= async () => {
+        const _web3auth = new Web3Auth({
+        clientId: process.env.WEB3AUTH_PROJECT_ID!, // get it from Web3Auth Dashboard
+        web3AuthNetwork: 'cyan',
+        chainConfig: {
+            chainNamespace: 'other', // for all non EVM and SOLANA chains, use "other"
+            rpcTarget: 'https://ghostnet.smartpy.io',
+            displayName: 'Tezos',
+            blockExplorer: 'https://tzstats.com',
+            ticker: 'XTZ',
+            tickerName: 'Tezos',
+        },
+    })
+    
+    const openloginAdapter = new OpenloginAdapter({
+        adapterSettings: {
+            uxMode: 'popup',
+        },
+    })
+    
+    _web3auth.configureAdapter(openloginAdapter)
+    await _web3auth.initModal()
+    web3auth = _web3auth
+    console.log(web3auth)
+}
     return (
         <>
             <div className={containerStyle}>
@@ -65,7 +93,8 @@ const ConnectWallet = ({
             <div className={containerStyle}>
             <div>
                 <div
-                    onClick={() => {
+                    onClick={async () => {
+                        await initModal()
                         user.wallet_instance
                             ? handleDisconnectWallet()
                             : handleConnectWallet(true)
@@ -98,5 +127,7 @@ const ConnectWallet = ({
         </>
     )
 }
+
+export { web3auth}
 
 export default ConnectWallet
