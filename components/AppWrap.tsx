@@ -62,4 +62,4 @@ export default function AppWrap({ Component, pageProps }: any) {
     )
 }
 
-export {web3auth}
+/* export {web3auth} */
