@@ -1,7 +1,4 @@
 import Layout from './Layout'
-const ConnectWallet = dynamic(() => import('./ConnectWallet'), {
-    ssr: false,
-}) as any
 import { useAppSelector } from '../state/hooks'
 import dynamic from 'next/dynamic'
 import { getLinkedCheck } from '../services/commonService'
@@ -9,7 +6,7 @@ import { Web3Auth } from '@web3auth/modal'
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
 import { useEffect } from 'react'
 
-const web3auth = new Web3Auth({
+/* const web3auth = new Web3Auth({
     clientId: process.env.WEB3AUTH_PROJECT_ID!, // get it from Web3Auth Dashboard
     web3AuthNetwork: 'cyan',
     chainConfig: {
@@ -28,13 +25,14 @@ const openloginAdapter = new OpenloginAdapter({
     },
 })
 
-web3auth.configureAdapter(openloginAdapter)
+web3auth.configureAdapter(openloginAdapter) */
 export default function AppWrap({ Component, pageProps }: any) {
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
     useEffect(() => {
         const initModal = async () => {
             try{
-            await web3auth.initModal()
+                console.log("INIT MODAL")
+            /* await web3auth.initModal() */
             }catch(err) {console.log(err)}
         }
         initModal()
