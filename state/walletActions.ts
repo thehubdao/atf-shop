@@ -8,7 +8,7 @@ import {
 import dynamic from 'next/dynamic'
 import { NetworkType } from '@airgap/beacon-sdk'
 import storage from 'redux-persist/lib/storage'
-import { web3auth } from '../components/ConnectWallet'
+import { web3auth } from '../components/AppWrap'
 import { hex2buf } from '@taquito/utils'
 import { SafeEventEmitterProvider, WALLET_ADAPTER_TYPE } from '@web3auth/base'
 const tezosCrypto = require('@tezos-core-tools/crypto-utils');
