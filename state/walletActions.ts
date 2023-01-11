@@ -8,7 +8,7 @@ import {
 import dynamic from 'next/dynamic'
 import { NetworkType } from '@airgap/beacon-sdk'
 import storage from 'redux-persist/lib/storage'
-import { web3auth } from '../components/AppWrap'
+/* import { web3auth } from '../components/AppWrap' */
 import { hex2buf } from '@taquito/utils'
 import { SafeEventEmitterProvider, WALLET_ADAPTER_TYPE } from '@web3auth/base'
 const tezosCrypto = require('@tezos-core-tools/crypto-utils');
@@ -16,6 +16,7 @@ const tezosCrypto = require('@tezos-core-tools/crypto-utils');
 const wallet_instance = getWalletInstance()
 
 export const connectWallet = (walletLogin: any, isWeb3Auth: boolean) => {
+    const web3Auth = isWeb3Auth
     return async (dispatch: any) => {
         try {
             let user = {}
@@ -23,7 +24,7 @@ export const connectWallet = (walletLogin: any, isWeb3Auth: boolean) => {
             let userAddress: any
 
             if (isWeb3Auth) {
-                const provider: SafeEventEmitterProvider =
+/*                 const provider: SafeEventEmitterProvider =
                     (await web3auth.connect()) as SafeEventEmitterProvider
 
                 const privateKey = (await provider.request({
@@ -38,7 +39,7 @@ export const connectWallet = (walletLogin: any, isWeb3Auth: boolean) => {
                     publicKey: keyPair.pk,
                     sk: keyPair.sk,
                 }
-                userAddress = activeAccount.address
+                userAddress = activeAccount.address */
             } else {
                 Tezos.setWalletProvider(wallet_instance)
                 activeAccount = await wallet_instance.client.getActiveAccount()
@@ -68,7 +69,7 @@ export const connectWallet = (walletLogin: any, isWeb3Auth: boolean) => {
             let { token, refreshToken } = await login(
                 activeAccount?.address,
                 activeAccount?.publicKey,
-                isWeb3Auth ? web3auth : wallet_instance,
+                /* isWeb3Auth ? web3auth : */ wallet_instance,
                 activeAccount,
                 isWeb3Auth
             )
@@ -100,7 +101,7 @@ export const disconnectWallet = (walletLogin: any) => {
     return async (dispatch: any) => {
         dispatch(_walletConfig({}))
         if (isWeb3Auth) {
-            web3auth.logout()
+            /* web3auth.logout() */
         } else if (wallet_instance) {
             await wallet_instance.client.clearActiveAccount()
         }
