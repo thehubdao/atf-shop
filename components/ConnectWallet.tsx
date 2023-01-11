@@ -26,7 +26,8 @@ const ConnectWallet = ({
     const { walletLogin }: any = useAppSelector((state) => state.walletLogin)
     const [isActive, setIsActive] = useState(false)
     const handleConnectWallet = async (isWeb3Auth:boolean) => {
-        await dispatch(connectWallet(walletLogin,isWeb3Auth))
+        console.log(isWeb3Auth)
+        /* await dispatch(connectWallet(walletLogin,isWeb3Auth)) */
     }
 
     const handleDisconnectWallet = async () => {
