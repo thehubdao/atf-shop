@@ -1,7 +1,9 @@
 /** @type {import('next-sitemap').IConfig} */
 
-module.exports = {
-    siteUrl: 'https://www.metagamehub.io',
-    generateRobotsTxt: true, // (optional)
-    // ...other options
-  }
+const config ={
+  siteUrl: 'https://www.metagamehub.io',
+  generateRobotsTxt: true,
+  outDir: "./out"
+}
+
+module.exports = config;

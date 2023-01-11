@@ -44,7 +44,7 @@ const Apparel: NextPage = (data) => {
                 <p className='font-bold text-3xl mb-5'>Apparel</p>
 
                 <div className="grid grid-cols-2 place-items-center gap-5">
-                    {apparel.map(product => (
+                    {apparel.map((product:any) => (
                         <ShopCard key={product.id_product} product={product} category="apparel" classes="min-w-[10rem]" />
                     ))}
                 </div>

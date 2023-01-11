@@ -10,11 +10,12 @@ import { NetworkType } from '@airgap/beacon-sdk'
 import storage from 'redux-persist/lib/storage'
 import { web3auth } from '../components/AppWrap'
 import { hex2buf } from '@taquito/utils'
-import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
+import { SafeEventEmitterProvider, WALLET_ADAPTER_TYPE } from '@web3auth/base'
+const tezosCrypto = require('@tezos-core-tools/crypto-utils');
+/* import * as tezosCrypto from '@tezos-core-tools/crypto-utils' */
 const wallet_instance = getWalletInstance()
 
-export const connectWallet = (walletLogin: any) => {
-    const { isWeb3Auth } = walletLogin 
+export const connectWallet = (walletLogin: any, isWeb3Auth: boolean) => {
     return async (dispatch: any) => {
         try {
             let user = {}
@@ -22,7 +23,9 @@ export const connectWallet = (walletLogin: any) => {
             let userAddress: any
 
             if (isWeb3Auth) {
-                const provider: any = await web3auth.connect()
+                const provider: SafeEventEmitterProvider =
+                    (await web3auth.connect()) as SafeEventEmitterProvider
+
                 const privateKey = (await provider.request({
                     method: 'private_key',
                 })) as string
@@ -93,7 +96,7 @@ export const _walletConfig = (user: any) => {
 }
 
 export const disconnectWallet = (walletLogin: any) => {
-    const { isWeb3Auth } = walletLogin 
+    const { isWeb3Auth } = walletLogin
     return async (dispatch: any) => {
         dispatch(_walletConfig({}))
         if (isWeb3Auth) {

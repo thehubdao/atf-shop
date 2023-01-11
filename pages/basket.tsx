@@ -38,13 +38,13 @@ const Basket: NextPage = () => {
 
     useEffect(() => {
         basketItems.forEach((item) => {
-            setBasketList((basketList) => {
+            setBasketList((basketList:any) => {
                 return [
                     ...basketList,
                     {
-                        ...allData.filter((product: any) => {
+/*                         ...allData.filter((product: any) => {
                             return product.id_product == item.id
-                        })[0],
+                        })[0], */
                         count: item.count,
                     },
                 ]

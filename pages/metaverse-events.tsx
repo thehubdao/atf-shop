@@ -44,7 +44,7 @@ const Events: NextPage = (data) => {
                 <p className='font-bold text-3xl mb-5'>Metaverse Events</p>
 
                 <div className="grid grid-cols-2 place-items-center gap-5">
-                    {metaverseEvents.map(product => (
+                    {metaverseEvents.map((product:any) => (
                         <ShopCard key={product.id_product} product={product} category="metaverseEvents" classes="min-w-[10rem]" />
                     ))}
                 </div>

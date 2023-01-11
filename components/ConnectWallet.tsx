@@ -25,8 +25,8 @@ const ConnectWallet = ({
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
     const { walletLogin }: any = useAppSelector((state) => state.walletLogin)
     const [isActive, setIsActive] = useState(false)
-    const handleConnectWallet = async () => {
-        await dispatch(connectWallet(walletLogin))
+    const handleConnectWallet = async (isWeb3Auth:boolean) => {
+        await dispatch(connectWallet(walletLogin,isWeb3Auth))
     }
 
     const handleDisconnectWallet = async () => {
@@ -48,16 +48,32 @@ const ConnectWallet = ({
             <div>
                 <div
                     onClick={() => {
-                        walletLogin?.isWeb3Auth ? null : setIsActive(true)
+                         setIsActive(true)
                         user.wallet_instance
                             ? handleDisconnectWallet()
-                            : handleConnectWallet()
+                            : handleConnectWallet(false)
                     }}
                     className={buttonStyle}
                 >
                     {user.wallet_instance
                         ? 'Disconnect Wallet'
                         : connectText || 'Connect Wallet'}
+                </div>
+            </div>
+            </div>
+            <div className={containerStyle}>
+            <div>
+                <div
+                    onClick={() => {
+                        user.wallet_instance
+                            ? handleDisconnectWallet()
+                            : handleConnectWallet(true)
+                    }}
+                    className={buttonStyle}
+                >
+                    {user.wallet_instance
+                        ? 'Disconnect Web3Auth'
+                        : connectText || 'Connect Web3Auth'}
                 </div>
             </div>
             </div>
