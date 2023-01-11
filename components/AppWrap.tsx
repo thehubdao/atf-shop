@@ -33,7 +33,9 @@ export default function AppWrap({ Component, pageProps }: any) {
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
     useEffect(() => {
         const initModal = async () => {
+            try{
             await web3auth.initModal()
+            }catch(err) {console.log(err)}
         }
         initModal()
     },[])
