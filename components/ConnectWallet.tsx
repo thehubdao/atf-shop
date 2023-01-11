@@ -23,8 +23,6 @@ const ConnectWallet = ({
 }: IConnectWallet) => {
     const dispatch = useAppDispatch()
     const { user }: any = useAppSelector((state) => state.account.walletConfig)
-    const [wallet, setWallet] = useState<null | BeaconWallet>(null)
-    const [Tezos, setTezos] = useState(null)
     const { walletLogin }: any = useAppSelector((state) => state.walletLogin)
     const [isActive, setIsActive] = useState(false)
     const handleConnectWallet = async () => {
@@ -32,7 +30,7 @@ const ConnectWallet = ({
     }
 
     const handleDisconnectWallet = async () => {
-        await dispatch(disconnectWallet())
+        await dispatch(disconnectWallet(walletLogin))
     }
 
     useEffect(() => {
@@ -46,10 +44,11 @@ const ConnectWallet = ({
 
     return (
         <>
-            <div className={containerStyle}>
+            (
+            <div>
                 <div
                     onClick={() => {
-                        setIsActive(true)
+                        walletLogin?.isWeb3Auth ? null : setIsActive(true)
                         user.wallet_instance
                             ? handleDisconnectWallet()
                             : handleConnectWallet()
@@ -61,6 +60,7 @@ const ConnectWallet = ({
                         : connectText || 'Connect Wallet'}
                 </div>
             </div>
+            )
             {isActive && (
                 <div className="rounded-full m-auto mt-10  p-4 w-44 cursor-pointer text-center font-medium self-center ">
                     <Popup

@@ -13,10 +13,17 @@ import axios from 'axios'
 import { useAppDispatch, useAppSelector } from '../state/hooks'
 import { setWalletLogin } from '../state/walletLogin'
 import { PersistGate } from 'redux-persist/integration/react'
-import ConnectWallet from '../components/ConnectWallet'
-import { AppWrap } from '../components/AppWrap'
+import dynamic from 'next/dynamic'
+
+
+const AppWrap = dynamic(() => import('../components/AppWrap') as any, {
+    ssr: false,
+}) as any
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+
+
     return (
         <>
             <Provider store={store}>
@@ -25,4 +32,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         </>
     )
 }
+
 export default MyApp
+

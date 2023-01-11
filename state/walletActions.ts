@@ -8,45 +8,71 @@ import {
 import dynamic from 'next/dynamic'
 import { NetworkType } from '@airgap/beacon-sdk'
 import storage from 'redux-persist/lib/storage'
+import { web3auth } from '../components/AppWrap'
+import { hex2buf } from '@taquito/utils'
+import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
 const wallet_instance = getWalletInstance()
 
 export const connectWallet = (walletLogin: any) => {
+    /* const { isWeb3Auth } = walletLogin */
+    const isWeb3Auth = true
     return async (dispatch: any) => {
-        console.log(await storage.getItem('root'), 'STORAGE')
         try {
             let user = {}
-            Tezos.setWalletProvider(wallet_instance)
-            let activeAccount = await wallet_instance.client.getActiveAccount()
-            if (!activeAccount) {
-                await wallet_instance.requestPermissions({
-                    network: {
-                        type: NetworkType.CUSTOM,
-                        rpcUrl: 'https://ghostnet.smartpy.io',
-                    },
-                })
+            let activeAccount: any
+            let userAddress: any
+
+            if (isWeb3Auth) {
+                const provider: any = await web3auth.connect()
+                const privateKey = (await provider.request({
+                    method: 'private_key',
+                })) as string
+                const keyPair = tezosCrypto.utils.seedToKeyPair(
+                    hex2buf(privateKey)
+                )
+                console.log(keyPair, 'KEY PAIR')
+                activeAccount = {
+                    address: keyPair.pkh,
+                    publicKey: keyPair.pk,
+                    sk: keyPair.sk,
+                }
+                userAddress = activeAccount.address
+            } else {
+                Tezos.setWalletProvider(wallet_instance)
                 activeAccount = await wallet_instance.client.getActiveAccount()
+                if (!activeAccount) {
+                    await wallet_instance.requestPermissions({
+                        network: {
+                            type: NetworkType.CUSTOM,
+                            rpcUrl: 'https://ghostnet.smartpy.io',
+                        },
+                    })
+                    activeAccount =
+                        await wallet_instance.client.getActiveAccount()
+                }
+                userAddress = await wallet_instance.getPKH()
             }
+
             if (
                 (walletLogin as any)?.token &&
                 !(walletLogin as any)?.isValidLogin &&
                 activeAccount?.address
             ) {
-                console.log(
-                    await linkWallet(
-                        (walletLogin as any).token,
-                        activeAccount?.address
-                    )
+                await linkWallet(
+                    (walletLogin as any).token,
+                    activeAccount?.address
                 )
             }
-            const userAddress = await wallet_instance.getPKH()
             let { token, refreshToken } = await login(
                 activeAccount?.address,
                 activeAccount?.publicKey,
-                wallet_instance
+                isWeb3Auth ? web3auth : wallet_instance,
+                activeAccount,
+                isWeb3Auth
             )
             user = {
-                userAddress: userAddress,
-                wallet_instance: wallet_instance,
+                userAddress,
+                wallet_instance,
                 token,
                 refreshToken,
             }
@@ -67,10 +93,14 @@ export const _walletConfig = (user: any) => {
     }
 }
 
-export const disconnectWallet = () => {
+export const disconnectWallet = (walletLogin: any) => {
+    /* const { isWeb3Auth } = walletLogin */
+    const isWeb3Auth = true
     return async (dispatch: any) => {
         dispatch(_walletConfig({}))
-        if (wallet_instance) {
+        if (isWeb3Auth) {
+            web3auth.logout()
+        } else if (wallet_instance) {
             await wallet_instance.client.clearActiveAccount()
         }
     }

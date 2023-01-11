@@ -21,6 +21,7 @@ module.exports = {
         ADMIN_EMAIL: process.env.ADMIN_EMAIL,
         ADMIN_USERNAME: process.env.ADMIN_USERNAME,
         ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+        WEB3AUTH_PROJECT_ID: process.env.WEB3AUTH_PROJECT_ID,
     },
     async redirects() {
         return [
@@ -50,8 +51,7 @@ module.exports = {
             },
             {
                 source: '/api/loginWallet',
-                destination:
-                    'https://uat.alltokenfootball.com/api/loginWallet',
+                destination: 'https://uat.alltokenfootball.com/api/loginWallet',
             },
             {
                 source: '/api/validate-token',
@@ -73,8 +73,7 @@ module.exports = {
             },
             {
                 source: '/api/apparels',
-                destination:
-                    'https://uat.alltokenfootball.com/api/apparels',
+                destination: 'https://uat.alltokenfootball.com/api/apparels',
             },
             {
                 source: '/api/events',
@@ -82,13 +81,11 @@ module.exports = {
             },
             {
                 source: '/api/get-users',
-                destination:
-                    'https://uat.alltokenfootball.com/api/get-users',
+                destination: 'https://uat.alltokenfootball.com/api/get-users',
             },
             {
                 source: '/api/login',
-                destination:
-                    'https://uat.alltokenfootball.com/api/login',
+                destination: 'https://uat.alltokenfootball.com/api/login',
             },
             {
                 source: '/api/getAPBalance',
@@ -103,7 +100,7 @@ module.exports = {
             {
                 source: '/api/user/update',
                 destination: 'https://uat.alltokenfootball.com/api/user/update',
-            }
+            },
         ]
     },
 }
