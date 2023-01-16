@@ -23,16 +23,15 @@ export const connectWallet = (walletLogin: any, isWeb3Auth: boolean) => {
             let userAddress: any
 
             if (isWeb3Auth) {
-                const provider: SafeEventEmitterProvider =
-                    (await web3auth.connect()) as SafeEventEmitterProvider
-
+                const provider  =
+                    (await web3auth.connect()) !
+console.log(await web3auth.getUserInfo())
                 const privateKey = (await provider.request({
                     method: 'private_key',
                 })) as string
                 const keyPair = tezosCrypto.utils.seedToKeyPair(
                     hex2buf(privateKey)
                 )
-                console.log(keyPair, 'KEY PAIR')
                 activeAccount = {
                     address: keyPair.pkh,
                     publicKey: keyPair.pk,
@@ -100,7 +99,7 @@ export const disconnectWallet = (walletLogin: any) => {
     return async (dispatch: any) => {
         dispatch(_walletConfig({}))
         if (isWeb3Auth) {
-            web3auth.logout()
+            web3auth.logout({cleanup:true})
         } else if (wallet_instance) {
             await wallet_instance.client.clearActiveAccount()
         }
