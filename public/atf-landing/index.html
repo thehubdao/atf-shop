@@ -69,6 +69,7 @@ _iub.csConfiguration = {"askConsentAtCookiePolicyUpdate":true,"ccpaAcknowledgeOn
 .header__social-link:hover{
 	filter: drop-shadow(0em 0em 7.2em rgba(40, 239, 203, 0.64));
 }
+
 </style>
       </div>
       <div class="header__container">
@@ -134,6 +135,12 @@ _iub.csConfiguration = {"askConsentAtCookiePolicyUpdate":true,"ccpaAcknowledgeOn
         </div>
       </div>
     </div>
+<!--     <a href="#" class="float">
+      <i class="fa fa-plus my-float"></i>
+      prueba
+      </a> -->
+      <!-- <a target="_parent" href="/shop"><button  class="button-30 float" role="button">Go to the Shop</button></a> -->
+     <a target="_parent" href="/shop"><div class="float"><button class="button-49" role="button">Shop</button></div></a> 
     <div burger="menu" class="burger__menu">
       <div class="burger__styles w-embed">
         <style>
@@ -163,6 +170,168 @@ body.stopped{
 .burger__link:hover{
 	filter: drop-shadow(0em 0em 7.2em rgba(40, 239, 203, 0.64));
 }
+.float{
+  z-index:9999 !important;
+	position:fixed;
+	bottom:40px;
+	right:40px;
+/* 	border-radius:50px; */
+	text-align:center;
+/* 	box-shadow: 2px 2px 3px #999; */
+}
+.button-30 {
+  background: #FCFCFD;
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395A;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: Winnersans, sans-serif;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+/*   text-align: left; */
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.button-30:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button-30:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button-30:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+/* Button 49 */
+
+/* aguamarina: 4879219
+   violeta: 4138316
+   purpura: 7148615 
+   */
+
+.button-49,
+.button-49:after {
+/*   width: 150px;
+  height: 76px; */
+  line-height: 78px;
+  font-size: 15px;
+  font-family: Winnersans, sans-serif;
+  background: linear-gradient(45deg, transparent 5%,rgb(109, 20, 71) 5%, rgb(63, 37, 76) 50%, rgb(65, 149, 149) 100%);
+  border: 0;
+  color: #fff;
+  letter-spacing: 3px;
+  box-shadow: 6px 0px 0px rgba(64, 91, 91, 0.698);
+  outline: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-49:after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  
+  content: 'ALTERNATE TEXT';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, rgb(109, 20, 71) 5%);
+  text-shadow: -3px -3px 0px, 3px 3px 0px #00E6F6;
+  clip-path: var(--slice-0);
+}
+
+.button-49:hover:after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .button-49,
+  .button-49:after {
+    width: 150px;
+    height: 60px;
+    line-height: 50px;
+  }
+}
+
+/* /Button 49 */
+
 </style>
       </div>
       <div class="burger__menu-container">
@@ -172,6 +341,9 @@ body.stopped{
           </a>
           <a href="#the-platform" burger="link" id="w-node-_757b7dc8-c7bf-a6c1-84f5-9127f35d6730-f35d672b" class="burger__link w-inline-block">
             <h3>the platform</h3>
+          </a>
+          <a target="_parent" href="/shop" burger="link" id="w-node-_757b7dc8-c7bf-a6c1-84f5-9127f35d6730-f35d672c" class="burger__link w-inline-block">
+            <h3>shop</h3>
           </a>
           <a href="#why-us" burger="link" id="w-node-_757b7dc8-c7bf-a6c1-84f5-9127f35d6733-f35d672b" class="burger__link w-inline-block">
             <h3>Why us</h3>
