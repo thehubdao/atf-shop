@@ -44,7 +44,7 @@ export const login = async (
     activeAccount: any,
     isWeb3Auth: boolean
 ) => {
-    const nonce = await getNonce(activeAccount.address)
+    const {nonce} = await getNonce(activeAccount.address)
     const bytes = char2Bytes(nonce + '')
     const payloadBytes = '05' + '0100' + char2Bytes(bytes.length + '') + bytes
     let signature: any

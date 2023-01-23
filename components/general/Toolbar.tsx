@@ -47,7 +47,7 @@ const Toolbar = ({ dark }: any) => {
     return (
         <div className="w-full flex items-center justify-between py-3 px-5">
             <div className="flex md:space-x-5">
-                <Link href="/">
+                <Link href="/shop">
                     <a className="">
                         <img
                             src="/images/atf-logo.png"
