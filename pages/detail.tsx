@@ -40,7 +40,7 @@ const ShopItemDetail = () => {
     useEffect(() => {
         let products: any[] = [];
 
-        if(category === "nfts") {
+        if (category === "nfts") {
             products = nfts
         } else if (category === "events") {
             products = events
@@ -58,7 +58,7 @@ const ShopItemDetail = () => {
 
     useEffect(() => {
         if (id) {
-            const item =  basketItems.find((item) => item.id === id[0])
+            const item = basketItems.find((item) => item.id === id[0])
             item && setInBasketCount(item.count)
         }
         return () => setInBasketCount(0)
@@ -66,7 +66,8 @@ const ShopItemDetail = () => {
 
     const addToBasket = () => {
         if (!user.wallet_instance) return
-        dispatch(addItem({ id: id, count: 1 }))
+        if (id)
+            dispatch(addItem({ id: id[0], count: 1 }))
         setBasketPopUp(true)
         setTimeout(() => {
             setBasketPopUp(false)
@@ -127,12 +128,18 @@ const ShopItemDetail = () => {
                 ) : (
                     <div className="flex items-center space-x-5">
                         <BsDash
-                            onClick={() => dispatch(decrease(id))}
+                            onClick={() => {
+                                if (id)
+                                    dispatch(decrease(id[0]))
+                            }}
                             className="text-5xl rounded-full bg-gray-200 p-2 cursor-pointer"
                         />
                         <p className="text-xl font-jost">{inBasketCount}</p>
                         <BsPlus
-                            onClick={() => dispatch(increase(id))}
+                            onClick={() => {
+                                if (id)
+                                    dispatch(increase(id[0]))
+                            }}
                             className="text-5xl rounded-full bg-gray-300 p-2 cursor-pointer"
                         />
                     </div>
