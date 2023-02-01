@@ -6,7 +6,8 @@ export interface basketState {
 
 export interface basketItem {
   id: string;
-  count: number
+  count: number;
+  Detail: any
 }
 
 export interface ProductData {

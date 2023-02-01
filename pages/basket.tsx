@@ -38,14 +38,15 @@ const Basket: NextPage = () => {
 
     useEffect(() => {
         basketItems.forEach((item) => {
-            setBasketList((basketList:any) => {
+            setBasketList((basketList: any) => {
                 return [
                     ...basketList,
                     {
-/*                         ...allData.filter((product: any) => {
-                            return product.id_product == item.id
-                        })[0], */
+                        /*                         ...allData.filter((product: any) => {
+                                                    return product.id_product == item.id
+                                                })[0], */
                         count: item.count,
+                        Detail: item.Detail
                     },
                 ]
             })
@@ -173,57 +174,60 @@ const Basket: NextPage = () => {
                 <hr className="my-10" />
 
                 <div className="flex flex-col space-y-10 w-full">
-                    {basketList.map((item) => (
-                        <div
-                            key={item?.id_product}
-                            className="flex items-center space-x-5"
-                        >
-                            <img
-                                src={item?.Detail?.miniature}
-                                className="h-auto w-10"
-                            />
-                            <p className="font-medium text-xs w-full">
-                                {item?.Detail?.detail?.name}
-                            </p>
-                            <BsTrash
-                                onClick={() => {
-                                    dispatch(
-                                        removeItem(item?.Detail?.id_detail)
-                                    )
-                                }}
-                                className="text-3xl cursor-pointer"
-                            />
-                            {/*                             <div className="flex items-center space-x-2">
-                                <BsDash
-                                    onClick={() => dispatch(decrease(item.id_product))}
-                                    className="text-2xl rounded-full bg-gray-200 p-1 cursor-pointer"
+                    {basketList.map((item) => {
+                        console.log(item)
+                        return (
+                            <div
+                                key={item?.id_product}
+                                className="flex items-center space-x-5"
+                            >
+                                <img
+                                    src={item?.Detail?.miniature}
+                                    className="h-auto w-10"
                                 />
-                                <p className="text-lg font-jost">
-                                    {item.count}
+                                <p className="font-medium text-xs w-full">
+                                    {item?.Detail?.detail?.name}
                                 </p>
-                                <BsPlus
-                                    onClick={() => dispatch(increase(item.id_product))}
-                                    className="text-2xl rounded-full bg-gray-300 p-1 cursor-pointer"
+                                <BsTrash
+                                    onClick={() => {
+                                        dispatch(
+                                            removeItem(item?.Detail?.id_detail)
+                                        )
+                                    }}
+                                    className="text-3xl cursor-pointer"
                                 />
-                            </div> */}
-                            <div className="flex flex-col min-w-max">
-                                {item?.Detail?.detail?.priceAP && (
-                                    <p className="font-medium">
-                                        {item.Detail.detail.priceAP *
-                                            (item.count || 1)}{' '}
-                                        AP
+                                <div className="flex items-center space-x-2">
+                                    <BsDash
+                                        onClick={() => dispatch(decrease(item.Detail.id_detail))}
+                                        className="text-2xl rounded-full bg-gray-200 p-1 cursor-pointer"
+                                    />
+                                    <p className="text-lg font-jost">
+                                        {item.count}
                                     </p>
-                                )}
-                                {item?.Detail?.detail?.priceATF && (
-                                    <p className="font-medium">
-                                        {item.Detail.detail.priceATF *
-                                            (item.count || 1)}{' '}
-                                        ATF
-                                    </p>
-                                )}
+                                    <BsPlus
+                                        onClick={() => dispatch(increase(item.Detail.id_detail))}
+                                        className="text-2xl rounded-full bg-gray-300 p-1 cursor-pointer"
+                                    />
+                                </div>
+                                <div className="flex flex-col min-w-max">
+                                    {item?.Detail?.detail?.priceAP && (
+                                        <p className="font-medium">
+                                            {item.Detail.detail.priceAP *
+                                                (item.count || 1)}{' '}
+                                            AP
+                                        </p>
+                                    )}
+                                    {item?.Detail?.detail?.priceATF && (
+                                        <p className="font-medium">
+                                            {item.Detail.detail.priceATF *
+                                                (item.count || 1)}{' '}
+                                            ATF
+                                        </p>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        )
+                    })}
                 </div>
 
                 <hr className="mt-10" />
