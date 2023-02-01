@@ -58,7 +58,7 @@ const ShopItemDetail = () => {
 
     useEffect(() => {
         if (id) {
-            const item = basketItems.find((item) => item.id === id[0])
+            const item = basketItems.find((item) => item.id === id)
             item && setInBasketCount(item.count)
         }
         return () => setInBasketCount(0)
@@ -67,7 +67,7 @@ const ShopItemDetail = () => {
     const addToBasket = () => {
         if (!user.wallet_instance) return
         if (id)
-            dispatch(addItem({ id: id[0], count: 1 }))
+            dispatch(addItem({ id: id, count: 1 }))
         setBasketPopUp(true)
         setTimeout(() => {
             setBasketPopUp(false)
@@ -128,18 +128,12 @@ const ShopItemDetail = () => {
                 ) : (
                     <div className="flex items-center space-x-5">
                         <BsDash
-                            onClick={() => {
-                                if (id)
-                                    dispatch(decrease(id[0]))
-                            }}
+                            onClick={() => dispatch(decrease(id))}
                             className="text-5xl rounded-full bg-gray-200 p-2 cursor-pointer"
                         />
                         <p className="text-xl font-jost">{inBasketCount}</p>
                         <BsPlus
-                            onClick={() => {
-                                if (id)
-                                    dispatch(increase(id[0]))
-                            }}
+                            onClick={() => dispatch(increase(id))}
                             className="text-5xl rounded-full bg-gray-300 p-2 cursor-pointer"
                         />
                     </div>
