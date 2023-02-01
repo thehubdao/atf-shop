@@ -24,19 +24,19 @@ export const basketSlice = createSlice({
         },
         removeItem: (state, { payload }) => {
             state.basketItems = state.basketItems.filter((item: any) => {
-                return item.id != payload
+                return item.id !== payload
             })
         },
         increase: (state, { payload }) => {
             const index = state.basketItems.findIndex(
-                (item) => item.id == payload
+                (item) => item.id === payload
             )
             if (index >= 0)
                 state.basketItems[index].count += 1
         },
         decrease: (state, { payload }) => {
             const index = state.basketItems.findIndex(
-                (item) => item.id == payload
+                (item) => item.id === payload
             )
             if (state.basketItems[index].count > 1 && index >= 0) {
                 state.basketItems[index].count -= 1

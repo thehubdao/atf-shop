@@ -190,22 +190,20 @@ const Basket: NextPage = () => {
                                 </p>
                                 <BsTrash
                                     onClick={() => {
-                                        dispatch(
-                                            removeItem(item?.Detail?.id_detail)
-                                        )
+                                        dispatch(removeItem(`${item?.Detail?.id_detail}`))
                                     }}
                                     className="text-3xl cursor-pointer"
                                 />
                                 <div className="flex items-center space-x-2">
                                     <BsDash
-                                        onClick={() => dispatch(decrease(item.Detail.id_detail))}
+                                        onClick={() => dispatch(decrease(`${item?.Detail?.id_detail}`))}
                                         className="text-2xl rounded-full bg-gray-200 p-1 cursor-pointer"
                                     />
                                     <p className="text-lg font-jost">
                                         {item.count}
                                     </p>
                                     <BsPlus
-                                        onClick={() => dispatch(increase(item.Detail.id_detail))}
+                                        onClick={() => dispatch(increase(`${item?.Detail?.id_detail}`))}
                                         className="text-2xl rounded-full bg-gray-300 p-1 cursor-pointer"
                                     />
                                 </div>
