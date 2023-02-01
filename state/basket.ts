@@ -14,9 +14,7 @@ export const basketSlice = createSlice({
             )
 
             if (index === -1) {
-                console.log('1', payload)
                 const newState = [...state.basketItems, payload]
-                console.log('2', newState)
                 state.basketItems = newState
             } else {
                 state.basketItems.map((item) => (item.count += payload.count))

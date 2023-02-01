@@ -68,7 +68,6 @@ const ShopItemDetail = () => {
         if (!user.wallet_instance) return
         if (id) {
             dispatch(addItem({ id: id, count: 1, Detail: product.Detail }))
-            console.log(product)
         }
         setBasketPopUp(true)
         setTimeout(() => {

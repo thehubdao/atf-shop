@@ -175,7 +175,6 @@ const Basket: NextPage = () => {
 
                 <div className="flex flex-col space-y-10 w-full">
                     {basketList.map((item) => {
-                        console.log(item)
                         return (
                             <div
                                 key={item?.id_product}
