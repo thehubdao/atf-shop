@@ -26,7 +26,7 @@ import { setBalances } from '../state/balances'
 const Basket: NextPage = () => {
     const dispatch = useAppDispatch()
     const { basketItems } = useAppSelector((state) => state.basket)
-    const [basketList, setBasketList] = useState<ProductData[]>([])
+    const [basketList, setBasketList] = useState<any[]>([])
     const { user } = useAppSelector((state) => state.account.walletConfig)
     const [isConfirmedModal, setIsConfirmedModal] = useState<boolean>(false)
     const [isSuccesfulModal, setIsSuccesfulModal] = useState<boolean>(false)
@@ -38,6 +38,7 @@ const Basket: NextPage = () => {
 
     useEffect(() => {
         basketItems.forEach((item) => {
+            console.log(item)
             setBasketList((basketList: any) => {
                 return [
                     ...basketList,
@@ -46,6 +47,7 @@ const Basket: NextPage = () => {
                                                     return product.id_product == item.id
                                                 })[0], */
                         count: item.count,
+                        id_product: item.id_product,
                         Detail: item.Detail
                     },
                 ]
@@ -100,6 +102,7 @@ const Basket: NextPage = () => {
     }
 
     const handleConfirmModal = async () => {
+        console.log(basketList)
         let buyConfirm = await buyNfts({
             nfts: basketList,
             jwt: user.token,
