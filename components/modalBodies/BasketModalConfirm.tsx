@@ -43,7 +43,7 @@ const BasketModalConfirm = ({ isWaiting, isConfirmed, isSuccesful, setIsWaiting,
               >
                 Confirm
               </button>
-              <Link href="/">
+              <Link href="/shop">
                 Back to ATF
               </Link>
             </div>
