@@ -23,7 +23,6 @@ const AppWrap = dynamic(() => import('../components/AppWrap') as any, {
 function MyApp({ Component, pageProps }: AppProps) {
 
 
-
     return (
         <>
             <Provider store={store}>
