@@ -77,7 +77,7 @@ const BasketModalConfirm = ({ isWaiting, isConfirmed, isSuccesful, setIsWaiting,
             </ul>
             <div className='flex flex-col mt-10'>
               <div className="rounded-md my-3 bg-[#020202] text-white px-4 py-1 w-44 cursor-pointer text-center font-medium self-center">
-                <Link href="/">
+                <Link href="/shop">
                   Back to ATF
                 </Link>
 
@@ -94,7 +94,7 @@ const BasketModalConfirm = ({ isWaiting, isConfirmed, isSuccesful, setIsWaiting,
               <button className="rounded-md my-3 bg-[#020202] text-white px-4 py-1 w-44 cursor-pointer text-center font-medium self-center" onClick={() => handleResetModal()}>
                 Try again
               </button>
-              <Link href="/">
+              <Link href="/shop">
                 Back to ATF
               </Link>
             </div>
