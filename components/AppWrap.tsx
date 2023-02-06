@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 
 const web3auth = new Web3Auth({
     clientId: process.env.WEB3AUTH_PROJECT_ID!, // get it from Web3Auth Dashboard
-    web3AuthNetwork: 'cyan',
+    web3AuthNetwork: 'testnet',
     chainConfig: {
         chainNamespace: 'other', // for all non EVM and SOLANA chains, use "other"
         rpcTarget: 'https://ghostnet.smartpy.io',
