@@ -11,7 +11,8 @@ import storage from 'redux-persist/lib/storage'
 import { web3auth } from '../components/AppWrap'
 import { hex2buf } from '@taquito/utils'
 import { SafeEventEmitterProvider, WALLET_ADAPTER_TYPE } from '@web3auth/base'
-const tezosCrypto = require('@tezos-core-tools/crypto-utils');
+import { InMemorySigner } from '@taquito/signer'
+const tezosCrypto = require('@tezos-core-tools/crypto-utils')
 /* import * as tezosCrypto from '@tezos-core-tools/crypto-utils' */
 const wallet_instance = getWalletInstance()
 
@@ -23,9 +24,8 @@ export const connectWallet = (walletLogin: any, isWeb3Auth: boolean) => {
             let userAddress: any
 
             if (isWeb3Auth) {
-                const provider  =
-                    (await web3auth.connect()) !
-console.log(await web3auth.getUserInfo())
+                const provider = (await web3auth.connect())!
+                console.log(await web3auth.getUserInfo())
                 const privateKey = (await provider.request({
                     method: 'private_key',
                 })) as string
@@ -38,6 +38,10 @@ console.log(await web3auth.getUserInfo())
                     sk: keyPair.sk,
                 }
                 userAddress = activeAccount.address
+                console.log(activeAccount)
+                Tezos.setSignerProvider(
+                    await InMemorySigner.fromSecretKey(keyPair?.sk)
+                )
             } else {
                 Tezos.setWalletProvider(wallet_instance)
                 activeAccount = await wallet_instance.client.getActiveAccount()
@@ -99,7 +103,7 @@ export const disconnectWallet = (walletLogin: any) => {
     return async (dispatch: any) => {
         dispatch(_walletConfig({}))
         if (isWeb3Auth) {
-            web3auth.logout({cleanup:true})
+            web3auth.logout({ cleanup: true })
         } else if (wallet_instance) {
             await wallet_instance.client.clearActiveAccount()
         }

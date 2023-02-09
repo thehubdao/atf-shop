@@ -40,7 +40,7 @@ const ShopItemDetail = () => {
     useEffect(() => {
         let products: any[] = [];
 
-        if(category === "nfts") {
+        if (category === "nfts") {
             products = nfts
         } else if (category === "events") {
             products = events
@@ -58,7 +58,7 @@ const ShopItemDetail = () => {
 
     useEffect(() => {
         if (id) {
-            const item =  basketItems.find((item) => item.id === id[0])
+            const item = basketItems.find((item) => item.id === id)
             item && setInBasketCount(item.count)
         }
         return () => setInBasketCount(0)
@@ -66,7 +66,9 @@ const ShopItemDetail = () => {
 
     const addToBasket = () => {
         if (!user.wallet_instance) return
-        dispatch(addItem({ id: id, count: 1 }))
+        if (id) {
+            dispatch(addItem({ id: id, count: 1, Detail: product.Detail }))
+        }
         setBasketPopUp(true)
         setTimeout(() => {
             setBasketPopUp(false)

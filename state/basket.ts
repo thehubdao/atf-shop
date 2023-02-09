@@ -14,31 +14,33 @@ export const basketSlice = createSlice({
             )
 
             if (index === -1) {
-                state.basketItems.push(payload)
+                const newState = [...state.basketItems, payload]
+                state.basketItems = newState
             } else {
                 state.basketItems.map((item) => (item.count += payload.count))
             }
         },
         removeItem: (state, { payload }) => {
             state.basketItems = state.basketItems.filter((item: any) => {
-                return +item.id !== payload
+                return item.id !== payload
             })
         },
         increase: (state, { payload }) => {
             const index = state.basketItems.findIndex(
                 (item) => item.id === payload
             )
-            state.basketItems[index].count += 1
+            if (index >= 0)
+                state.basketItems[index].count += 1
         },
         decrease: (state, { payload }) => {
             const index = state.basketItems.findIndex(
                 (item) => item.id === payload
             )
-            if (state.basketItems[index].count > 1) {
+            if (state.basketItems[index].count > 1 && index >= 0) {
                 state.basketItems[index].count -= 1
             } else {
                 state.basketItems = state.basketItems.filter(
-                    (item) => item.id !== payload
+                    (item) => item.id != payload
                 )
             }
         },

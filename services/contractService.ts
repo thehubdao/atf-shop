@@ -78,6 +78,7 @@ export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
                     }) as any
                 )
         nfts.forEach((nft: any) => {
+            console.log(nft,nft.Detail.detail.swap_id)
             batch.withContractCall(
                 methodsObject.collect({
                     to_: address,
@@ -92,13 +93,15 @@ export const buyNfts = async ({ nfts, address, totalAP, totalATF }: any) => {
 
         await (await batch.send()).confirmation()
         nfts.forEach(async (nft: any) => {
+            console.log(nft)
             try {
-                await axios.delete('/api/nft/' + nft.id_product, config)
+                await axios.delete('/api/nft/' + nft.Detail.id_detail, config)
             } catch (error) {}
         })
 
         return true
-    } catch {
+    } catch(err) {
+        console.log(err)
         return false
     }
 }

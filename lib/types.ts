@@ -5,8 +5,10 @@ export interface basketState {
 }
 
 export interface basketItem {
+  id_product: any;
   id: string;
-  count: number
+  count: number;
+  Detail: any
 }
 
 export interface ProductData {
