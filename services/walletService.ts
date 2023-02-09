@@ -67,7 +67,6 @@ export const login = async (
             publicKey,
         })
     ).data
-    callData.wallet_instance = wallet_instance
     
         notifyMobile(callData)
         return callData
