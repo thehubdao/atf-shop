@@ -68,12 +68,11 @@ export const login = async (
         })
     ).data
     callData.wallet_instance = wallet_instance
-    try {
+    
         notifyMobile(callData)
         return callData
-    } catch (err) {
-        console.log(err)
-    }
+    
+    
 }
 
 export const checkJWT = async (jwt: any) => {
